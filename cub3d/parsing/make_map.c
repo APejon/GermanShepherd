@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gchernys <gchernys@42abudhabi.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:16:27 by gchernys          #+#    #+#             */
-/*   Updated: 2023/05/14 18:47:20 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/14 19:50:17 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,28 @@
 
 int	set_dimensions(t_map *map, char *file)
 {
-	int		height;
 	char	*temp;
 	int		fd;
-	int		i;
 
 	fd = open(file, O_RDONLY);
 	temp = get_next_line(fd);
 	if (!temp)
 		return (MALLOC_ERR);
-	height = 0;
-	i = 0;
 	while (temp != NULL)
 	{
-		i = ft_strlen(temp);
-		if (map->wide < i)
-			map->wide = i;
+		if (ft_strlen(temp) > map->wide)
+			map->wide = ft_strlen(temp);
 		if (ft_strcmp(temp, "\n") != 0)
-			height++;
+			map->high++;
 		free(temp);
+		if (map->high > 6 && ft_strcmp(temp, "\n") == 0)
+		{
+			close(fd);
+			return (MALLOC_ERR);
+		}
 		temp = get_next_line(fd);
 	}
 	free(temp);
-	map->high = height;
 	close(fd);
 	return (0);
 }
