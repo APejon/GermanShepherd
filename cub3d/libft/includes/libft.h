@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gchernys <gchernys@42abudhabi.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 19:45:57 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/14 19:26:40 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/15 17:56:55 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 /* void * */
 void		*ft_memchr(const void *s, int c, size_t n);
 /* size_t */
-size_t		ft_strlen(const char *c);
+int			ft_strlen(const char *c);
 
 /*------ Functions to change a string ------*/
 /* between a char * and an int*/
