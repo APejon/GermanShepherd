@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:12:34 by gchernys          #+#    #+#             */
-/*   Updated: 2023/05/14 18:48:14 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/19 14:42:34 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,20 @@ int	check_textures(t_map *map)
 	map->west[0] == '\0' || map->east[0] == '\0')
 		return (PARSE_ERR);
 	return (0);
+}
+
+void	load_grid(t_game **g)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 6;
+	(*g)->map->grid = ft_calloc(((*g)->map->high - 6 + 1), sizeof(char *));
+	while ((*g)->map->map[j])
+	{
+		(*g)->map->grid[i] = ft_strdup((*g)->map->map[j]);
+		i++;
+		j++;
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gchernys <gchernys@42abudhabi.ae>          +#+  +:+       +#+        */
+/*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:16:27 by gchernys          #+#    #+#             */
-/*   Updated: 2023/05/14 19:50:17 by gchernys         ###   ########.fr       */
+/*   Updated: 2023/05/19 14:15:27 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	set_dimensions(t_map *map, char *file)
 		return (MALLOC_ERR);
 	while (temp != NULL)
 	{
-		if (ft_strlen(temp) > map->wide)
+		if (ft_strlen(temp) > (size_t)map->wide)
 			map->wide = ft_strlen(temp);
 		if (ft_strcmp(temp, "\n") != 0)
 			map->high++;
@@ -127,6 +127,5 @@ int	validate_map(t_map *map, t_game *game)
 		return_error("Error\n 0 or Player touching a space\n\n", map, game);
 	else if (validate_player_count(map->map) == PARSE_ERR)
 		return_error("Error\n Invalid Players and/or symbols\n\n", map, game);
-	printf("%s\n", map->north);
 	return (0);
 }

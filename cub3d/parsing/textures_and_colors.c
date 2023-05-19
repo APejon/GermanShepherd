@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 07:35:06 by gchernys          #+#    #+#             */
-/*   Updated: 2023/05/14 18:48:21 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/19 14:06:40 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,5 @@ int	init_rgb(t_map *map)
 	map->ceiling_color = setrgb(ft_atoi(temp[0]), ft_atoi(temp[1]), \
 	ft_atoi(temp[2]));
 	free_double_array(temp);
-	printf("floor = %u, cil = %u\n", map->floor_color, map->ceiling_color);
 	return (0);
 }
