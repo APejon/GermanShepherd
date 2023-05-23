@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 14:46:40 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/23 17:16:27 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:28:04 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	**load_grid(t_game **game, int i, int x, int y)
 
 	j = y;
 	k = 0;
-	grid = ft_calloc(14, sizeof(char *));
+	grid = ft_calloc(14 + 1, sizeof(char *));
 	while ((*game)->map->full_grid[j] && (k < 14))
 	{
 		grid[k] = ft_substr((*game)->map->full_grid[j], x, 34);
@@ -75,6 +75,7 @@ char	**load_grid(t_game **game, int i, int x, int y)
 		j++;
 		k++;
 	}
+	grid[k] = NULL;
 	return (grid);
 }
 
