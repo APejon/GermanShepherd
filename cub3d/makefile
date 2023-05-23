@@ -6,7 +6,7 @@
 #    By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 10:55:58 by amalbrei          #+#    #+#              #
-#    Updated: 2023/05/19 19:04:54 by amalbrei         ###   ########.fr        #
+#    Updated: 2023/05/22 20:45:52 by amalbrei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,12 +37,12 @@ RM				=	rm	-rf
 
 INPUTS_SRC 		=	cub_close_x.c	cub_inputs.c
 
-PLAYER_SRC		=
+PLAYER_SRC		=	cub_find_player.c
 
 RENDERING_SRC	=	cub_bressenham.c	cub_draw_ui.c	cub_draw_map.c
 
 PARSING_SRC		=	make_map.c	map_validation.c	parsing.c	\
-					textures_and_colors.c
+					textures_and_colors.c	segmentation.c	fill_segments.c
 
 MAIN_SRC 		=	main.c	cub_utils.c	cub_init.c
 

@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:15:59 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/19 19:05:21 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/20 17:44:31 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ void	cub_bressenham_frag(t_game *game, t_bress *bress);
 void	cub_bressenham(int x, int y, t_game *game, char flag);
 
 /*----- cub_draw_ui -----*/
+void	cub_turn_transparent(t_game *game, t_window *win);
 void	cub_draw_ui(t_game *game);
 
 /*----- cub_draw_map -----*/
 int		cub_end_of_line(char *line);
 void	cub_draw_grid_extra(t_game *game, t_map *map, int x, int y);
 void	cub_draw_grid(t_game *game, t_map *map);
+void	cub_draw_m_background(t_game *game, t_window *win);
 
 #endif
