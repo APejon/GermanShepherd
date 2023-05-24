@@ -7,8 +7,9 @@
 #Libraries
 *.a
 
-#object files folder
+#object files folder/.o files
 object_files
+*.o
 
 #executables
 cub3D

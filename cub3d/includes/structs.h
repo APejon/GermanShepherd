@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:47 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/22 14:09:57 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/23 18:04:08 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,9 @@ typedef struct s_game
 	int			m_height;
 	int			m_horizontal;
 	int			m_vertical;
+	int			no_of_segments;
 	int			color;
+	int			start;
 	t_map		*map;
 	t_window	*win;
 }		t_game;

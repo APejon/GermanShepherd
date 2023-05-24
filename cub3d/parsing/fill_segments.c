@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 14:46:40 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/23 17:28:04 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/23 18:07:02 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	connect_segments_p2(t_game **game, int i, int h, int v)
 	}
 }
 
-void	connect_segments(t_game **game, int no_of_segments)
+void	connect_segments(t_game **game)
 {
 	int	i;
 	int	h;
@@ -48,7 +48,7 @@ void	connect_segments(t_game **game, int no_of_segments)
 	i = 0;
 	h = 1;
 	v = 0;
-	if (no_of_segments != 1)
+	if ((*game)->no_of_segments != 1)
 	{
 		while (v < (*game)->m_vertical)
 		{
@@ -71,7 +71,10 @@ char	**load_grid(t_game **game, int i, int x, int y)
 	{
 		grid[k] = ft_substr((*game)->map->full_grid[j], x, 34);
 		if (cub_scan_player(grid[k]))
+		{
 			(*game)->map->segment[i]->player_found = 1;
+			(*game)->start = i;
+		}
 		j++;
 		k++;
 	}
@@ -90,22 +93,24 @@ void	segment_init(t_game **game, int i)
 	(*game)->map->segment[i]->west = NULL;
 }
 
-void	fill_segments(t_game **game, int no_of_segments)
+void	fill_segments(t_game **game)
 {
 	int	i;
 	int	x;
 	int	y;
 
 	i = -1;
-	y = 0;
-	while (++i < no_of_segments)
+	while (++i < (*game)->no_of_segments)
 		segment_init(game, i);
 	i = -1;
 	x = 0;
-	while (++i < no_of_segments)
+	y = 0;
+	while (++i < (*game)->no_of_segments)
 	{
 		if (i != 0)
 			(*game)->map->segment[i - 1]->next = (*game)->map->segment[i];
+		else if (i == (*game)->no_of_segments - 1)
+			(*game)->map->segment[i]->next = (*game)->map->segment[0];
 		(*game)->map->segment[i]->grid = load_grid(game, i, x, y);
 		x += 34;
 		if (ft_strlen((*game)->map->segment[i]->grid[0]) < 34)
@@ -114,7 +119,7 @@ void	fill_segments(t_game **game, int no_of_segments)
 			y += 14;
 		}
 	}
-	connect_segments(game, no_of_segments);
+	connect_segments(game);
 }
 
 	// t_segment *segment;

@@ -6,7 +6,7 @@
 #    By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 10:55:58 by amalbrei          #+#    #+#              #
-#    Updated: 2023/05/22 20:45:52 by amalbrei         ###   ########.fr        #
+#    Updated: 2023/05/23 17:56:17 by amalbrei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ CFLAGS			=	-Wall -Wextra -Werror -g -Ofast -fsanitize=address
 CUB3D_FLAGS 	=	-framework OpenGL -framework AppKit
 RM				=	rm	-rf
 
-INPUTS_SRC 		=	cub_close_x.c	cub_inputs.c
+INPUTS_SRC 		=	cub_close_x.c	cub_inputs.c	cub_free.c
 
 PLAYER_SRC		=	cub_find_player.c
 

@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:17:57 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/20 15:37:12 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/24 14:11:19 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,38 @@ void	cub_bressenham_decision(t_game *game, t_bress *bress, int i)
 	}
 }
 
-void	cub_bressenham_frag(t_game *game, t_bress *bress)
+void	cub_fill_grid(t_game *game, t_bress *bress, int i)
+{
+	int	j;
+	int	start;
+
+	j = -1;
+	start = bress->x;
+	while (++j < 15)
+	{
+		i = 0;
+		bress->x = start;
+		while (i < bress->x_step + 1)
+		{			
+			my_mlx_pixel_put(game, bress->x, bress->y);
+			bress->x += 1;
+			i++;
+		}
+		bress->y += 1;
+	}
+}
+
+void	cub_bressenham_frag(t_game *game, t_bress *bress, char *flag)
 {
 	int	i;
 
 	bress->x_step = abs(bress->deltax[1] - bress->deltax[0]);
 	bress->y_step = abs(bress->deltay[1] - bress->deltay[0]);
 	bress->swap = 0;
+	bress->x = bress->deltax[0];
+	bress->y = bress->deltay[0];
+	bress->p = (2 * bress->y_step) - bress->x_step;
+	i = 0;
 	if (bress->y_step >= bress->x_step)
 	{
 		bress->temp = bress->x_step;
@@ -62,27 +87,26 @@ void	cub_bressenham_frag(t_game *game, t_bress *bress)
 		bress->y_step = bress->temp;
 		bress->swap = 1;
 	}
-	bress->x = bress->deltax[0];
-	bress->y = bress->deltay[0];
-	bress->p = (2 * bress->y_step) - bress->x_step;
-	i = 0;
-	cub_bressenham_decision(game, bress, i);
+	if (flag[1] == 'f')
+		cub_fill_grid(game, bress, i);
+	else
+		cub_bressenham_decision(game, bress, i);
 	ft_free(&bress);
 }
 
-void	cub_bressenham(int x, int y, t_game *game, char flag)
+void	cub_bressenham(int x, int y, t_game *game, char *flag)
 {
 	t_bress	*bress;
 
 	bress = calloc(1, sizeof(t_bress));
-	if (flag == 'x')
+	if (flag[0] == 'x')
 	{
 		bress->deltax[0] = x * (game->m_zoom);
 		bress->deltay[0] = y * (game->m_zoom);
 		bress->deltax[1] = (x + 1) * (game->m_zoom);
 		bress->deltay[1] = y * (game->m_zoom);
 	}
-	if (flag == 'y')
+	if (flag[0] == 'y')
 	{
 		bress->deltax[0] = x * (game->m_zoom);
 		bress->deltay[0] = y * (game->m_zoom);
@@ -95,5 +119,5 @@ void	cub_bressenham(int x, int y, t_game *game, char flag)
 		bress->sign1 = -1;
 	if (bress->deltay[1] - bress->deltay[0] < 0)
 		bress->sign2 = -1;
-	cub_bressenham_frag(game, bress);
+	cub_bressenham_frag(game, bress, flag);
 }

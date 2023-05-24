@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 14:19:41 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/22 21:01:40 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/24 12:43:34 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,11 @@ int	count_segments(t_game **game, char **full_grid)
 
 void	load_grid_segments(t_game **game)
 {
-	int	no_of_segments;
-
 	load_full_grid(*game);
-	no_of_segments = count_segments(game, (*game)->map->full_grid);
-	(*game)->map->segment = ft_calloc(no_of_segments + 1, sizeof(t_segment));
-	fill_segments(game, no_of_segments);
+	(*game)->no_of_segments = count_segments(game, (*game)->map->full_grid);
+	(*game)->map->segment
+		= ft_calloc((*game)->no_of_segments + 1, sizeof(t_segment));
+	fill_segments(game);
 }
 
 	// printf("%d total number of segments\n", total);
