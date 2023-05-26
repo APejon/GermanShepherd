@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:17:57 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/24 14:11:19 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/26 23:41:00 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ void	cub_bressenham_decision(t_game *game, t_bress *bress, int i)
 		{
 			bress->p = bress->p + (2 * (bress->y_step - bress->x_step));
 			if (bress->swap)
-				bress->x += bress->sign1;
+				bress->x += bress->signx;
 			else
-				bress->y += bress->sign2;
+				bress->y += bress->signy;
 		}
 		else
 			bress->p = bress->p + 2 * bress->y_step;
 		if (bress->swap)
-			bress->y += bress->sign2;
+			bress->y += bress->signy;
 		else
-			bress->x += bress->sign1;
+			bress->x += bress->signx;
 		i++;
 	}
 }
@@ -55,7 +55,7 @@ void	cub_fill_grid(t_game *game, t_bress *bress, int i)
 
 	j = -1;
 	start = bress->x;
-	while (++j < 15)
+	while (++j < 12 * game->m_mag)
 	{
 		i = 0;
 		bress->x = start;
@@ -113,11 +113,11 @@ void	cub_bressenham(int x, int y, t_game *game, char *flag)
 		bress->deltax[1] = x * (game->m_zoom);
 		bress->deltay[1] = (y + 1) * (game->m_zoom);
 	}
-	bress->sign1 = 1;
-	bress->sign2 = 1;
+	bress->signx = 1;
+	bress->signy = 1;
 	if (bress->deltax[1] - bress->deltax[0] < 0)
-		bress->sign1 = -1;
+		bress->signx = -1;
 	if (bress->deltay[1] - bress->deltay[0] < 0)
-		bress->sign2 = -1;
+		bress->signy = -1;
 	cub_bressenham_frag(game, bress, flag);
 }

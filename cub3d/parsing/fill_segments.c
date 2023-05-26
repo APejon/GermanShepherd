@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 14:46:40 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/23 18:07:02 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/24 15:43:11 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	**load_grid(t_game **game, int i, int x, int y)
 	while ((*game)->map->full_grid[j] && (k < 14))
 	{
 		grid[k] = ft_substr((*game)->map->full_grid[j], x, 34);
-		if (cub_scan_player(grid[k]))
+		if (cub_scan_player(game, grid[k], k))
 		{
 			(*game)->map->segment[i]->player_found = 1;
 			(*game)->start = i;

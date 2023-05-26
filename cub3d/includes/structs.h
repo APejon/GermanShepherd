@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:47 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/23 18:04:08 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/26 23:35:58 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ typedef enum e_error
 typedef struct s_bress {
 	int	deltax[2];
 	int	deltay[2];
-	int	sign1;
-	int	sign2;
+	int	signx;
+	int	signy;
 	int	x_step;
 	int	y_step;
 	int	swap;
@@ -51,6 +51,8 @@ typedef struct s_window{
 
 typedef struct s_player
 {
+	int		x_grid;
+	int		y_grid;
 	int		x;
 	int		y;
 	char	dir;
@@ -88,6 +90,7 @@ typedef struct s_map
 typedef struct s_game
 {
 	int			m_zoom;
+	int			m_mag;
 	int			m_xset;
 	int			m_yset;
 	int			m_width;

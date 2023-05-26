@@ -6,23 +6,29 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:03:57 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/24 13:56:25 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/26 23:47:50 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	cub_end_of_line(char *line)
+void	cub_print_m_info(t_game *game)
 {
-	int	i;
+	char	*segment;
 
-	i = 0;
-	while (line[i] == 'x')
-		i++;
-	if (line[i] == '\0')
-		return (1);
-	else
-		return (0);
+	mlx_string_put(game->win->mlx, game->win->window, 150 * game->m_mag,
+		210 * game->m_mag, 0x00000000,
+		"MAP SECTION: ");
+	segment = ft_itoa(game->start + 1);
+	mlx_string_put(game->win->mlx, game->win->window, 250 * game->m_mag,
+		210 * game->m_mag, 0x00000000, segment);
+	ft_free(&segment);
+	segment = ft_itoa(game->no_of_segments);
+	mlx_string_put(game->win->mlx, game->win->window, 255 * game->m_mag,
+		210 * game->m_mag, 0x00000000, "/");
+	mlx_string_put(game->win->mlx, game->win->window, 260 * game->m_mag,
+		210 * game->m_mag, 0x00000000, segment);
+	ft_free(&segment);
 }
 
 void	cub_draw_grid_extra(t_game *game, char **grid, int x, int y)
@@ -45,6 +51,19 @@ void	cub_draw_grid_extra(t_game *game, char **grid, int x, int y)
 		cub_bressenham(x + game->m_xset, y + game->m_yset + 1, game, "xg");
 	if (grid[y][x] == '1' && !grid[y + 1])
 		cub_bressenham(x + game->m_xset, y + game->m_yset + 1, game, "xg");
+}
+
+int	cub_end_of_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] == 'x')
+		i++;
+	if (line[i] == '\0')
+		return (1);
+	else
+		return (0);
 }
 
 void	cub_draw_grid(t_game *game, char **grid)
@@ -74,8 +93,15 @@ void	cub_draw_grid(t_game *game, char **grid)
 
 void	cub_draw_m_background(t_game *game, t_window *win)
 {
-	win->addr->i_p = mlx_xpm_file_to_image(game->win->mlx,
-			"textures/clouds.xpm", &(game->m_width), &(game->m_height));
+	if (game->m_mag == 2)
+		win->addr->i_p = mlx_xpm_file_to_image(game->win->mlx,
+				"textures/cloud.xpm", &(game->m_width), &(game->m_height));
+	else if (game->m_mag == 1)
+		win->addr->i_p = mlx_xpm_file_to_image(game->win->mlx,
+				"textures/clouds.xpm", &(game->m_width), &(game->m_height));
 	win->addr->ad = mlx_get_data_addr(win->addr->i_p, &(win->addr->pix_bi),
 			&(win->addr->line_by), &win->addr->endian);
+	mlx_put_image_to_window(game->win->mlx, game->win->window,
+		game->win->addr->i_p, 0, 0);
+	mlx_destroy_image(game->win->mlx, game->win->addr->i_p);
 }
