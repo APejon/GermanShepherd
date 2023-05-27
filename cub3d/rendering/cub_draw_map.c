@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:03:57 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/26 23:47:50 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/27 18:55:17 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,24 @@
 
 void	cub_print_m_info(t_game *game)
 {
+	int		spotx;
+	int		spoty;
 	char	*segment;
 
-	mlx_string_put(game->win->mlx, game->win->window, 150 * game->m_mag,
-		210 * game->m_mag, 0x00000000,
+	spotx = 250;
+	spoty = 280;
+	mlx_string_put(game->win->mlx, game->win->window, spotx * game->m_mag,
+		spoty * game->m_mag, 0x00000000,
 		"MAP SECTION: ");
 	segment = ft_itoa(game->start + 1);
-	mlx_string_put(game->win->mlx, game->win->window, 250 * game->m_mag,
-		210 * game->m_mag, 0x00000000, segment);
+	mlx_string_put(game->win->mlx, game->win->window, (spotx + 90)
+		* game->m_mag, spoty * game->m_mag, 0x00000000, segment);
 	ft_free(&segment);
 	segment = ft_itoa(game->no_of_segments);
-	mlx_string_put(game->win->mlx, game->win->window, 255 * game->m_mag,
-		210 * game->m_mag, 0x00000000, "/");
-	mlx_string_put(game->win->mlx, game->win->window, 260 * game->m_mag,
-		210 * game->m_mag, 0x00000000, segment);
+	mlx_string_put(game->win->mlx, game->win->window, (spotx + 100)
+		* game->m_mag, spoty * game->m_mag, 0x00000000, "/");
+	mlx_string_put(game->win->mlx, game->win->window, (spotx + 110)
+		* game->m_mag, spoty * game->m_mag, 0x00000000, segment);
 	ft_free(&segment);
 }
 

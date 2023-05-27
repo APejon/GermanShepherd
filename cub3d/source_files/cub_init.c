@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:05:07 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/26 23:44:18 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/27 18:35:31 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,13 @@ void	cub_prep_image(t_window **win)
 
 void	cub_draw(t_game *game)
 {
-	game->m_zoom = 12 * game->m_mag;
+	game->m_zoom = 16 * game->m_mag;
 	game->m_xset = 2;
 	game->m_yset = 2;
 	cub_draw_ui(game);
+	mlx_put_image_to_window(game->win->mlx, game->win->window,
+		game->win->addr->i_p, 0, 0);
+	mlx_destroy_image(game->win->mlx, game->win->addr->i_p);
 }
 
 void	cub_window_init(t_window **win)

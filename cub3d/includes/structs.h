@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:47 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/26 23:35:58 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/27 13:50:05 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ typedef enum e_error
 }	t_error;
 
 typedef struct s_bress {
-	int	deltax[2];
-	int	deltay[2];
-	int	signx;
-	int	signy;
-	int	x_step;
-	int	y_step;
-	int	swap;
-	int	temp;
-	int	x;
-	int	y;
-	int	p;
+	double	deltax[2];
+	double	deltay[2];
+	double	signx;
+	double	signy;
+	double	x_step;
+	double	y_step;
+	double	swap;
+	double	temp;
+	double	x;
+	double	y;
+	double	p;
 }	t_bress;
 
 typedef struct s_addr {
@@ -51,11 +51,11 @@ typedef struct s_window{
 
 typedef struct s_player
 {
-	int		x_grid;
-	int		y_grid;
-	int		x;
-	int		y;
-	char	dir;
+	double		x_grid;
+	double		y_grid;
+	double		x;
+	double		y;
+	char		dir;
 }		t_player;
 
 typedef struct s_segment

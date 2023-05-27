@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 14:19:41 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/26 23:45:41 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/27 18:38:20 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	count_segments(t_game **game, char **full_grid)
 void	load_grid_segments(t_game **game)
 {
 	(*game)->m_mag = 1;
-	(*game)->m_zoom = 12;
+	(*game)->m_zoom = 16;
 	(*game)->m_xset = 2;
 	(*game)->m_yset = 2;
 	load_full_grid(*game);

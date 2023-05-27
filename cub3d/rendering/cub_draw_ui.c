@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:01:03 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/26 23:58:50 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/27 14:12:33 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	cub_draw_cursor(t_game *game, t_player *player)
 	}
 }
 
-void	cub_turn_transparent(t_game *game, t_window *win, char flag)
+void	cub_turn_transparent(t_game *game, int width, int height, char flag)
 {
 	int	x;
 	int	y;
@@ -59,10 +59,10 @@ void	cub_turn_transparent(t_game *game, t_window *win, char flag)
 		game->color = 0xFF000000;
 	else if (flag == 'B')
 		game->color = 0x00000000;
-	while (y <= win->window_h)
+	while (y <= height)
 	{
 		x = 0;
-		while (x <= win->window_w)
+		while (x <= width)
 		{
 			my_mlx_pixel_put(game, x, y);
 			x++;
@@ -75,11 +75,8 @@ void	cub_draw_ui(t_game *game)
 {
 	cub_draw_m_background(game, game->win);
 	cub_prep_image(&(game->win));
-	cub_turn_transparent(game, game->win, 'T');
+	cub_turn_transparent(game, game->win->window_w, game->win->window_h, 'T');
 	cub_draw_grid(game, game->map->segment[game->start]->grid);
 	cub_print_m_info(game);
 	cub_draw_cursor(game, game->map->player);
-	mlx_put_image_to_window(game->win->mlx, game->win->window,
-		game->win->addr->i_p, 0, 0);
-	mlx_destroy_image(game->win->mlx, game->win->addr->i_p);
 }

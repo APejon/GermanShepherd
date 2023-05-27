@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:24:15 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/27 00:04:53 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/27 14:14:20 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	cub_move_player(int key, t_game **game)
 {
 	if (key == 13)
-		(*game)->map->player->y_grid -= 1;
+		(*game)->map->player->y_grid -= 1.0;
 	if (key == 1)
-		(*game)->map->player->y_grid += 1;
+		(*game)->map->player->y_grid += 1.0;
 	if (key == 0)
-		(*game)->map->player->x_grid -= 1;
+		(*game)->map->player->x_grid -= 1.0;
 	if (key == 2)
-		(*game)->map->player->x_grid += 1;
+		(*game)->map->player->x_grid += 1.0;
 }
 
 void	cub_enlarge_map(int key, t_game **game)
@@ -33,7 +33,6 @@ void	cub_enlarge_map(int key, t_game **game)
 		else if ((*game)->m_mag == 2)
 			(*game)->m_mag = 1;
 		cub_prep_image(&((*game)->win));
-		cub_turn_transparent(*game, (*game)->win, 'B');
 		mlx_put_image_to_window((*game)->win->mlx, (*game)->win->window,
 			(*game)->win->addr->i_p, 0, 0);
 		mlx_destroy_image((*game)->win->mlx, (*game)->win->addr->i_p);
