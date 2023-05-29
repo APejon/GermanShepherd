@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gchernys <gchernys@42abudhabi.ae>          +#+  +:+       +#+        */
+/*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:16:27 by gchernys          #+#    #+#             */
-/*   Updated: 2023/05/14 19:50:17 by gchernys         ###   ########.fr       */
+/*   Updated: 2023/05/29 09:21:58 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	set_dimensions(t_map *map, char *file)
 
 void	setmap(char **tempmap, t_map *map)
 {
-	int	j;
-	int	i;
+	size_t	j;
+	size_t	i;
 
 	j = 0;
 	while (tempmap[j] != NULL)
@@ -65,7 +65,7 @@ void	setmap(char **tempmap, t_map *map)
 
 int	malloc_map(t_map *map, char *file)
 {
-	int	i;
+	size_t	i;
 
 	if (set_dimensions(map, file))
 		return (MALLOC_ERR);

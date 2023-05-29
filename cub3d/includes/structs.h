@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gchernys <gchernys@42abudhabi.ae>          +#+  +:+       +#+        */
+/*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:47 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/15 17:57:46 by gchernys         ###   ########.fr       */
+/*   Updated: 2023/05/29 09:21:30 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef struct s_map
 	unsigned int	ceiling_color;
 	char			*floor;
 	char			*cil;
-	int				wide;
-	int				high;
+	size_t			wide;
+	size_t			high;
 	char			*north;
 	char			*south;
 	char			*west;
