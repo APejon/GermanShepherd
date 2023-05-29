@@ -6,7 +6,7 @@
 /*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:47 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/29 09:44:13 by gchernys         ###   ########.fr       */
+/*   Updated: 2023/05/29 09:48:35 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ typedef struct s_map
 	unsigned int	ceiling_color;
 	char			*floor;
 	char			*cil;
-	size_t			wide;
-	size_t			high;
+	int				wide;
+	int				high;
 	char			*north;
 	char			*south;
 	char			*west;
