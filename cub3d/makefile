@@ -6,7 +6,7 @@
 #    By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 10:55:58 by amalbrei          #+#    #+#              #
-#    Updated: 2023/05/14 19:29:17 by amalbrei         ###   ########.fr        #
+#    Updated: 2023/05/23 17:56:17 by amalbrei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ C				=	\033[1;36m
 NAME			=	cub3D
 SUB_LIB			=	libft/libft.a
 OBJ_DIR			=	object_files
-MATH_DIR		=	math
+INPUTS_DIR		=	inputs
 PLAYER_DIR		=	player
 RENDERING_DIR	=	rendering
 PARSING_DIR		=	parsing
@@ -31,22 +31,22 @@ LIB				=	ar	-rcs
 LIBFT			=	-Llibft -lft
 MLX				=	-Lmlx -lmlx
 CC				=	gcc
-CFLAGS			=	-Wall -Wextra -Werror -g -Ofast
+CFLAGS			=	-Wall -Wextra -Werror -g -Ofast -fsanitize=address
 CUB3D_FLAGS 	=	-framework OpenGL -framework AppKit
 RM				=	rm	-rf
 
-MATH_SRC 		=	
+INPUTS_SRC 		=	cub_close_x.c	cub_inputs.c	cub_free.c
 
-PLAYER_SRC		=
+PLAYER_SRC		=	cub_find_player.c
 
-RENDERING_SRC	=
+RENDERING_SRC	=	cub_bressenham.c	cub_draw_ui.c	cub_draw_map.c
 
 PARSING_SRC		=	make_map.c	map_validation.c	parsing.c	\
-					textures_and_colors.c
+					textures_and_colors.c	segmentation.c	fill_segments.c
 
 MAIN_SRC 		=	main.c	cub_utils.c	cub_init.c
 
-SRC				=	$(MATH_SRC) $(PLAYER_SRC) $(RENDERING_SRC) $(PARSING_SRC)\
+SRC				=	$(INPUTS_SRC) $(PLAYER_SRC) $(RENDERING_SRC) $(PARSING_SRC)\
 					$(MAIN_SRC)
 
 OBJ				= 	$(addprefix $(OBJ_DIR)/,$(SRC:%.c=%.o))
@@ -70,7 +70,7 @@ $(SUB_LIB):
 	@printf "$(C)==========================\n"
 	@printf "$(C)==========================\n\n$(D)"
 
-$(OBJ_DIR)/%.o: $(MATH_DIR)/%.c
+$(OBJ_DIR)/%.o: $(INPUTS_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	@printf "\033[A\033[2K\r\033[A\033[2K\r$(G)Compiling:\n$(D)"
 	$(CC) $(CFLAGS) $(INC_DIR) $(MLX_DIR)  -c $< -o $@
