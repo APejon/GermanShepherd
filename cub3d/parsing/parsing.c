@@ -47,5 +47,9 @@ int	check_textures(t_map *map)
 	map->east == NULL || map->north[0] == '\0' || map->south[0] == '\0' || \
 	map->west[0] == '\0' || map->east[0] == '\0')
 		return (PARSE_ERR);
+	// check if the textures are valid once we have them
+	// if (open(map->north, O_RDONLY) < 0 || open(map->south, O_RDONLY) < 0 || \
+	// open(map->west, O_RDONLY) < 0 || open(map->east, O_RDONLY) < 0)
+	// 	return (PARSE_ERR);
 	return (0);
 }
