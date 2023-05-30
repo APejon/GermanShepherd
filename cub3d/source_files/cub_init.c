@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:05:07 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/27 18:35:31 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:06:20 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	cub_draw(t_game *game)
 	game->m_zoom = 16 * game->m_mag;
 	game->m_xset = 2;
 	game->m_yset = 2;
+	// cub_calc_player(&(game));
 	cub_draw_ui(game);
 	mlx_put_image_to_window(game->win->mlx, game->win->window,
 		game->win->addr->i_p, 0, 0);
@@ -34,16 +35,19 @@ void	cub_draw(t_game *game)
 
 void	cub_window_init(t_window **win)
 {
+	(*win)->addr = malloc(sizeof(t_addr));
+	if (!(*win)->addr)
+		exit (MALLOC_ERR);
 	(*win)->mlx = mlx_init();
-	(*win)->window_w = 1260;
-	(*win)->window_h = 1260;
+	(*win)->window_w = 1280;
+	(*win)->window_h = 800;
 	(*win)->window = mlx_new_window((*win)->mlx, (*win)->window_w,
 			(*win)->window_h, "Cub3D Clear To Fly");
-	(*win)->addr = malloc(sizeof(t_addr));
 }
 
 void	cub_init(t_game *game)
 {
+	cub_player_init(&(game));
 	cub_window_init(&(game->win));
 	cub_draw(game);
 }

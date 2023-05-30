@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:47 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/27 13:50:05 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/28 20:47:47 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,19 @@ typedef struct s_window{
 
 typedef struct s_player
 {
-	double		x_grid;
-	double		y_grid;
-	double		x;
-	double		y;
-	char		dir;
+	int		fov;
+	int		height;
+	char	dir;
+	double	angle;
+	int		verti_dis;
+	int		horiz_dis;
+	int		distance;
+	int		x;
+	int		y;
+	int		x_m_grid;
+	int		y_m_grid;
+	int		x_pos;
+	int		y_pos;
 }		t_player;
 
 typedef struct s_segment
@@ -84,11 +92,11 @@ typedef struct s_map
 	char			*west;
 	char			*east;
 	t_segment		**segment;
-	t_player		*player;
 }		t_map;
 
 typedef struct s_game
 {
+	int			grid_size;
 	int			m_zoom;
 	int			m_mag;
 	int			m_xset;
@@ -98,9 +106,10 @@ typedef struct s_game
 	int			m_horizontal;
 	int			m_vertical;
 	int			no_of_segments;
-	int			color;
 	int			start;
+	int			color;
 	t_map		*map;
+	t_player	*player;
 	t_window	*win;
 }		t_game;
 

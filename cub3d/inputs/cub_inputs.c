@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:24:15 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/27 14:14:20 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:09:32 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	cub_move_player(int key, t_game **game)
 {
 	if (key == 13)
-		(*game)->map->player->y_grid -= 1.0;
+		(*game)->player->y_m_grid -= 1.0;
 	if (key == 1)
-		(*game)->map->player->y_grid += 1.0;
+		(*game)->player->y_m_grid += 1.0;
 	if (key == 0)
-		(*game)->map->player->x_grid -= 1.0;
+		(*game)->player->x_m_grid -= 1.0;
 	if (key == 2)
-		(*game)->map->player->x_grid += 1.0;
+		(*game)->player->x_m_grid += 1.0;
 }
 
 void	cub_enlarge_map(int key, t_game **game)
@@ -67,8 +67,8 @@ void	cub_esc(int key, t_game **game)
 		mlx_clear_window((*game)->win->mlx, (*game)->win->window);
 		cub_free_map(game);
 		cub_free_segments(game);
-		ft_free(&(*game)->map->player);
 		ft_free(&((*game)->map));
+		ft_free(&(*game)->player);
 		ft_free(&((*game)->win->addr));
 		ft_free(&((*game)->win));
 		ft_free(&((*game)));
