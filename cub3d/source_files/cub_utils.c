@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:29:17 by gchernys          #+#    #+#             */
-/*   Updated: 2023/05/14 18:54:10 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:08:39 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	return_error(char *str, t_map *map, t_game *game)
 		free(map->floor);
 	if (map->cil)
 		free(map->cil);
-	free(map->player);
 	free(map);
 	free(game);
 	ft_putstr_fd(str, 2);

@@ -6,7 +6,11 @@
 /*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:16:27 by gchernys          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/05/29 09:49:21 by gchernys         ###   ########.fr       */
+=======
+/*   Updated: 2023/05/30 13:08:14 by amalbrei         ###   ########.fr       */
+>>>>>>> ammar
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +85,6 @@ int	malloc_map(t_map *map, char *file)
 			return (MALLOC_ERR);
 		i++;
 	}
-	map->player = malloc(sizeof(t_player));
 	return (0);
 }
 
@@ -108,6 +111,8 @@ int	load_map(t_game *game, t_map *map, char *file)
 	setmap(map_temp, map);
 	free_double_array(map_temp);
 	validate_map(map, game);
+	game->grid_size = 64;
+	load_grid_segments(&game);
 	return (0);
 }
 

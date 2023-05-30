@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:17:57 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/27 18:58:50 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/05/28 15:12:52 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	my_mlx_pixel_put(t_game *game, int x, int y)
 
 void	cub_bressenham_decision(t_game *game, t_bress *bress, int i)
 {
-	bress->x += 1;
 	while (i < bress->x_step)
 	{
 		my_mlx_pixel_put(game, bress->x, bress->y);

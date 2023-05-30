@@ -5,13 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/14 12:32:47 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/29 09:48:35 by gchernys         ###   ########.fr       */
+/*   Created: 2023/05/30 13:22:45 by gchernys          #+#    #+#             */
+/*   Updated: 2023/05/30 13:22:47 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#ifndef STRUCTS_H
-# define STRUCTS_H
 
 typedef enum e_error
 {
@@ -51,11 +48,19 @@ typedef struct s_window{
 
 typedef struct s_player
 {
-	double		x_grid;
-	double		y_grid;
-	double		x;
-	double		y;
-	char		dir;
+	int		fov;
+	int		height;
+	char	dir;
+	double	angle;
+	int		verti_dis;
+	int		horiz_dis;
+	int		distance;
+	int		x;
+	int		y;
+	int		x_m_grid;
+	int		y_m_grid;
+	int		x_pos;
+	int		y_pos;
 }		t_player;
 
 typedef struct s_segment
@@ -84,11 +89,11 @@ typedef struct s_map
 	char			*west;
 	char			*east;
 	t_segment		**segment;
-	t_player		*player;
 }		t_map;
 
 typedef struct s_game
 {
+	int			grid_size;
 	int			m_zoom;
 	int			m_mag;
 	int			m_xset;
@@ -98,9 +103,10 @@ typedef struct s_game
 	int			m_horizontal;
 	int			m_vertical;
 	int			no_of_segments;
-	int			color;
 	int			start;
+	int			color;
 	t_map		*map;
+	t_player	*player;
 	t_window	*win;
 }		t_game;
 

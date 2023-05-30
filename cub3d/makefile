@@ -6,7 +6,7 @@
 #    By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 10:55:58 by amalbrei          #+#    #+#              #
-#    Updated: 2023/05/23 17:56:17 by amalbrei         ###   ########.fr        #
+#    Updated: 2023/05/28 17:10:05 by amalbrei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ RM				=	rm	-rf
 
 INPUTS_SRC 		=	cub_close_x.c	cub_inputs.c	cub_free.c
 
-PLAYER_SRC		=	cub_find_player.c
+PLAYER_SRC		=	cub_find_player.c	cub_calc_player.c
 
 RENDERING_SRC	=	cub_bressenham.c	cub_draw_ui.c	cub_draw_map.c
 
