@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:12:34 by gchernys          #+#    #+#             */
-/*   Updated: 2023/05/21 14:20:39 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/01 14:15:00 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,18 @@ int	check_textures(t_map *map)
 	map->west[0] == '\0' || map->east[0] == '\0')
 		return (PARSE_ERR);
 	return (0);
+}
+
+void	cub_draw_floor_and_ceiling(t_game *game)
+{
+	unsigned int i;
+	unsigned int *dst;
+
+	i = game->win->window_w * game->win->window_h / 2;
+	dst = (unsigned int *) game->win->addr->ad;
+	while (--i > 0)
+		*dst++ = game->map->floor_color;
+	i = game->win->window_w * game->win->window_h / 2;
+	while (--i > 0)
+		*dst++ = game->map->ceiling_color;
 }

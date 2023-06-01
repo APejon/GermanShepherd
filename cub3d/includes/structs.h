@@ -6,9 +6,12 @@
 /*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:22:45 by gchernys          #+#    #+#             */
-/*   Updated: 2023/05/30 13:22:47 by gchernys         ###   ########.fr       */
+/*   Updated: 2023/06/01 12:53:37 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
 typedef enum e_error
 {

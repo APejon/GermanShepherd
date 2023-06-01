@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:16:57 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/20 17:44:34 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/01 12:58:23 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ void	cub_prep_image(t_window **win);
 void	cub_draw(t_game *game);
 void	cub_window_init(t_window **win);
 void	cub_init(t_game *game);
+void	cub_draw_floor_and_ceiling(t_game *game);
 
 #endif
