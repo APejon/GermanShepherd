@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:12:32 by gchernys          #+#    #+#             */
-/*   Updated: 2023/06/06 14:20:08 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/06 19:03:29 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 int	main(int argc, char **argv)
 {
-	int		j;
 	t_game	*game;
 
-	j = -1;
 	basic_error_check(argc, argv);
 	game = ft_calloc(1, sizeof(t_game));
 	game->map = ft_calloc(1, sizeof(t_map));
@@ -26,6 +24,7 @@ int	main(int argc, char **argv)
 	game->player = ft_calloc(1, sizeof(t_player));
 	game->player->verti_i = ft_calloc(2, sizeof(double));
 	game->player->horiz_i = ft_calloc(2, sizeof(double));
+	game->player->dir = 0;
 	load_map(game, game->map, argv[1]);
 	game->win = ft_calloc(1, sizeof(t_window));
 	cub_init(game);

@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:05:07 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/05 12:51:08 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/06 18:06:16 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	cub_prep_image(t_window **win)
 void	cub_draw(t_game *game)
 {
 	game->m_zoom = (game->grid_size / 4) * game->m_mag;
+	game->player->verti_dis = INT_MAX;
+	game->player->horiz_dis = INT_MAX;
 	cub_calc_player(&(game));
 	cub_draw_ui(game);
 }
