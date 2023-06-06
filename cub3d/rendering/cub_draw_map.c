@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:03:57 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/27 18:55:17 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/03 18:14:43 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void	cub_draw_grid(t_game *game, char **grid)
 
 void	cub_draw_m_background(t_game *game, t_window *win)
 {
+	// int	start[2];
+
 	if (game->m_mag == 2)
 		win->addr->i_p = mlx_xpm_file_to_image(game->win->mlx,
 				"textures/cloud.xpm", &(game->m_width), &(game->m_height));
@@ -105,6 +107,9 @@ void	cub_draw_m_background(t_game *game, t_window *win)
 				"textures/clouds.xpm", &(game->m_width), &(game->m_height));
 	win->addr->ad = mlx_get_data_addr(win->addr->i_p, &(win->addr->pix_bi),
 			&(win->addr->line_by), &win->addr->endian);
+	// start[0] = game->m_width;
+	// start[1] = game->m_height;
+	// cub_turn_transparent(game, game->win->window_w, game->win->window_h, start);
 	mlx_put_image_to_window(game->win->mlx, game->win->window,
 		game->win->addr->i_p, 0, 0);
 	mlx_destroy_image(game->win->mlx, game->win->addr->i_p);

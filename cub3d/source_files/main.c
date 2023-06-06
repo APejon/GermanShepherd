@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:12:32 by gchernys          #+#    #+#             */
-/*   Updated: 2023/05/30 13:10:45 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:20:08 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ int	main(int argc, char **argv)
 	game->map = ft_calloc(1, sizeof(t_map));
 	if (game->map == NULL || game == NULL || malloc_map(game->map, argv[1]))
 		return_error("Error\n Malloc error\n\n", game->map, game);
-	game->player = malloc(sizeof(t_player));
+	game->player = ft_calloc(1, sizeof(t_player));
+	game->player->verti_i = ft_calloc(2, sizeof(double));
+	game->player->horiz_i = ft_calloc(2, sizeof(double));
 	load_map(game, game->map, argv[1]);
 	game->win = ft_calloc(1, sizeof(t_window));
 	cub_init(game);

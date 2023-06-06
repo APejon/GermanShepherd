@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:17:57 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/28 15:12:52 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/06 13:58:56 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,6 @@ void	cub_bressenham_decision(t_game *game, t_bress *bress, int i)
 	while (i < bress->x_step)
 	{
 		my_mlx_pixel_put(game, bress->x, bress->y);
-		if (bress->p > 0)
-		{
-			bress->p = bress->p + (2 * (bress->y_step - bress->x_step));
-			if (bress->swap)
-				bress->x += bress->signx;
-			else
-				bress->y += bress->signy;
-		}
-		else
-			bress->p = bress->p + 2 * bress->y_step;
 		if (bress->swap)
 			bress->y += bress->signy;
 		else

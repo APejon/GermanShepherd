@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:16:57 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/20 17:44:34 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/05 12:50:40 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 /*-------- open and unlink --------*/
 # include <fcntl.h>
 
-/*-------- sin and cos --------*/
+/*-------- sin and cos and tan--------*/
 # include <math.h>
 
 /*-------- mlx --------*/
@@ -60,6 +60,7 @@ void	free_double_array(char **arr);
 int		return_error(char *str, t_map *map, t_game *game);
 
 /*-------- cub_init.c --------*/
+void	cub_place_image(t_window **win);
 void	cub_prep_image(t_window **win);
 void	cub_draw(t_game *game);
 void	cub_window_init(t_window **win);

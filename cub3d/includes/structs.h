@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:47 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/28 20:47:47 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:14:09 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,20 @@ typedef struct s_player
 	int		height;
 	char	dir;
 	double	angle;
-	int		verti_dis;
-	int		horiz_dis;
-	int		distance;
-	int		x;
-	int		y;
+	int		hit;
+	int		side;
+	double	x;
+	double	y;
+	double	dx;
+	double	dy;
+	double	x_pos;
+	double	y_pos;
 	int		x_m_grid;
 	int		y_m_grid;
-	int		x_pos;
-	int		y_pos;
+	double	*verti_i;
+	double	*horiz_i;
+	double	verti_dis;
+	double	horiz_dis;
 }		t_player;
 
 typedef struct s_segment
@@ -114,3 +119,25 @@ typedef struct s_game
 }		t_game;
 
 #endif
+	// int		mapx;
+	// int		mapy;
+	// double	dirx;
+	// double	diry;
+	// double	planex;
+	// double	planey;
+	// double	camerax;
+	// double	raydirx;
+	// double	raydiry;
+	// double	sidedistx;
+	// double	sidedisty;
+	// double	deltadistx;
+	// double	deltadisty;
+	// double	perpwalldist;
+	// int		stepx;
+	// int		stepy;
+	// int		lineheight;
+	// int		drawstart;
+	// int		drawend;
+
+	// double		time;
+	// double		oldtime;

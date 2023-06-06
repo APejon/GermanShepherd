@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:24:15 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/30 13:09:32 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:16:32 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ void	cub_esc(int key, t_game **game)
 		cub_free_map(game);
 		cub_free_segments(game);
 		ft_free(&((*game)->map));
-		ft_free(&(*game)->player);
+		ft_free(&((*game)->player->verti_i));
+		ft_free(&((*game)->player->horiz_i));
+		ft_free(&((*game))->player);
 		ft_free(&((*game)->win->addr));
 		ft_free(&((*game)->win));
 		ft_free(&((*game)));
