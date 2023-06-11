@@ -5,31 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/17 16:17:57 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/06 13:58:56 by amalbrei         ###   ########.fr       */
+/*   Created: 2023/06/11 16:46:13 by amalbrei          #+#    #+#             */
+/*   Updated: 2023/06/11 18:07:19 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	my_mlx_pixel_put(t_game *game, int x, int y)
-{
-	char	*dst;
-
-	if ((x >= 0 && y >= 0) && (x < game->win->window_w
-			&& y < game->win->window_h))
-	{
-		dst = game->win->addr->ad + (y * game->win->addr->line_by + x
-				* (game->win->addr->pix_bi / 8));
-		*(unsigned int *)dst = game->color;
-	}
-}
-
 void	cub_bressenham_decision(t_game *game, t_bress *bress, int i)
 {
+	game->color = 0x8b0000;
 	while (i < bress->x_step)
 	{
-		my_mlx_pixel_put(game, bress->x, bress->y);
+		my_mlx_pixel_put(game, (int)bress->x, (int)bress->y);
+		if (bress->p > 0)
+		{
+			bress->p = bress->p + (2 * (bress->y_step - bress->x_step));
+			if (bress->swap)
+				bress->x += bress->signx;
+			else
+				bress->y += bress->signy;
+		}
+		else
+			bress->p = bress->p + 2 * bress->y_step;
 		if (bress->swap)
 			bress->y += bress->signy;
 		else
@@ -38,29 +36,7 @@ void	cub_bressenham_decision(t_game *game, t_bress *bress, int i)
 	}
 }
 
-void	cub_fill_grid(t_game *game, t_bress *bress, int i)
-{
-	int	j;
-	int	start;
-
-	j = -1;
-	bress->x += 1;
-	start = bress->x;
-	while (++j < 16 * game->m_mag)
-	{
-		i = 0;
-		bress->x = start;
-		while (i <= bress->x_step)
-		{			
-			my_mlx_pixel_put(game, bress->x, bress->y);
-			bress->x += 1;
-			i++;
-		}
-		bress->y += 1;
-	}
-}
-
-void	cub_bressenham_frag(t_game *game, t_bress *bress, char *flag)
+void	cub_bressenham_frag(t_game *game, t_bress *bress)
 {
 	int	i;
 
@@ -78,37 +54,26 @@ void	cub_bressenham_frag(t_game *game, t_bress *bress, char *flag)
 		bress->y_step = bress->temp;
 		bress->swap = 1;
 	}
-	if (flag[1] == 'f')
-		cub_fill_grid(game, bress, i);
-	else
-		cub_bressenham_decision(game, bress, i);
+	cub_bressenham_decision(game, bress, i);
 	ft_free(&bress);
 }
 
-void	cub_bressenham(int x, int y, t_game *game, char *flag)
+void	cub_bressenham(double x, double y, double *delta, t_game *game)
 {
 	t_bress	*bress;
 
 	bress = calloc(1, sizeof(t_bress));
-	if (flag[0] == 'x')
-	{
-		bress->deltax[0] = x * (game->m_zoom);
-		bress->deltay[0] = y * (game->m_zoom);
-		bress->deltax[1] = (x + 1) * (game->m_zoom);
-		bress->deltay[1] = y * (game->m_zoom);
-	}
-	if (flag[0] == 'y')
-	{
-		bress->deltax[0] = x * (game->m_zoom);
-		bress->deltay[0] = y * (game->m_zoom);
-		bress->deltax[1] = x * (game->m_zoom);
-		bress->deltay[1] = (y + 1) * (game->m_zoom);
-	}
+	bress->deltax[0] = x * (game->m_mag);
+	bress->deltay[0] = y * (game->m_mag);
+	bress->deltax[1] = (delta[0] + (double)game->m_xset)
+		* ((double)game->m_zoom);
+	bress->deltay[1] = (delta[1] + (double)game->m_yset)
+		* ((double)game->m_zoom);
 	bress->signx = 1;
 	bress->signy = 1;
 	if (bress->deltax[1] - bress->deltax[0] < 0)
 		bress->signx = -1;
 	if (bress->deltay[1] - bress->deltay[0] < 0)
 		bress->signy = -1;
-	cub_bressenham_frag(game, bress, flag);
+	cub_bressenham_frag(game, bress);
 }

@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:47 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/06 14:14:09 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/10 14:26:14 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ typedef enum e_error
 	MALLOC_ERR = 1,
 	PARSE_ERR,
 }	t_error;
+
+typedef enum e_side
+{
+	NORTH = 1,
+	SOUTH,
+	EAST,
+	WEST,
+}	t_side;
 
 typedef struct s_bress {
 	double	deltax[2];
@@ -54,7 +62,8 @@ typedef struct s_player
 	int		fov;
 	int		height;
 	char	dir;
-	double	angle;
+	double	p_angle;
+	double	r_angle;
 	int		hit;
 	int		side;
 	double	x;
@@ -67,8 +76,10 @@ typedef struct s_player
 	int		y_m_grid;
 	double	*verti_i;
 	double	*horiz_i;
+	double	project_dis;
 	double	verti_dis;
 	double	horiz_dis;
+	double	correct_dis;
 }		t_player;
 
 typedef struct s_segment
@@ -113,6 +124,7 @@ typedef struct s_game
 	int			no_of_segments;
 	int			start;
 	int			color;
+	int			win_x;
 	t_map		*map;
 	t_player	*player;
 	t_window	*win;

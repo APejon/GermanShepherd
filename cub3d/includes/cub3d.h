@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:16:57 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/05 12:50:40 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/11 17:16:51 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,15 @@
 # include "rendering.h"
 
 /*-------- cub_utils.c --------*/
+void	cub_place_image(t_window **win);
+void	cub_prep_image(t_game *game, t_window **win, char flag);
 void	free_double_array(char **arr);
 int		return_error(char *str, t_map *map, t_game *game);
 
 /*-------- cub_init.c --------*/
-void	cub_place_image(t_window **win);
-void	cub_prep_image(t_window **win);
 void	cub_draw(t_game *game);
 void	cub_window_init(t_window **win);
+void	cub_player_init(t_game **game);
 void	cub_init(t_game *game);
 
 #endif

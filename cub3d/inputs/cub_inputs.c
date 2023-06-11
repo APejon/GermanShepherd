@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:24:15 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/06 14:16:32 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/11 17:58:22 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	cub_enlarge_map(int key, t_game **game)
 			(*game)->m_mag = 2;
 		else if ((*game)->m_mag == 2)
 			(*game)->m_mag = 1;
-		cub_prep_image(&((*game)->win));
+		cub_prep_image(*game, &((*game)->win), 'n');
 		mlx_put_image_to_window((*game)->win->mlx, (*game)->win->window,
 			(*game)->win->addr->i_p, 0, 0);
 		mlx_destroy_image((*game)->win->mlx, (*game)->win->addr->i_p);

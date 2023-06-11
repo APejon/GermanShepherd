@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:03:57 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/03 18:14:43 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/10 13:51:48 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,17 @@ void	cub_draw_grid_extra(t_game *game, char **grid, int x, int y)
 		if (grid[y][x] == '1')
 		{
 			game->color = 0x0000FF;
-			cub_bressenham(x + game->m_xset, y + game->m_yset, game, "xf");
+			cub_bressenham_mini(x + game->m_xset, y + game->m_yset, game, "xf");
 		}
-		cub_bressenham(x + game->m_xset, y + game->m_yset, game, "xg");
-		cub_bressenham(x + game->m_xset, y + game->m_yset, game, "yg");
+		cub_bressenham_mini(x + game->m_xset, y + game->m_yset, game, "xg");
+		cub_bressenham_mini(x + game->m_xset, y + game->m_yset, game, "yg");
 	}
 	if (x != 0 && grid[y][x] == 'x' && grid[y][x - 1] != 'x')
-		cub_bressenham(x + game->m_xset, y + game->m_yset, game, "yg");
+		cub_bressenham_mini(x + game->m_xset, y + game->m_yset, game, "yg");
 	if (grid[y + 1] && grid[y][x] == '1' && grid[y + 1][x] == 'x')
-		cub_bressenham(x + game->m_xset, y + game->m_yset + 1, game, "xg");
+		cub_bressenham_mini(x + game->m_xset, y + game->m_yset + 1, game, "xg");
 	if (grid[y][x] == '1' && !grid[y + 1])
-		cub_bressenham(x + game->m_xset, y + game->m_yset + 1, game, "xg");
+		cub_bressenham_mini(x + game->m_xset, y + game->m_yset + 1, game, "xg");
 }
 
 int	cub_end_of_line(char *line)
@@ -90,7 +90,7 @@ void	cub_draw_grid(t_game *game, char **grid)
 		}
 		if ((grid[y][x] == 'x' && grid[y][x - 1] == '1')
 			|| (!grid[y][x] && (grid[y][x - 1] == '1' || grid[y][x -1] == '0')))
-			cub_bressenham(x + game->m_xset, y + game->m_yset, game, "yg");
+			cub_bressenham_mini(x + game->m_xset, y + game->m_yset, game, "yg");
 		y++;
 	}
 }
