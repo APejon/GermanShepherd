@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:47 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/15 16:35:43 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/15 19:15:51 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ typedef enum e_side
 typedef struct s_bress {
 	double	deltax[2];
 	double	deltay[2];
-	double	signx;
-	double	signy;
-	double	x_step;
-	double	y_step;
-	double	swap;
-	double	temp;
-	double	x;
-	double	y;
-	double	p;
+	int		signx;
+	int		signy;
+	int		x_step;
+	int		y_step;
+	int		swap;
+	int		temp;
+	int		x;
+	int		y;
+	int		p;
 }	t_bress;
 
 typedef struct s_addr {

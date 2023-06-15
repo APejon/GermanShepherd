@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 16:46:13 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/13 21:08:23 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/15 19:30:53 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	cub_bressenham_decision(t_game *game, t_bress *bress, int i)
 	game->color = 0x8b0000;
 	while (i < bress->x_step)
 	{
-		my_mlx_pixel_put(game, (int)bress->x, (int)bress->y);
+		if (bress->x < game->m_width && bress->y < game->m_height)
+			my_mlx_pixel_put(game, bress->x, bress->y);
 		if (bress->p > 0)
 		{
 			bress->p = bress->p + (2 * (bress->y_step - bress->x_step));
@@ -32,6 +33,9 @@ void	cub_bressenham_decision(t_game *game, t_bress *bress, int i)
 			bress->y += bress->signy;
 		else
 			bress->x += bress->signx;
+		if ((game->player->r_angle >= 269.9 && game->player->r_angle <= 270.0)
+			|| (game->player->r_angle >= 89.9 && game->player->r_angle <= 90.0))
+			bress->x = bress->deltax[0];
 		i++;
 	}
 }
@@ -40,11 +44,11 @@ void	cub_bressenham_frag(t_game *game, t_bress *bress)
 {
 	int	i;
 
-	bress->x_step = fabs(bress->deltax[1] - bress->deltax[0]);
-	bress->y_step = fabs(bress->deltay[1] - bress->deltay[0]);
+	bress->x_step = (int)fabs(bress->deltax[1] - bress->deltax[0]);
+	bress->y_step = (int)fabs(bress->deltay[1] - bress->deltay[0]);
 	bress->swap = 0;
-	bress->x = bress->deltax[0];
-	bress->y = bress->deltay[0];
+	bress->x = (int)bress->deltax[0];
+	bress->y = (int)bress->deltay[0];
 	bress->p = (2 * bress->y_step) - bress->x_step;
 	i = 0;
 	if (bress->y_step >= bress->x_step)

@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:00:33 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/15 16:08:48 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/15 19:11:21 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	cub_draw_column(t_game **game, t_map *map, t_player *pl,
 		if ((*game)->map->segment[(*game)->start]->player_found)
 			cub_bressenham(pl->x_m_grid, pl->y_m_grid, pl->verti_i, *game);
 	}
-	else if (pl->horiz_dis < pl->verti_dis)
+	else if (pl->horiz_dis <= pl->verti_dis)
 	{
 		(*game)->player->correct_dis = pl->horiz_dis;
 		//check whether its north or south of block
@@ -108,6 +108,8 @@ void	cub_draw_column(t_game **game, t_map *map, t_player *pl,
 	{
 		printf("ERROR OCCURED IN CALCULATING CORRECT DISTANCE\n at r_angle: %f \
 		and p_angle: %f\n", pl->r_angle, pl->p_angle);
+		printf("VERTI DIS %f and HORZI DIS %f\n", pl->verti_dis, pl->horiz_dis);
+		printf("AT VERTI %f and %f AND HORZI %f and %f\n", pl->verti_i[1], pl->verti_i[0], pl->horiz_i[1], pl->horiz_i[0]);
 		printf("CORRECT DISTANCE = %f\n", pl->correct_dis);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:05:07 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/15 17:13:14 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:22:38 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	cub_player_init(t_game **game)
 	(*game)->player->fov = 60;
 	(*game)->player->height = 32;
 	if ((*game)->player->dir == 'N')
-		(*game)->player->p_angle = 30.0;
+		(*game)->player->p_angle = 90.0;
 	if ((*game)->player->dir == 'W')
 		(*game)->player->p_angle = 180.0;
 	if ((*game)->player->dir == 'S')

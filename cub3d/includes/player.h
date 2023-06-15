@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:15:40 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/15 17:01:16 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/15 18:22:36 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		cub_scan_player(t_game **game, char *line, int k);
 int		cub_find_player(t_game **game, t_map *map);
 
 /*----- cub_find_utils.c -----*/
+char	cub_boundary_check(t_game **game, t_player *player, t_map *map);
 void	cub_grid_mult_verti(t_game **game, t_player *player);
 void	cub_grid_mult_hori(t_game **game, t_player *player);
 void	cub_grid_div_verti(t_game **game, t_player *player);

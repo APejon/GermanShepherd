@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:08:51 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/15 17:00:35 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:26:07 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	cub_first_intersect(t_game **game, t_map *m, t_player *play)
 			== '1')
 			cub_get_distance(game, play, &r_flag, 'h');
 	}
-	if (r_flag == 'r' || r_flag == 'p')
+	if (r_flag == 'r')
 		return (1);
 	return (0);
 }
