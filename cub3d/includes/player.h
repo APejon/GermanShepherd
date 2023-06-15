@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:15:40 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/11 16:36:54 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:01:16 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 # define PLAYER_H
 
 /*----- cub_calc_player.c -----*/
-double	cub_get_distance(t_player *player, double *dest);
+void	cub_get_distance(t_game **game, t_player *player, char *r_flag,
+			char flag);
 int		cub_subsequent_intersect(t_game **game, t_map *map, t_player *player);
 int		cub_first_intersect(t_game **game, t_map *map, t_player *player);
 void	cub_calc_player(t_game **game, t_player *player, t_window *win);
 
 /*----- cub_find_intersect.c -----*/
-void	cub_find_first_v(t_game **game, t_player *player);
+void	cub_find_next_h(t_game **game, t_player *player);
+void	cub_find_next_v(t_game **game, t_player *player);
 void	cub_find_first_h(t_game **game, t_player *player);
-char	cub_find_intersect(t_game **game, t_player *player, char strt_flag);
+void	cub_find_first_v(t_game **game, t_player *player);
+char	cub_find_intersect(t_game **game, t_map *m, t_player *player,
+			char strt_flag);
 
 /*----- cub_find_player.c -----*/
 int		cub_scan_player(t_game **game, char *line, int k);

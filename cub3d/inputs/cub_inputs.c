@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:24:15 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/11 17:58:22 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/15 16:32:11 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ void	cub_move_player(int key, t_game **game)
 	if (key == 1)
 		(*game)->player->y_m_grid += 1.0;
 	if (key == 0)
-		(*game)->player->x_m_grid -= 1.0;
+		(*game)->player->p_angle += 1.0;
 	if (key == 2)
-		(*game)->player->x_m_grid += 1.0;
+		(*game)->player->p_angle -= 1.0;
+	if ((*game)->player->p_angle > 359.0)
+		(*game)->player->p_angle = (*game)->player->p_angle - 360;
+	if ((*game)->player->p_angle < 0.0)
+		(*game)->player->p_angle = (*game)->player->p_angle + 360;
 }
 
 void	cub_enlarge_map(int key, t_game **game)

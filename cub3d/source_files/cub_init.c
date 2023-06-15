@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:05:07 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/11 17:59:45 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:13:14 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@ void	cub_draw(t_game *game)
 {
 	game->m_zoom = (game->grid_size / 4) * game->m_mag;
 	game->win_x = 0;
+	game->player->rays = 0.0;
+	game->player->r_angle = game->player->p_angle + (game->player->fov / 2);
+	if (game->player->r_angle >= 360)
+		game->player->r_angle = game->player->r_angle - 360;
 	game->player->hit = 0;
 	game->player->side = 0;
 	game->player->verti_dis = INT_MAX;
 	game->player->horiz_dis = INT_MAX;
-	game->player->correct_dis = 0;
-	game->player->r_angle = game->player->p_angle + (game->player->fov / 2);
+	game->player->correct_dis = 0.0;
+	cub_draw_m_background(game, game->win);
 	cub_draw_ui(game);
 	cub_calc_player(&(game), game->player, game->win);
 }
@@ -44,7 +48,7 @@ void	cub_player_init(t_game **game)
 	(*game)->player->fov = 60;
 	(*game)->player->height = 32;
 	if ((*game)->player->dir == 'N')
-		(*game)->player->p_angle = 90.0;
+		(*game)->player->p_angle = 30.0;
 	if ((*game)->player->dir == 'W')
 		(*game)->player->p_angle = 180.0;
 	if ((*game)->player->dir == 'S')

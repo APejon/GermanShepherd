@@ -6,45 +6,59 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:08:51 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/11 17:17:16 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:00:35 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-double	cub_get_distance(t_player *player, double *dest)
+void	cub_get_distance(t_game **game, t_player *player, char *r_flag,
+						char flag)
 {
-	return (sqrt((dest[0] - player->x_pos) * (dest[0] - player->x_pos)
-			+ (dest[1] - player->y_pos) * (dest[1] - player->y_pos)));
+	if (*r_flag == 0)
+		*r_flag = 'p';
+	else if (*r_flag == 'p')
+		*r_flag = 'r';
+	if (flag == 'v')
+	{
+		cub_grid_mult_verti(game, player);
+		(*game)->player->verti_dis = sqrt((player->verti_i[0] - player->x_pos)
+				* (player->verti_i[0] - (*game)->player->x_pos)
+				+ (player->verti_i[1] - (*game)->player->y_pos)
+				* (player->verti_i[1] - (*game)->player->y_pos));
+		cub_grid_div_verti(game, player);
+	}
+	else if (flag == 'h')
+	{
+		cub_grid_mult_hori(game, player);
+		(*game)->player->horiz_dis = sqrt((player->horiz_i[0] - player->x_pos)
+				* (player->horiz_i[0] - (*game)->player->x_pos)
+				+ (player->horiz_i[1] - (*game)->player->y_pos)
+				* (player->horiz_i[1] - (*game)->player->y_pos));
+		cub_grid_div_hori(game, player);
+	}
 }
 
 int	cub_subsequent_intersect(t_game **game, t_map *m, t_player *play)
 {
-	char	flag;
 	char	r_flag;
 
-	(*game)->player->verti_dis = INT_MAX;
-	(*game)->player->horiz_dis = INT_MAX;
-	flag = cub_find_intersect(game, play, 's');
-	if (flag != 'v')
+	r_flag = 0;
+	(*game)->player->prot_flag = cub_find_intersect(game, m, play, 's');
+	if ((*game)->player->prot_flag != 'v')
 	{
-		if (m->full_grid[(int)play->verti_i[1]][(int)play->verti_i[0]] == '1')
-		{
-			cub_grid_mult_verti(game, play);
-			(*game)->player->verti_dis = cub_get_distance(play, play->verti_i);
-			r_flag = 'r';
-		}
+		if (m->full_grid[(int)play->verti_i[1]][(int)play->verti_i[0]]
+			== '1')
+			cub_get_distance(game, play, &r_flag, 'v');
 	}
-	if (flag != 'h')
+	if ((*game)->player->prot_flag != 'h')
 	{
-		if (m->full_grid[(int)play->horiz_i[1]][(int)play->horiz_i[0]] == '1')
-		{
-			cub_grid_mult_hori(game, play);
-			(*game)->player->horiz_dis = cub_get_distance(play, play->horiz_i);
-			r_flag = 'r';
-		}
+		if (m->full_grid[(int)play->horiz_i[1]][(int)play->horiz_i[0]]
+			== '1')
+			cub_get_distance(game, play, &r_flag, 'h');
 	}
-	if (r_flag == 'r')
+	if (r_flag == 'r' || (r_flag == 'p'
+			&& (play->prot_flag == 'v' || play->prot_flag == 'h')))
 		return (1);
 	return (0);
 }
@@ -61,40 +75,31 @@ int	cub_subsequent_intersect(t_game **game, t_map *m, t_player *play)
  */
 int	cub_first_intersect(t_game **game, t_map *m, t_player *play)
 {
-	char	flag;
 	char	r_flag;
 
-	flag = cub_find_intersect(game, play, 'f');
-	if (flag != 'v')
+	r_flag = 0;
+	(*game)->player->prot_flag = cub_find_intersect(game, m, play, 'f');
+	if (play->prot_flag != 'v')
 	{
-		if (m->full_grid[(int)play->verti_i[1]][(int)play->verti_i[0]] == '1')
-		{
-			cub_grid_mult_verti(game, play);
-			(*game)->player->verti_dis = cub_get_distance(play, play->verti_i);
-			r_flag = 'r';
-		}
+		if (m->full_grid[(int)play->verti_i[1]][(int)play->verti_i[0]]
+			== '1')
+			cub_get_distance(game, play, &r_flag, 'v');
 	}
-	if (flag != 'h')
+	if (play->prot_flag != 'h')
 	{
-		if (m->full_grid[(int)play->horiz_i[1]][(int)play->horiz_i[0]] == '1')
-		{
-			cub_grid_mult_hori(game, play);
-			(*game)->player->horiz_dis = cub_get_distance(play, play->horiz_i);
-			r_flag = 'r';
-		}
+		if (m->full_grid[(int)play->horiz_i[1]][(int)play->horiz_i[0]]
+			== '1')
+			cub_get_distance(game, play, &r_flag, 'h');
 	}
-	if (r_flag == 'r')
+	if (r_flag == 'r' || r_flag == 'p')
 		return (1);
 	return (0);
 }
 
 void	cub_calc_player(t_game **game, t_player *player, t_window *win)
 {
-	double	x;
-
-	x = 0.0;
 	cub_prep_image(*game, &((*game)->win), 'g');
-	while (x <= player->fov)
+	while (player->rays <= player->fov)
 	{
 		if (cub_first_intersect(game, (*game)->map, (*game)->player))
 			cub_draw_column(game, (*game)->map, player, win);
@@ -110,8 +115,10 @@ void	cub_calc_player(t_game **game, t_player *player, t_window *win)
 		}
 		(*game)->player->r_angle -= (double)player->fov / (double)win->window_w;
 		if (player->r_angle < 0)
-			(*game)->player->r_angle = 360 - player->fov / win->window_w;
-		x += (double)player->fov / (double)win->window_w;
+			(*game)->player->r_angle = player->r_angle + 360;
+		(*game)->player->rays += (double)player->fov / (double)win->window_w;
+		(*game)->player->verti_dis = INT_MAX;
+		(*game)->player->horiz_dis = INT_MAX;
 	}
 	cub_place_image(&((*game)->win));
 }

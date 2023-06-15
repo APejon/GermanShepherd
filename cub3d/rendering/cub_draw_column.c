@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:00:33 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/11 18:11:23 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/15 16:08:48 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,6 @@ void	cub_draw_column(t_game **game, t_map *map, t_player *pl,
 						t_window *win)
 {
 	(void)map;
-	cub_grid_div_verti(game, pl);
-	cub_grid_div_hori(game, pl);
 	if (pl->verti_dis < pl->horiz_dis)
 	{
 		(*game)->player->correct_dis = pl->verti_dis;
@@ -107,6 +105,9 @@ void	cub_draw_column(t_game **game, t_map *map, t_player *pl,
 	if (pl->correct_dis)
 		cub_prep_column(*game, map, pl, win);
 	else
+	{
 		printf("ERROR OCCURED IN CALCULATING CORRECT DISTANCE\n at r_angle: %f \
-		and p_angle: %f", pl->r_angle, pl->p_angle);
+		and p_angle: %f\n", pl->r_angle, pl->p_angle);
+		printf("CORRECT DISTANCE = %f\n", pl->correct_dis);
+	}
 }

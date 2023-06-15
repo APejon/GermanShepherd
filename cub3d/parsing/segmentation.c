@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 14:19:41 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/01 17:54:12 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:38:40 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	load_full_grid(t_game *game)
 		i++;
 		j++;
 	}
+	game->map->wide = ft_strlen(game->map->full_grid[0]);
+	game->map->high = i;
 }
 
 int	count_segments(t_game **game, char **full_grid)

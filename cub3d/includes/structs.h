@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:47 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/10 14:26:14 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/15 16:35:43 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,13 @@ typedef struct s_window{
 
 typedef struct s_player
 {
+	char	prot_flag;
 	int		fov;
 	int		height;
 	char	dir;
 	double	p_angle;
 	double	r_angle;
+	double	rays;
 	int		hit;
 	int		side;
 	double	x;

@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:01:03 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/11 18:06:03 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/15 14:09:00 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	cub_turn_transparent(t_game *game, int width, int height, int *start)
 		{
 			while (++x <= start[0])
 				my_mlx_pixel_put(game, x, y);
+			if (y == start[1] - 1)
+				break ;
 		}
 		else
 		{
@@ -73,7 +75,6 @@ void	cub_turn_transparent(t_game *game, int width, int height, int *start)
 
 void	cub_draw_ui(t_game *game)
 {
-	cub_draw_m_background(game, game->win);
 	cub_prep_image(game, &(game->win), 'm');
 	cub_draw_grid(game, game->map->segment[game->start]->grid);
 	cub_print_m_info(game);
