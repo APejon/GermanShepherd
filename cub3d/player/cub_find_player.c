@@ -6,27 +6,32 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:42:56 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/06 19:13:20 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:47:04 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	cub_scan_player(t_game **game, char *line, int k)
+int	cub_scan_player(t_game *game, char *line, int k)
 {
 	int		i;
+	int		x;
+	int		y;
 
 	i = -1;
+	x = 0;
+	y = 0;
 	while (line[++i])
 	{
 		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E'
 			|| line[i] == 'W')
 		{
-			(*game)->player->x_m_grid = (ft_find_char(line, line[i])
-					+ (*game)->m_xset) * (*game)->m_zoom
-				+ ((*game)->m_zoom / 2);
-			(*game)->player->y_m_grid = (k + (*game)->m_yset)
-				* (*game)->m_zoom + ((*game)->m_zoom / 2);
+			game->player->x_m_grid = (ft_find_char(line, line[i])
+					+ game->m_xset) * game->m_zoom + (game->m_zoom / 2);
+			game->player->y_m_grid = (k + game->m_yset)
+				* game->m_zoom + (game->m_zoom / 2);
+			x = game->player->x_m_grid;
+			y = game->player->y_m_grid;
 			return (1);
 		}
 	}

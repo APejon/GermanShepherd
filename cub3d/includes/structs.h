@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:47 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/15 19:15:51 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/17 16:38:14 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,18 @@ typedef enum e_side
 	WEST,
 }	t_side;
 
+typedef struct s_keys {
+	bool	esc;
+	bool	w;
+	bool	s;
+	bool	a;
+	bool	d;
+	bool	l_arrow;
+	bool	r_arrow;
+	bool	m_switch;
+	bool	m_player;
+}	t_keys;
+
 typedef struct s_bress {
 	double	deltax[2];
 	double	deltay[2];
@@ -39,6 +51,10 @@ typedef struct s_bress {
 	int		x;
 	int		y;
 	int		p;
+	int		x_shift;
+	int		y_shift;
+	int		x_check;
+	int		y_check;
 }	t_bress;
 
 typedef struct s_addr {
@@ -76,6 +92,8 @@ typedef struct s_player
 	double	y_pos;
 	int		x_m_grid;
 	int		y_m_grid;
+	int		x_shift;
+	int		y_shift;
 	double	*verti_i;
 	double	*horiz_i;
 	double	project_dis;
@@ -130,28 +148,7 @@ typedef struct s_game
 	t_map		*map;
 	t_player	*player;
 	t_window	*win;
+	t_keys		*keys;
 }		t_game;
 
 #endif
-	// int		mapx;
-	// int		mapy;
-	// double	dirx;
-	// double	diry;
-	// double	planex;
-	// double	planey;
-	// double	camerax;
-	// double	raydirx;
-	// double	raydiry;
-	// double	sidedistx;
-	// double	sidedisty;
-	// double	deltadistx;
-	// double	deltadisty;
-	// double	perpwalldist;
-	// int		stepx;
-	// int		stepy;
-	// int		lineheight;
-	// int		drawstart;
-	// int		drawend;
-
-	// double		time;
-	// double		oldtime;

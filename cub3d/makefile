@@ -6,7 +6,7 @@
 #    By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 10:55:58 by amalbrei          #+#    #+#              #
-#    Updated: 2023/06/11 16:56:30 by amalbrei         ###   ########.fr        #
+#    Updated: 2023/06/17 13:36:24 by amalbrei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,11 +31,11 @@ LIB				=	ar	-rcs
 LIBFT			=	-Llibft -lft
 MLX				=	-Lmlx -lmlx
 CC				=	gcc
-CFLAGS			=	-Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS			=	-Wall -Wextra -Werror -g3 -Ofast
 CUB3D_FLAGS 	=	-framework OpenGL -framework AppKit
 RM				=	rm	-rf
 
-INPUTS_SRC 		=	cub_close_x.c	cub_inputs.c	cub_free.c
+INPUTS_SRC 		=	cub_close_x.c	cub_inputs.c	cub_free.c	cub_press.c
 
 PLAYER_SRC		=	cub_calc_player.c	cub_find_intersect.c\
 					cub_find_player.c	cub_find_utils.c

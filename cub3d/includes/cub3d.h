@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:16:57 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/11 17:16:51 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/17 12:58:46 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@
 
 /*-------- sin and cos and tan--------*/
 # include <math.h>
+
+/*-------- bool -------*/
+# include <stdbool.h>
 
 /*-------- mlx --------*/
 # include "../mlx/mlx.h"

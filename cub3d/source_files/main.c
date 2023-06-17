@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:12:32 by gchernys          #+#    #+#             */
-/*   Updated: 2023/06/06 19:03:29 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:13:27 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,13 @@ int	main(int argc, char **argv)
 	if (game->map == NULL || game == NULL || malloc_map(game->map, argv[1]))
 		return_error("Error\n Malloc error\n\n", game->map, game);
 	game->player = ft_calloc(1, sizeof(t_player));
-	game->player->verti_i = ft_calloc(2, sizeof(double));
-	game->player->horiz_i = ft_calloc(2, sizeof(double));
-	game->player->dir = 0;
 	load_map(game, game->map, argv[1]);
-	game->win = ft_calloc(1, sizeof(t_window));
 	cub_init(game);
+	game->keys = ft_calloc(1, sizeof(t_keys));
 	mlx_hook(game->win->window, 17, 0, cub_close_x, &game);
-	mlx_hook(game->win->window, 2, 0, cub_inputs, &game);
+	mlx_hook(game->win->window, 2, 0, cub_key_press, &game);
+	mlx_hook(game->win->window, 3, 0, cub_key_release, &game);
+	mlx_loop_hook(game->win->mlx, cub_inputs, &game);
 	mlx_loop(game->win->mlx);
 	return (0);
 }

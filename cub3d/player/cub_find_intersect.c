@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 21:08:36 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/15 18:23:15 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:43:18 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void	cub_find_first_h(t_game **game, t_player *player)
 	}
 	else if (player->r_angle > 0.0 && player->r_angle < 180.0)
 	{
-		(*game)->player->horiz_i[1] = floor(player->y_pos / 64.0) * 64.0 - 1.0;
+		(*game)->player->horiz_i[1] = floor(player->y_pos / 64.0)
+			* 64.0 - 0.0001;
 		(*game)->player->horiz_i[0] = player->x_pos + (player->y_pos
 				- player->horiz_i[1]) / tan(player->r_angle * (M_PI / 180.0));
 	}
@@ -95,7 +96,8 @@ void	cub_find_first_v(t_game **game, t_player *player)
 	}
 	else if (player->r_angle > 90.0 && player->r_angle < 270.0)
 	{
-		(*game)->player->verti_i[0] = floor(player->x_pos / 64.0) * 64.0 - 1.0;
+		(*game)->player->verti_i[0] = floor(player->x_pos / 64.0)
+			* 64.0 - 0.0001;
 		(*game)->player->verti_i[1] = player->y_pos + (player->x_pos
 				- player->verti_i[0]) * tan(player->r_angle * (M_PI / 180.0));
 	}

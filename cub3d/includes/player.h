@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:15:40 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/15 18:22:36 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:30:48 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	cub_find_intersect(t_game **game, t_map *m, t_player *player,
 			char strt_flag);
 
 /*----- cub_find_player.c -----*/
-int		cub_scan_player(t_game **game, char *line, int k);
+int		cub_scan_player(t_game *game, char *line, int k);
 int		cub_find_player(t_game **game, t_map *map);
 
 /*----- cub_find_utils.c -----*/

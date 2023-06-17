@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 16:46:13 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/15 19:30:53 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/17 16:45:27 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	cub_bressenham_decision(t_game *game, t_bress *bress, int i)
 	game->color = 0x8b0000;
 	while (i < bress->x_step)
 	{
-		if (bress->x < game->m_width && bress->y < game->m_height)
+		if (bress->x < game->m_width - 20 && bress->y < game->m_height - 30)
 			my_mlx_pixel_put(game, bress->x, bress->y);
 		if (bress->p > 0)
 		{
@@ -62,17 +62,40 @@ void	cub_bressenham_frag(t_game *game, t_bress *bress)
 	ft_free(&bress);
 }
 
+void	cub_realign(t_bress *bress, t_game *game)
+{
+	while (bress->x_check < game->player->x)
+	{
+		bress->x_check += bress->x_check;
+		bress->x_shift++;
+	}
+	while (bress->x_shift-- > 0)
+		bress->deltax[1] -= 544;
+	while (bress->y_check < game->player->y)
+	{
+		bress->y_check += bress->y_check;
+		bress->y_shift++;
+	}
+	while (bress->y_shift-- > 0)
+		bress->deltay[1] -= 224;
+}
+
 void	cub_bressenham(double x, double y, double *delta, t_game *game)
 {
 	t_bress	*bress;
 
 	bress = calloc(1, sizeof(t_bress));
+	bress->x_shift = 0;
+	bress->y_shift = 0;
+	bress->x_check = 33;
+	bress->y_check = 13;
 	bress->deltax[0] = x * (game->m_mag);
 	bress->deltay[0] = y * (game->m_mag);
 	bress->deltax[1] = (delta[0] + (double)game->m_xset)
 		* ((double)game->m_zoom);
 	bress->deltay[1] = (delta[1] + (double)game->m_yset)
 		* ((double)game->m_zoom);
+	cub_realign(bress, game);
 	bress->signx = 1;
 	bress->signy = 1;
 	if (bress->deltax[1] - bress->deltax[0] < 0)

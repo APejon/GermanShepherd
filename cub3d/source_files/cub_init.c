@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:05:07 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/15 17:22:38 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/17 14:17:05 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,11 @@ void	cub_player_init(t_game **game)
 
 void	cub_init(t_game *game)
 {
+	game->win = ft_calloc(1, sizeof(t_window));
 	cub_window_init(&(game->win));
+	game->player->verti_i = ft_calloc(2, sizeof(double));
+	game->player->horiz_i = ft_calloc(2, sizeof(double));
+	game->player->dir = 0;
 	cub_player_init(&(game));
 	cub_draw(game);
 }
