@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:00:33 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/17 13:46:40 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/19 19:31:48 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ void	cub_prep_column(t_game *game, t_map *map, t_player *player,
 	(void)map;
 	wall_height = (int)ceil(game->grid_size / player->correct_dis
 			* player->project_dis);
-	draw_start = (win->window_h / 2) - (wall_height / 2);
+	draw_start = (win->window_h / 2) - (wall_height / 2) + player->up;
 	if (draw_start < 0)
 		draw_start = 0;
-	draw_end = (win->window_h / 2) + (wall_height / 2);
+	draw_end = (win->window_h / 2) + (wall_height / 2) + player->up;
 	if (draw_end > win->window_h)
 		draw_end = win->window_h;
 	cub_put_column(game, draw_start, draw_end);
