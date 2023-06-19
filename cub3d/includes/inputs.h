@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:23:08 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/19 19:27:01 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/19 21:41:44 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	cub_free_map(t_game **game);
 void	cub_free_segments(t_game **game);
 
 /*----- cub_inputs_utils.c -----*/
+void	cub_map_bound2(t_game **game, t_player *player, t_segment *segment);
+void	cub_map_bound(t_game **game, t_player *player, t_segment *segment);
 void	cub_undo_cont2(t_game **game, t_player *player);
 void	cub_undo_cont(t_game **game, t_player *player);
 void	cub_undo(t_game **game, t_map *map, t_player *player);

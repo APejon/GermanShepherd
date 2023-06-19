@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:24:15 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/19 19:37:42 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/19 22:20:43 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ int	cub_inputs(t_game **game)
 	cub_undo(game, (*game)->map, (*game)->player);
 	cub_turn_player(game);
 	cub_change_speed(game);
+	cub_map_bound(game, (*game)->player,
+		(*game)->map->segment[(*game)->start]);
 	cub_draw(*game);
 	return (0);
 }
