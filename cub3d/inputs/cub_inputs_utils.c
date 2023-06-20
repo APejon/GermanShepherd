@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 19:09:50 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/19 22:38:28 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:52:01 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,20 @@
 
 void	cub_map_bound2(t_game **game, t_player *player, t_segment *segment)
 {
-	int	y;
+	double	y;
 
 	y = player->y_m_grid / (*game)->m_zoom - (*game)->m_yset;
 	if (y < 0)
 	{
-		(*game)->player->y_m_grid = (14 + (*game)->m_yset) * (*game)->m_zoom
-			- player->y_m_grid;
+		(*game)->player->y_m_grid = (14 + (*game)->m_yset) * (*game)->m_zoom;
 		segment->player_found = 0;
 		segment->north->player_found = 1;
 		(*game)->start = segment->north->id;
 	}
-	if (y > 13)
+	if (y > 14)
 	{
-		(*game)->player->y_m_grid = player->y_m_grid - (16 - (*game)->m_yset)
-			* (*game)->m_zoom;
+		(*game)->player->y_m_grid = player->y_m_grid - ((12.01
+					+ (*game)->m_yset) * (*game)->m_zoom);
 		segment->player_found = 0;
 		segment->south->player_found = 1;
 		(*game)->start = segment->south->id;
@@ -37,20 +36,19 @@ void	cub_map_bound2(t_game **game, t_player *player, t_segment *segment)
 
 void	cub_map_bound(t_game **game, t_player *player, t_segment *segment)
 {
-	int	x;
+	double	x;
 
 	x = player->x_m_grid / (*game)->m_zoom - (*game)->m_xset;
 	if (x < 0)
 	{
-		(*game)->player->x_m_grid = (34 + (*game)->m_xset) * (*game)->m_zoom
-			- player->x_m_grid;
+		(*game)->player->x_m_grid = (34 + (*game)->m_xset) * (*game)->m_zoom;
 		segment->player_found = 0;
 		segment->west->player_found = 1;
 		(*game)->start = segment->west->id;
 	}
-	else if (x > 33)
+	else if (x > 34)
 	{
-		(*game)->player->x_m_grid = player->x_m_grid - (36 - (*game)->m_xset)
+		(*game)->player->x_m_grid = player->x_m_grid - (36.01 - (*game)->m_xset)
 			* (*game)->m_zoom;
 		segment->player_found = 0;
 		segment->east->player_found = 1;

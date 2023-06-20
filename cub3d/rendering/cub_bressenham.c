@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 16:46:13 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/19 22:29:05 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:17:52 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	cub_bressenham_decision(t_game *game, t_bress *bress, int i)
 {
-	game->color = 0x8b0000;
+	game->color = 0xbf8b0000;
 	while (i < bress->x_step)
 	{
 		if (bress->x < game->m_width - 20 && bress->y < game->m_height - 30)
