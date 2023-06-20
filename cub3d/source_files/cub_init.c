@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:05:07 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/20 14:28:49 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/20 17:22:36 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ void	cub_draw(t_game *game)
 	cub_calc_player(&(game), game->player, game->win);
 }
 
-void	cub_window_init(t_window **win)
+void	cub_window_init(t_window *win)
 {
-	(*win)->addr = malloc(sizeof(t_addr));
-	if (!(*win)->addr)
+	win->addr = malloc(sizeof(t_addr));
+	if (!win->addr)
 		exit (MALLOC_ERR);
-	(*win)->mlx = mlx_init();
-	(*win)->window_w = 1280;
-	(*win)->window_h = 1280;
-	(*win)->window = mlx_new_window((*win)->mlx, (*win)->window_w,
-			(*win)->window_h, "Cub3D Clear To Fly");
+	win->mlx = mlx_init();
+	win->window_w = 1280;
+	win->window_h = 1280;
+	win->window = mlx_new_window(win->mlx, win->window_w,
+			win->window_h, "Cub3D Clear To Fly");
 }
 
 void	cub_player_init(t_game **game)
@@ -70,7 +70,7 @@ void	cub_player_init(t_game **game)
 void	cub_init(t_game *game)
 {
 	game->win = ft_calloc(1, sizeof(t_window));
-	cub_window_init(&(game->win));
+	cub_window_init(game->win);
 	game->player->verti_i = ft_calloc(2, sizeof(double));
 	game->player->horiz_i = ft_calloc(2, sizeof(double));
 	game->player->dir = 0;
