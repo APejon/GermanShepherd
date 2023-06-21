@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:29:17 by gchernys          #+#    #+#             */
-/*   Updated: 2023/06/11 18:02:12 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:58:20 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	cub_prep_image(t_game *game, t_window **win, char flag)
 		start[0] = game->m_width;
 		start[1] = game->m_height;
 	}
+	cub_draw_floor_and_ceiling(game);
 	if (flag == 'm' || flag == 'g')
 		cub_turn_transparent(game, (*win)->window_w, (*win)->window_h, start);
 }

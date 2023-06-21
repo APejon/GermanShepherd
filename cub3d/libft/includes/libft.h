@@ -6,7 +6,7 @@
 /*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 19:45:57 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/29 09:20:41 by gchernys         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:19:22 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 /* void * */
 void		*ft_memchr(const void *s, int c, size_t n);
 /* size_t */
-size_t	ft_strlen(const char *c);
+size_t		ft_strlen(const char *c);
 
 /*------ Functions to change a string ------*/
 /* between a char * and an int*/

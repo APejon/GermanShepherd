@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_inputs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:24:15 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/20 14:28:43 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:10:26 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,6 @@ void	cub_change_speed(t_game **game)
 
 void	cub_turn_player(t_game **game)
 {
-	if ((*game)->player->up <= 600)
-		if ((*game)->keys->u_arrow == true)
-			(*game)->player->up += (*game)->player->speed;
-	if ((*game)->player->up >= -600)
-		if ((*game)->keys->d_arrow == true)
-			(*game)->player->up -= (*game)->player->speed;
 	if ((*game)->keys->l_arrow == true)
 		(*game)->player->p_angle += (*game)->player->speed;
 	if ((*game)->keys->r_arrow == true)
