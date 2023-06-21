@@ -6,11 +6,41 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:29:17 by gchernys          #+#    #+#             */
-/*   Updated: 2023/05/30 13:08:39 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/11 18:02:12 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	cub_place_image(t_window **win)
+{
+	mlx_put_image_to_window((*win)->mlx, (*win)->window,
+		(*win)->addr->i_p, 0, 0);
+	mlx_destroy_image((*win)->mlx, (*win)->addr->i_p);
+}
+
+void	cub_prep_image(t_game *game, t_window **win, char flag)
+{
+	int	start[2];
+
+	(*win)->addr->i_p = mlx_new_image((*win)->mlx, (*win)->window_w,
+			(*win)->window_h);
+	(*win)->addr->ad = mlx_get_data_addr((*win)->addr->i_p,
+			&((*win)->addr->pix_bi), &((*win)->addr->line_by),
+			&((*win)->addr->endian));
+	if (flag == 'm')
+	{
+		start[0] = 0;
+		start[1] = 0;
+	}
+	else if (flag == 'g')
+	{
+		start[0] = game->m_width;
+		start[1] = game->m_height;
+	}
+	if (flag == 'm' || flag == 'g')
+		cub_turn_transparent(game, (*win)->window_w, (*win)->window_h, start);
+}
 
 void	free_double_array(char **arr)
 {

@@ -6,7 +6,7 @@
 #    By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 10:55:58 by amalbrei          #+#    #+#              #
-#    Updated: 2023/05/28 17:10:05 by amalbrei         ###   ########.fr        #
+#    Updated: 2023/06/17 13:36:24 by amalbrei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,17 +31,19 @@ LIB				=	ar	-rcs
 LIBFT			=	-Llibft -lft
 MLX				=	-Lmlx -lmlx
 CC				=	gcc
-CFLAGS			=	-Wall -Wextra -Werror -g -Ofast -fsanitize=address
+CFLAGS			=	-Wall -Wextra -Werror -g3 -Ofast
 CUB3D_FLAGS 	=	-framework OpenGL -framework AppKit
 RM				=	rm	-rf
 
-INPUTS_SRC 		=	cub_close_x.c	cub_inputs.c	cub_free.c
+INPUTS_SRC 		=	cub_close_x.c	cub_inputs.c	cub_free.c	cub_press.c
 
-PLAYER_SRC		=	cub_find_player.c	cub_calc_player.c
+PLAYER_SRC		=	cub_calc_player.c	cub_find_intersect.c\
+					cub_find_player.c	cub_find_utils.c
 
-RENDERING_SRC	=	cub_bressenham.c	cub_draw_ui.c	cub_draw_map.c
+RENDERING_SRC	=	cub_bressenham_mini.c	cub_draw_ui.c	cub_draw_map.c\
+					cub_draw_column.c	cub_bressenham.c
 
-PARSING_SRC		=	make_map.c	map_validation.c	parsing.c	\
+PARSING_SRC		=	make_map.c	map_validation.c	parsing.c\
 					textures_and_colors.c	segmentation.c	fill_segments.c
 
 MAIN_SRC 		=	main.c	cub_utils.c	cub_init.c

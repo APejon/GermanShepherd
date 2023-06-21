@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/30 13:22:45 by gchernys          #+#    #+#             */
-/*   Updated: 2023/06/01 12:53:37 by gchernys         ###   ########.fr       */
+/*   Created: 2023/05/14 12:32:47 by amalbrei          #+#    #+#             */
+/*   Updated: 2023/06/19 17:28:57 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,42 @@ typedef enum e_error
 	PARSE_ERR,
 }	t_error;
 
+typedef enum e_side
+{
+	NORTH = 1,
+	SOUTH,
+	EAST,
+	WEST,
+}	t_side;
+
+typedef struct s_keys {
+	bool	esc;
+	bool	w;
+	bool	s;
+	bool	a;
+	bool	d;
+	bool	l_arrow;
+	bool	r_arrow;
+	bool	m_switch;
+	bool	m_player;
+}	t_keys;
+
 typedef struct s_bress {
 	double	deltax[2];
 	double	deltay[2];
-	double	signx;
-	double	signy;
-	double	x_step;
-	double	y_step;
-	double	swap;
-	double	temp;
-	double	x;
-	double	y;
-	double	p;
+	int		signx;
+	int		signy;
+	int		x_step;
+	int		y_step;
+	int		swap;
+	int		temp;
+	int		x;
+	int		y;
+	int		p;
+	int		x_shift;
+	int		y_shift;
+	int		x_check;
+	int		y_check;
 }	t_bress;
 
 typedef struct s_addr {
@@ -51,19 +75,31 @@ typedef struct s_window{
 
 typedef struct s_player
 {
+	char	prot_flag;
 	int		fov;
 	int		height;
 	char	dir;
-	double	angle;
-	int		verti_dis;
-	int		horiz_dis;
-	int		distance;
-	int		x;
-	int		y;
+	double	p_angle;
+	double	r_angle;
+	double	rays;
+	int		hit;
+	int		side;
+	double	x;
+	double	y;
+	double	dx;
+	double	dy;
+	double	x_pos;
+	double	y_pos;
 	int		x_m_grid;
 	int		y_m_grid;
-	int		x_pos;
-	int		y_pos;
+	int		x_shift;
+	int		y_shift;
+	double	*verti_i;
+	double	*horiz_i;
+	double	project_dis;
+	double	verti_dis;
+	double	horiz_dis;
+	double	correct_dis;
 }		t_player;
 
 typedef struct s_segment
@@ -108,9 +144,11 @@ typedef struct s_game
 	int			no_of_segments;
 	int			start;
 	int			color;
+	int			win_x;
 	t_map		*map;
 	t_player	*player;
 	t_window	*win;
+	t_keys		*keys;
 }		t_game;
 
 #endif

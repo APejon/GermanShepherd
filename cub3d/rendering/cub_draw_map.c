@@ -6,7 +6,7 @@
 /*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:03:57 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/01 13:09:41 by gchernys         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:27:42 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,17 @@ void	cub_draw_grid_extra(t_game *game, char **grid, int x, int y)
 		if (grid[y][x] == '1')
 		{
 			game->color = 0x0000FF;
-			cub_bressenham(x + game->m_xset, y + game->m_yset, game, "xf");
+			cub_bressenham_mini(x + game->m_xset, y + game->m_yset, game, "xf");
 		}
-		cub_bressenham(x + game->m_xset, y + game->m_yset, game, "xg");
-		cub_bressenham(x + game->m_xset, y + game->m_yset, game, "yg");
+		cub_bressenham_mini(x + game->m_xset, y + game->m_yset, game, "xg");
+		cub_bressenham_mini(x + game->m_xset, y + game->m_yset, game, "yg");
 	}
 	if (x != 0 && grid[y][x] == 'x' && grid[y][x - 1] != 'x')
-		cub_bressenham(x + game->m_xset, y + game->m_yset, game, "yg");
+		cub_bressenham_mini(x + game->m_xset, y + game->m_yset, game, "yg");
 	if (grid[y + 1] && grid[y][x] == '1' && grid[y + 1][x] == 'x')
-		cub_bressenham(x + game->m_xset, y + game->m_yset + 1, game, "xg");
+		cub_bressenham_mini(x + game->m_xset, y + game->m_yset + 1, game, "xg");
 	if (grid[y][x] == '1' && !grid[y + 1])
-		cub_bressenham(x + game->m_xset, y + game->m_yset + 1, game, "xg");
+		cub_bressenham_mini(x + game->m_xset, y + game->m_yset + 1, game, "xg");
 }
 
 int	cub_end_of_line(char *line)
@@ -90,13 +90,15 @@ void	cub_draw_grid(t_game *game, char **grid)
 		}
 		if ((grid[y][x] == 'x' && grid[y][x - 1] == '1')
 			|| (!grid[y][x] && (grid[y][x - 1] == '1' || grid[y][x -1] == '0')))
-			cub_bressenham(x + game->m_xset, y + game->m_yset, game, "yg");
+			cub_bressenham_mini(x + game->m_xset, y + game->m_yset, game, "yg");
 		y++;
 	}
 }
 
 void	cub_draw_m_background(t_game *game, t_window *win)
 {
+	// int	start[2];
+
 	if (game->m_mag == 2)
 		win->addr->i_p = mlx_xpm_file_to_image(game->win->mlx,
 				"textures/cloud.xpm", &(game->m_width), &(game->m_height));
@@ -105,6 +107,9 @@ void	cub_draw_m_background(t_game *game, t_window *win)
 				"textures/clouds.xpm", &(game->m_width), &(game->m_height));
 	win->addr->ad = mlx_get_data_addr(win->addr->i_p, &(win->addr->pix_bi),
 			&(win->addr->line_by), &win->addr->endian);
+	// start[0] = game->m_width;
+	// start[1] = game->m_height;
+	// cub_turn_transparent(game, game->win->window_w, game->win->window_h, start);
 	mlx_put_image_to_window(game->win->mlx, game->win->window,
 		game->win->addr->i_p, 0, 0);
 	mlx_destroy_image(game->win->mlx, game->win->addr->i_p);

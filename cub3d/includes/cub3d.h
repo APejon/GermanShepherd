@@ -6,7 +6,7 @@
 /*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:16:57 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/01 12:58:23 by gchernys         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:28:48 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,11 @@
 /*-------- open and unlink --------*/
 # include <fcntl.h>
 
-/*-------- sin and cos --------*/
+/*-------- sin and cos and tan--------*/
 # include <math.h>
+
+/*-------- bool -------*/
+# include <stdbool.h>
 
 /*-------- mlx --------*/
 # include "../mlx/mlx.h"
@@ -56,13 +59,15 @@
 # include "rendering.h"
 
 /*-------- cub_utils.c --------*/
+void	cub_place_image(t_window **win);
+void	cub_prep_image(t_game *game, t_window **win, char flag);
 void	free_double_array(char **arr);
 int		return_error(char *str, t_map *map, t_game *game);
 
 /*-------- cub_init.c --------*/
-void	cub_prep_image(t_window **win);
 void	cub_draw(t_game *game);
 void	cub_window_init(t_window **win);
+void	cub_player_init(t_game **game);
 void	cub_init(t_game *game);
 void	cub_draw_floor_and_ceiling(t_game *game);
 

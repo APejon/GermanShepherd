@@ -6,7 +6,7 @@
 /*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:01:03 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/01 14:13:30 by gchernys         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:27:38 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,8 @@ void	cub_draw_outline(t_game *game, t_bress bress)
 
 void	cub_draw_cursor(t_game *game, t_player *player)
 {
-	int		i;
 	t_bress	bress;
 
-	i = 0;
 	if (game->map->segment[game->start]->player_found)
 	{
 		game->color = 0x00FF0000;
@@ -48,13 +46,18 @@ void	cub_draw_cursor(t_game *game, t_player *player)
 	}
 }
 
+<<<<<<< HEAD
 void	cub_turn_transparent(t_game *game, char flag)
+=======
+void	cub_turn_transparent(t_game *game, int width, int height, int *start)
+>>>>>>> 4dd4a52c31382f8dc38907827f398d1fcfe8d3f0
 {
 	int	x;
 	int	y;
 
 	x = 0;
 	y = 0;
+<<<<<<< HEAD
 	if (flag == 'T')
 		game->color = 0xFF000000;
 	else if (flag == 'B')
@@ -63,9 +66,23 @@ void	cub_turn_transparent(t_game *game, char flag)
 	{
 		x = 0;
 		while (x <= game->m_width)
+=======
+	game->color = 0xFF000000;
+	while (y <= height)
+	{
+		x = -1;
+		if (y < start[1])
+>>>>>>> 4dd4a52c31382f8dc38907827f398d1fcfe8d3f0
 		{
-			my_mlx_pixel_put(game, x, y);
-			x++;
+			while (++x <= start[0])
+				my_mlx_pixel_put(game, x, y);
+			if (y == start[1] - 1)
+				break ;
+		}
+		else
+		{
+			while (++x <= width)
+				my_mlx_pixel_put(game, x, y);
 		}
 		y++;
 	}
@@ -73,11 +90,16 @@ void	cub_turn_transparent(t_game *game, char flag)
 
 void	cub_draw_ui(t_game *game)
 {
+<<<<<<< HEAD
 	cub_draw_m_background(game, game->win);
 	cub_prep_image(&(game->win));
 	cub_draw_floor_and_ceiling(game);
 	cub_turn_transparent(game, 'T');
+=======
+	cub_prep_image(game, &(game->win), 'm');
+>>>>>>> 4dd4a52c31382f8dc38907827f398d1fcfe8d3f0
 	cub_draw_grid(game, game->map->segment[game->start]->grid);
 	cub_print_m_info(game);
 	cub_draw_cursor(game, game->player);
+	cub_place_image(&(game->win));
 }
