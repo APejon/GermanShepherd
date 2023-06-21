@@ -6,7 +6,7 @@
 /*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:47 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/19 17:28:57 by gchernys         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:13:42 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,14 @@ typedef struct s_keys {
 	bool	s;
 	bool	a;
 	bool	d;
+	bool	u_arrow;
+	bool	d_arrow;
 	bool	l_arrow;
 	bool	r_arrow;
+	bool	shift;
 	bool	m_switch;
 	bool	m_player;
+	bool	m_enlarge;
 }	t_keys;
 
 typedef struct s_bress {
@@ -78,7 +82,9 @@ typedef struct s_player
 	char	prot_flag;
 	int		fov;
 	int		height;
+	int		up;
 	char	dir;
+	double	speed;
 	double	p_angle;
 	double	r_angle;
 	double	rays;
@@ -86,12 +92,10 @@ typedef struct s_player
 	int		side;
 	double	x;
 	double	y;
-	double	dx;
-	double	dy;
 	double	x_pos;
 	double	y_pos;
-	int		x_m_grid;
-	int		y_m_grid;
+	double	x_m_grid;
+	double	y_m_grid;
 	int		x_shift;
 	int		y_shift;
 	double	*verti_i;
@@ -105,6 +109,7 @@ typedef struct s_player
 typedef struct s_segment
 {
 	char				**grid;
+	int					id;
 	int					player_found;
 	struct s_segment	*next;
 	struct s_segment	*north;
@@ -144,6 +149,8 @@ typedef struct s_game
 	int			no_of_segments;
 	int			start;
 	int			color;
+	int			border_x;
+	int			border_y;
 	int			win_x;
 	t_map		*map;
 	t_player	*player;

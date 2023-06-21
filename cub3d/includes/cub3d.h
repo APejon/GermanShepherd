@@ -6,7 +6,7 @@
 /*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:16:57 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/19 17:28:48 by gchernys         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:13:47 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		return_error(char *str, t_map *map, t_game *game);
 
 /*-------- cub_init.c --------*/
 void	cub_draw(t_game *game);
-void	cub_window_init(t_window **win);
+void	cub_window_init(t_window *win);
 void	cub_player_init(t_game **game);
 void	cub_init(t_game *game);
 void	cub_draw_floor_and_ceiling(t_game *game);

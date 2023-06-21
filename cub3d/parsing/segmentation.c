@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 14:19:41 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/13 14:38:40 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/19 22:23:48 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ int	count_segments(t_game **game, char **full_grid)
 	int	total;
 
 	(*game)->m_horizontal = ft_strlen(full_grid[0]);
-	(*game)->m_horizontal = ((*game)->m_horizontal / 35) + 1;
+	(*game)->m_horizontal = ((*game)->m_horizontal / 34) + 1;
 	(*game)->m_vertical = 0;
 	while (full_grid[(*game)->m_vertical])
 		(*game)->m_vertical++;
-	(*game)->m_vertical = ((*game)->m_vertical / 15) + 1;
+	(*game)->m_vertical = ((*game)->m_vertical / 14) + 1;
 	total = (*game)->m_horizontal * (*game)->m_vertical;
 	return (total);
 }

@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 14:46:40 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/17 15:31:07 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/19 19:49:19 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,21 @@ char	**load_grid(t_game **game, int i, int x, int y)
 	return (grid);
 }
 
-void	segment_init(t_game **game, int i)
+void	segment_init(t_game **game)
 {
-	(*game)->map->segment[i] = ft_calloc(1, sizeof(t_segment));
-	(*game)->map->segment[i]->player_found = 0;
-	(*game)->map->segment[i]->next = NULL;
-	(*game)->map->segment[i]->north = NULL;
-	(*game)->map->segment[i]->south = NULL;
-	(*game)->map->segment[i]->east = NULL;
-	(*game)->map->segment[i]->west = NULL;
+	int	i;
+
+	i = -1;
+	while (++i < (*game)->no_of_segments)
+	{
+		(*game)->map->segment[i] = ft_calloc(1, sizeof(t_segment));
+		(*game)->map->segment[i]->player_found = 0;
+		(*game)->map->segment[i]->next = NULL;
+		(*game)->map->segment[i]->north = NULL;
+		(*game)->map->segment[i]->south = NULL;
+		(*game)->map->segment[i]->east = NULL;
+		(*game)->map->segment[i]->west = NULL;
+	}
 }
 
 void	fill_segments(t_game **game)
@@ -99,14 +105,13 @@ void	fill_segments(t_game **game)
 	int	x;
 	int	y;
 
-	i = -1;
-	while (++i < (*game)->no_of_segments)
-		segment_init(game, i);
+	segment_init(game);
 	i = -1;
 	x = 0;
 	y = 0;
 	while (++i < (*game)->no_of_segments)
 	{
+		(*game)->map->segment[i]->id = i;
 		if (i != 0)
 			(*game)->map->segment[i - 1]->next = (*game)->map->segment[i];
 		else if (i == (*game)->no_of_segments - 1)
@@ -121,15 +126,3 @@ void	fill_segments(t_game **game)
 	}
 	connect_segments(game);
 }
-
-	// t_segment *segment;
-	// segment = (*game)->map->segment[0];
-	// while (segment)
-	// {
-	// 	printf("%s\n %d FOUND?\n", segment->grid[0], segment->player_found);
-	// 	printf("%p ORIGIN POINTING NORTH TOWARDS %p\n", segment, segment->north);
-	// 	printf("%p ORIGIN POINTING SOUTH TOWARDS %p\n", segment, segment->south);
-	// 	printf("%p ORIGIN POINTING EAST TOWARDS %p\n", segment, segment->east);
-	// 	printf("%p ORIGIN POINTING WEST TOWARDS %p\n", segment, segment->west);
-	// 	segment = segment->next;
-	// }

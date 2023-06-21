@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:16:48 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/23 18:06:42 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/19 19:49:27 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void			load_full_grid(t_game *game);
 void			load_grid_segments(t_game **game);
 char			**load_grid(t_game **game, int i, int x, int y);
 void			fill_segments(t_game **game);
-void			segment_init(t_game **game, int i);
+void			segment_init(t_game **game);
 void			connect_segments(t_game **game);
 void			connect_segments_p2(t_game **game, int i, int h, int v);
 

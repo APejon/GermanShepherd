@@ -6,7 +6,7 @@
 /*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:15:59 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/19 17:28:54 by gchernys         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:13:44 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	cub_draw_grid(t_game *game, char **grid);
 void	cub_draw_m_background(t_game *game, t_window *win);
 
 /*----- cub_draw_column.c -----*/
-void	cub_put_column(t_game *game, int draw_start, int draw_end);
+void	cub_put_column(t_game *game, t_map *map, int draw_start, int draw_end);
 void	cub_prep_column(t_game *game, t_map *map, t_player *player,
 			t_window *win);
 void	cub_correct_distance(t_game **game, t_player *player);

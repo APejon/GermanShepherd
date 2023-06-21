@@ -6,79 +6,99 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:24:15 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/17 15:14:38 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:28:43 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	cub_move_player(t_game **game)
+void	cub_change_speed(t_game **game)
 {
-	if ((*game)->keys->w == true)
-		(*game)->player->y_m_grid -= 1.0;
-	if ((*game)->keys->s == true)
-		(*game)->player->y_m_grid += 1.0;
-	if ((*game)->keys->a == true)
-		(*game)->player->x_m_grid -= 1.0;
-	if ((*game)->keys->d == true)
-		(*game)->player->x_m_grid += 1.0;
+	if ((*game)->keys->shift == true)
+		(*game)->player->speed = 6;
+	else if ((*game)->keys->shift == false)
+		(*game)->player->speed = 4;
+}
+
+void	cub_turn_player(t_game **game)
+{
+	if ((*game)->player->up <= 600)
+		if ((*game)->keys->u_arrow == true)
+			(*game)->player->up += (*game)->player->speed;
+	if ((*game)->player->up >= -600)
+		if ((*game)->keys->d_arrow == true)
+			(*game)->player->up -= (*game)->player->speed;
 	if ((*game)->keys->l_arrow == true)
-		(*game)->player->p_angle += 2.0;
+		(*game)->player->p_angle += (*game)->player->speed;
 	if ((*game)->keys->r_arrow == true)
-		(*game)->player->p_angle -= 2.0;
+		(*game)->player->p_angle -= (*game)->player->speed;
 	if ((*game)->player->p_angle > 359.0)
 		(*game)->player->p_angle = (*game)->player->p_angle - 360;
 	if ((*game)->player->p_angle < 0.0)
 		(*game)->player->p_angle = (*game)->player->p_angle + 360;
 }
 
-void	cub_enlarge_map(t_game **game)
+void	cub_strafe_player(t_game **game, t_player *player)
 {
-	if ((*game)->m_mag == 1)
-		(*game)->m_mag = 2;
-	else if ((*game)->m_mag == 2)
-		(*game)->m_mag = 1;
-}
-
-void	cub_change_map(t_game **game)
-{
-	int	i;
-
-	i = 0;
-	if ((*game)->keys->m_switch)
+	if ((*game)->keys->a == true)
 	{
-		if ((*game)->start < (*game)->no_of_segments - 1)
-				(*game)->start++;
-		else
-				(*game)->start = 0;
+		(*game)->player->y_pos -= sin((player->p_angle + 90) * (M_PI / 180))
+			* player->speed;
+		(*game)->player->x_pos += cos((player->p_angle + 90) * (M_PI / 180))
+			* player->speed;
+		(*game)->player->y_m_grid -= sin((player->p_angle + 90) * (M_PI / 180))
+			* player->speed / 4.0;
+		(*game)->player->x_m_grid += cos((player->p_angle + 90) * (M_PI / 180))
+			* player->speed / 4.0;
 	}
-	if ((*game)->keys->m_player)
+	if ((*game)->keys->d == true)
 	{
-		while (!(*game)->map->segment[i]->player_found)
-			i++;
-		(*game)->start = i;
+		(*game)->player->y_pos -= sin((player->p_angle - 90) * (M_PI / 180))
+			* (*game)->player->speed;
+		(*game)->player->x_pos += cos((player->p_angle - 90) * (M_PI / 180))
+			* (*game)->player->speed;
+		(*game)->player->y_m_grid -= sin((player->p_angle - 90) * (M_PI / 180))
+			* player->speed / 4.0;
+		(*game)->player->x_m_grid += cos((player->p_angle - 90) * (M_PI / 180))
+			* player->speed / 4.0;
 	}
 }
 
-void	cub_esc(t_game **game)
+void	cub_move_player(t_game **game, t_player *player)
 {
-	mlx_clear_window((*game)->win->mlx, (*game)->win->window);
-	cub_free_map(game);
-	cub_free_segments(game);
-	ft_free(&((*game)->keys));
-	ft_free(&((*game)->win->addr));
-	ft_free(&((*game)->win));
-	ft_free(&((*game)->player->verti_i));
-	ft_free(&((*game)->player->horiz_i));
-	ft_free(&((*game))->player);
-	ft_free(&((*game)->map));
-	ft_free(&((*game)));
-	exit(0);
+	if ((*game)->keys->w == true)
+	{
+		(*game)->player->y_pos -= sin(player->p_angle * (M_PI / 180))
+			* player->speed;
+		(*game)->player->x_pos += cos(player->p_angle * (M_PI / 180))
+			* player->speed;
+		(*game)->player->y_m_grid -= sin(player->p_angle * (M_PI / 180))
+			* player->speed / 4.0;
+		(*game)->player->x_m_grid += cos(player->p_angle * (M_PI / 180))
+			* player->speed / 4.0;
+	}
+	if ((*game)->keys->s == true)
+	{
+		(*game)->player->y_pos += sin(player->p_angle * (M_PI / 180))
+			* (*game)->player->speed;
+		(*game)->player->x_pos -= cos(player->p_angle * (M_PI / 180))
+			* (*game)->player->speed;
+		(*game)->player->y_m_grid += sin(player->p_angle * (M_PI / 180))
+			* player->speed / 4.0;
+		(*game)->player->x_m_grid -= cos(player->p_angle * (M_PI / 180))
+			* player->speed / 4.0;
+	}
 }
 
 int	cub_inputs(t_game **game)
 {
-	cub_move_player(game);
+	cub_move_player(game, (*game)->player);
+	cub_strafe_player(game, (*game)->player);
+	cub_undo(game, (*game)->map, (*game)->player);
+	cub_turn_player(game);
+	cub_change_speed(game);
+	cub_map_bound(game, (*game)->player,
+		(*game)->map->segment[(*game)->start]);
 	cub_draw(*game);
 	return (0);
 }

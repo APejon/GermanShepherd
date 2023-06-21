@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 16:46:13 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/17 16:45:27 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:17:52 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	cub_bressenham_decision(t_game *game, t_bress *bress, int i)
 {
-	game->color = 0x8b0000;
+	game->color = 0xbf8b0000;
 	while (i < bress->x_step)
 	{
 		if (bress->x < game->m_width - 20 && bress->y < game->m_height - 30)
@@ -64,14 +64,14 @@ void	cub_bressenham_frag(t_game *game, t_bress *bress)
 
 void	cub_realign(t_bress *bress, t_game *game)
 {
-	while (bress->x_check < game->player->x)
+	while (bress->x_check < (game->player->x_pos / 64) - 1)
 	{
 		bress->x_check += bress->x_check;
 		bress->x_shift++;
 	}
 	while (bress->x_shift-- > 0)
 		bress->deltax[1] -= 544;
-	while (bress->y_check < game->player->y)
+	while (bress->y_check < (game->player->y_pos / 64) - 1)
 	{
 		bress->y_check += bress->y_check;
 		bress->y_shift++;

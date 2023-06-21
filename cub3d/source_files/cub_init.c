@@ -6,7 +6,7 @@
 /*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:05:07 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/19 17:27:31 by gchernys         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:13:33 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ void	cub_draw(t_game *game)
 	cub_calc_player(&(game), game->player, game->win);
 }
 
-void	cub_window_init(t_window **win)
+void	cub_window_init(t_window *win)
 {
-	(*win)->addr = malloc(sizeof(t_addr));
-	if (!(*win)->addr)
+	win->addr = malloc(sizeof(t_addr));
+	if (!win->addr)
 		exit (MALLOC_ERR);
-	(*win)->mlx = mlx_init();
-	(*win)->window_w = 1280;
-	(*win)->window_h = 1280;
-	(*win)->window = mlx_new_window((*win)->mlx, (*win)->window_w,
-			(*win)->window_h, "Cub3D Clear To Fly");
+	win->mlx = mlx_init();
+	win->window_w = 1280;
+	win->window_h = 1280;
+	win->window = mlx_new_window(win->mlx, win->window_w,
+			win->window_h, "Cub3D Clear To Fly");
 }
 
 void	cub_player_init(t_game **game)
@@ -47,6 +47,7 @@ void	cub_player_init(t_game **game)
 	cub_find_player(game, (*game)->map);
 	(*game)->player->fov = 60;
 	(*game)->player->height = 32;
+	(*game)->player->up = 0;
 	if ((*game)->player->dir == 'N')
 		(*game)->player->p_angle = 90.0;
 	if ((*game)->player->dir == 'W')
@@ -63,12 +64,13 @@ void	cub_player_init(t_game **game)
 		+ ((*game)->grid_size / 2);
 	(*game)->player->project_dis = ((*game)->win->window_w / 2)
 		/ tan(((*game)->player->fov / 2) * (M_PI / 180));
+	(*game)->player->speed = 4;
 }
 
 void	cub_init(t_game *game)
 {
 	game->win = ft_calloc(1, sizeof(t_window));
-	cub_window_init(&(game->win));
+	cub_window_init(game->win);
 	game->player->verti_i = ft_calloc(2, sizeof(double));
 	game->player->horiz_i = ft_calloc(2, sizeof(double));
 	game->player->dir = 0;
