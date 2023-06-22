@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:47 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/20 17:22:18 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/22 15:21:44 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ typedef struct s_bress {
 	int		x;
 	int		y;
 	int		p;
-	int		x_shift;
-	int		y_shift;
-	int		x_check;
-	int		y_check;
+	double	x_shift;
+	double	y_shift;
+	double	x_check;
+	double	y_check;
 }	t_bress;
 
 typedef struct s_addr {

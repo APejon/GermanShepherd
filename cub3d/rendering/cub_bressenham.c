@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 16:46:13 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/20 14:17:52 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/22 15:46:14 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,16 @@ void	cub_bressenham_frag(t_game *game, t_bress *bress)
 
 void	cub_realign(t_bress *bress, t_game *game)
 {
-	while (bress->x_check < (game->player->x_pos / 64) - 1)
+	while (bress->x_check < (game->player->x_pos / (double)game->grid_size))
 	{
-		bress->x_check += bress->x_check;
+		bress->x_check += 34;
 		bress->x_shift++;
 	}
 	while (bress->x_shift-- > 0)
 		bress->deltax[1] -= 544;
-	while (bress->y_check < (game->player->y_pos / 64) - 1)
+	while (bress->y_check < (game->player->y_pos / (double)game->grid_size))
 	{
-		bress->y_check += bress->y_check;
+		bress->y_check += 14;
 		bress->y_shift++;
 	}
 	while (bress->y_shift-- > 0)
@@ -85,10 +85,10 @@ void	cub_bressenham(double x, double y, double *delta, t_game *game)
 	t_bress	*bress;
 
 	bress = calloc(1, sizeof(t_bress));
-	bress->x_shift = 0;
-	bress->y_shift = 0;
-	bress->x_check = 33;
-	bress->y_check = 13;
+	bress->x_shift = 0.0;
+	bress->y_shift = 0.0;
+	bress->x_check = 34.0;
+	bress->y_check = 14.0;
 	bress->deltax[0] = x * (game->m_mag);
 	bress->deltay[0] = y * (game->m_mag);
 	bress->deltax[1] = (delta[0] + (double)game->m_xset)
