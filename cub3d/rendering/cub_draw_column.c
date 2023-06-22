@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_draw_column.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:00:33 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/20 17:26:32 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:34:29 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,20 @@
 void	cub_put_column(t_game *game, t_map *map, int draw_start, int draw_end)
 {
 	int	y;
-
 	(void)map;
 	y = 0;
 	if (game->player->side == NORTH)
-		game->color = 0x56accbb;
+		game->color = 0x191233;
+		// mlx_xpm_file_to_image(game->win->mlx, game->map->north, &size, &size);
 	else if (game->player->side == EAST)
 		game->color = 0x194523;
+		// mlx_xpm_file_to_image(game->win->mlx, game->map->north, &size, &size);
 	else if (game->player->side == SOUTH)
 		game->color = 0xbba24c;
+		// mlx_xpm_file_to_image(game->win->mlx, game->map->north, &size, &size);
 	else if (game->player->side == WEST)
 		game->color = 0x42adef;
+		// mlx_xpm_file_to_image(game->win->mlx, game->map->north, &size, &size);
 	if (game->win_x <= game->m_width)
 	{
 		while (y <= game->m_height)
