@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:23:08 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/19 21:41:44 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/23 13:28:58 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define INPUTS_H
 
 /*----- cub_close_x.c -----*/
+int		cub_no_clip(t_map *map, t_player *player, char **full_grid);
 int		cub_close_x(t_game **game);
 
 /*----- cub_free.c -----*/
@@ -21,7 +22,8 @@ void	cub_free_map(t_game **game);
 void	cub_free_segments(t_game **game);
 
 /*----- cub_inputs_utils.c -----*/
-void	cub_map_bound2(t_game **game, t_player *player, t_segment *segment);
+void	cub_map_bound2(t_game **game, t_player *player, t_segment *segment,
+			double y);
 void	cub_map_bound(t_game **game, t_player *player, t_segment *segment);
 void	cub_undo_cont2(t_game **game, t_player *player);
 void	cub_undo_cont(t_game **game, t_player *player);

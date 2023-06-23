@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:47 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/22 16:06:56 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:22:49 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,12 @@ typedef struct s_player
 	double	verti_dis;
 	double	horiz_dis;
 	double	correct_dis;
+	double	fl_coll;
+	double	fr_coll;
+	double	bl_coll;
+	double	br_coll;
+	double	l_coll;
+	double	r_coll;
 }		t_player;
 
 typedef struct s_segment
@@ -152,6 +158,8 @@ typedef struct s_game
 	int			border_x;
 	int			border_y;
 	int			win_x;
+	int			x_shift;
+	int			y_shift;
 	t_map		*map;
 	t_player	*player;
 	t_window	*win;

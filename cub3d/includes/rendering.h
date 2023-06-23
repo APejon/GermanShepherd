@@ -3,15 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:15:59 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/21 14:13:44 by gchernys         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:35:18 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDERING_H
 # define RENDERING_H
+
+/*----- cub_back_collisions.c -----*/
+void	cub_protect_boundaries_x(t_map *map, double *point);
+void	cub_protect_boundaries_y(t_map *map, double *point);
+double	cub_back_horizontal(t_map *map, t_player *player, char **full_grid,
+			double angle);
+double	cub_back_vertical(t_map *map, t_player *player, char **full_grid,
+			double angle);
+double	cub_back_collisions(t_game **game, t_player *player, double angle);
 
 /*----- cub_bressenham_mini.c -----*/
 void	my_mlx_pixel_put(t_game *game, int x, int y);

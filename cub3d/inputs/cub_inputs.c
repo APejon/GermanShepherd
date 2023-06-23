@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:24:15 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/22 16:06:25 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/23 13:22:01 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	cub_change_speed(t_game **game)
 {
 	if ((*game)->keys->shift == true)
-		(*game)->player->speed = 8;
-	else if ((*game)->keys->shift == false)
 		(*game)->player->speed = 4;
+	else if ((*game)->keys->shift == false)
+		(*game)->player->speed = 2;
 }
 
 void	cub_turn_player(t_game **game)
@@ -94,7 +94,7 @@ int	cub_inputs(t_game **game)
 	cub_undo(game, (*game)->map, (*game)->player);
 	cub_turn_player(game);
 	cub_change_speed(game);
-	while (++i < (*game)->no_of_segments - 1)
+	while (++i < (*game)->no_of_segments)
 	{
 		if ((*game)->map->segment[i]->player_found)
 			cub_map_bound(game, (*game)->player,
