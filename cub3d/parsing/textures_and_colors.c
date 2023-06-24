@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 07:35:06 by gchernys          #+#    #+#             */
-/*   Updated: 2023/05/19 14:06:40 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/24 19:09:46 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ int	check_rgb(char **str)
 	j = 0;
 	while (str[j])
 	{
+		str[j] = cub_strtrim_free(str[j], " \t\n\v\f\r");
+		if (!str[j] || str[j][0] == '\0')
+			return (PARSE_ERR);
 		i = 0;
 		while (str[j][i])
 		{
@@ -52,19 +55,18 @@ int	set_textures(t_map *map)
 	while (j++ < 6)
 	{
 		i = 0;
-		while (ft_space(map->map[j][i]))
-			i++;
 		k = i + 2;
-		if (ft_strncmp(map->map[j] + i, "NO", 2) == 0)
+		map->map[j] = cub_strtrim_free(map->map[j], " \t\n\v\f\r");
+		if (ft_strncmp(map->map[j] + i, "NO ", 3) == 0)
 			map->north = ft_substr(map->map[j], k + spacecount(map->map[j], k), \
 			ft_strlen(map->map[j]) - k - spacecount(map->map[j], k));
-		else if (ft_strncmp(map->map[j] + i, "SO", 2) == 0)
+		else if (ft_strncmp(map->map[j] + i, "SO ", 3) == 0)
 			map->south = ft_substr(map->map[j], k + spacecount(map->map[j], k), \
 			ft_strlen(map->map[j]) - k - spacecount(map->map[j], k));
-		else if (ft_strncmp(map->map[j] + i, "WE", 2) == 0)
+		else if (ft_strncmp(map->map[j] + i, "WE ", 3) == 0)
 			map->west = ft_substr(map->map[j], k + spacecount(map->map[j], k), \
 			ft_strlen(map->map[j]) - k - spacecount(map->map[j], k));
-		else if (ft_strncmp(map->map[j] + i, "EA", 2) == 0)
+		else if (ft_strncmp(map->map[j] + i, "EA ", 3) == 0)
 			map->east = ft_substr(map->map[j], k + spacecount(map->map[j], k), \
 			ft_strlen(map->map[j]) - k - spacecount(map->map[j], k));
 	}
@@ -101,7 +103,7 @@ int	init_rgb(t_map *map)
 	char			**temp;
 
 	temp = ft_split(map->floor, ',');
-	if (check_rgb(temp) == PARSE_ERR)
+	if (check_rgb(temp) == PARSE_ERR || cub_comma_count(map->floor) > 2)
 	{
 		free_double_array(temp);
 		return (PARSE_ERR);
@@ -113,7 +115,7 @@ int	init_rgb(t_map *map)
 	ft_atoi(temp[2]));
 	free_double_array(temp);
 	temp = ft_split(map->cil, ',');
-	if (check_rgb(temp) == PARSE_ERR)
+	if (check_rgb(temp) == PARSE_ERR || cub_comma_count(map->cil) > 2)
 	{
 		free_double_array(temp);
 		return (PARSE_ERR);

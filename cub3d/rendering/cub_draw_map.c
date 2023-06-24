@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:03:57 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/24 11:34:17 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/24 19:35:35 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,11 @@ void	cub_draw_m_background(t_game *game, t_window *win)
 {
 	win->addr->i_p = mlx_xpm_file_to_image(game->win->mlx,
 			"textures/clouds.xpm", &(game->m_width), &(game->m_height));
+	if (!win->addr->i_p)
+	{
+		write(2, "Texture file couldn't open or corrupted\n", 40);
+		cub_close_x(&game);
+	}
 	win->addr->ad = mlx_get_data_addr(win->addr->i_p, &(win->addr->pix_bi),
 			&(win->addr->line_by), &win->addr->endian);
 	mlx_put_image_to_window(game->win->mlx, game->win->window,

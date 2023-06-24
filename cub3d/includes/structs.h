@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:47 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/24 11:32:24 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/24 16:05:35 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ typedef struct s_keys {
 	bool	s;
 	bool	a;
 	bool	d;
-	bool	u_arrow;
-	bool	d_arrow;
 	bool	l_arrow;
 	bool	r_arrow;
 	bool	shift;
@@ -81,7 +79,6 @@ typedef struct s_player
 	char	prot_flag;
 	int		fov;
 	int		height;
-	int		up;
 	char	dir;
 	double	speed;
 	double	p_angle;
@@ -125,6 +122,7 @@ typedef struct s_segment
 
 typedef struct s_map
 {
+	int				check;
 	char			**map;
 	char			**full_grid;
 	unsigned int	floor_color;

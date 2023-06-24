@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 13:19:50 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/24 11:32:50 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/24 16:05:03 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,6 @@ void	cub_movement(int key, t_game **game)
 		(*game)->keys->a = true;
 	if (key == 2)
 		(*game)->keys->d = true;
-	if (key == 126)
-		(*game)->keys->u_arrow = true;
-	if (key == 125)
-		(*game)->keys->d_arrow = true;
 	if (key == 123)
 		(*game)->keys->l_arrow = true;
 	if (key == 124)
@@ -101,10 +97,6 @@ int	cub_key_release(int key, t_game **game)
 		(*game)->keys->a = false;
 	if (key == 2)
 		(*game)->keys->d = false;
-	if (key == 126)
-		(*game)->keys->u_arrow = false;
-	if (key == 125)
-		(*game)->keys->d_arrow = false;
 	if (key == 123)
 		(*game)->keys->l_arrow = false;
 	if (key == 124)

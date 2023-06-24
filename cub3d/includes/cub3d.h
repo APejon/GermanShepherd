@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:16:57 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/21 14:13:47 by gchernys         ###   ########.fr       */
+/*   Updated: 2023/06/24 19:42:22 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,14 @@
 # include "rendering.h"
 
 /*-------- cub_utils.c --------*/
+char	*cub_strtrim_free(char *line, char *set);
 void	cub_place_image(t_window **win);
 void	cub_prep_image(t_game *game, t_window **win, char flag);
 void	free_double_array(char **arr);
 int		return_error(char *str, t_map *map, t_game *game);
+
+/*-------- cub_utls2.c --------*/
+void	cub_return_error(char *str, t_map *map, t_game *game);
 
 /*-------- cub_init.c --------*/
 void	cub_draw(t_game *game);

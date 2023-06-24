@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 14:46:40 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/19 19:49:19 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/24 20:32:59 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,13 @@ char	**load_grid(t_game **game, int i, int x, int y)
 	j = y;
 	k = 0;
 	grid = ft_calloc(14 + 1, sizeof(char *));
+	if (!grid)
+		return (NULL);
 	while ((*game)->map->full_grid[j] && (k < 14))
 	{
 		grid[k] = ft_substr((*game)->map->full_grid[j], x, 34);
+		if (!grid[k])
+			return (NULL);
 		if (cub_scan_player(*game, grid[k], k))
 		{
 			(*game)->map->segment[i]->player_found = 1;
@@ -87,9 +91,15 @@ void	segment_init(t_game **game)
 	int	i;
 
 	i = -1;
+	(*game)->map->segment
+		= ft_calloc((*game)->no_of_segments + 1, sizeof(t_segment));
+	if (!(*game)->map->segment)
+		cub_return_error("Error\n Malloc error\n\n", (*game)->map, (*game));
 	while (++i < (*game)->no_of_segments)
 	{
 		(*game)->map->segment[i] = ft_calloc(1, sizeof(t_segment));
+		if (!(*game)->map->segment[i])
+			cub_return_error("Error\n Malloc error\n\n", (*game)->map, (*game));
 		(*game)->map->segment[i]->player_found = 0;
 		(*game)->map->segment[i]->next = NULL;
 		(*game)->map->segment[i]->north = NULL;
@@ -102,13 +112,12 @@ void	segment_init(t_game **game)
 void	fill_segments(t_game **game)
 {
 	int	i;
-	int	x;
-	int	y;
+	int	coord[2];
 
 	segment_init(game);
 	i = -1;
-	x = 0;
-	y = 0;
+	coord[0] = 0;
+	coord[1] = 0;
 	while (++i < (*game)->no_of_segments)
 	{
 		(*game)->map->segment[i]->id = i;
@@ -116,12 +125,14 @@ void	fill_segments(t_game **game)
 			(*game)->map->segment[i - 1]->next = (*game)->map->segment[i];
 		else if (i == (*game)->no_of_segments - 1)
 			(*game)->map->segment[i]->next = (*game)->map->segment[0];
-		(*game)->map->segment[i]->grid = load_grid(game, i, x, y);
-		x += 34;
+		(*game)->map->segment[i]->grid = load_grid(game, i, coord[0], coord[1]);
+		if (!(*game)->map->segment[i]->grid)
+			cub_return_error("Error\n Malloc error\n\n", (*game)->map, *game);
+		coord[0] += 34;
 		if (ft_strlen((*game)->map->segment[i]->grid[0]) < 34)
 		{
-			x = 0;
-			y += 14;
+			coord[0] = 0;
+			coord[1] += 14;
 		}
 	}
 	connect_segments(game);

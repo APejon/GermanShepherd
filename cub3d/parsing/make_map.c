@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:16:27 by gchernys          #+#    #+#             */
-/*   Updated: 2023/06/19 17:31:58 by gchernys         ###   ########.fr       */
+/*   Updated: 2023/06/24 19:05:29 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,8 @@ int	set_dimensions(t_map *map, char *file)
 	{
 		if (ft_strlen(temp) > (size_t)map->wide)
 			map->wide = ft_strlen(temp);
-		if (ft_strcmp(temp, "\n") != 0)
-			map->high++;
+		map->high++;
 		free(temp);
-		if (map->high > 6 && ft_strcmp(temp, "\n") == 0)
-		{
-			close(fd);
-			return (MALLOC_ERR);
-		}
 		temp = get_next_line(fd);
 	}
 	free(temp);
@@ -40,11 +34,14 @@ int	set_dimensions(t_map *map, char *file)
 	return (0);
 }
 
-void	setmap(char **tempmap, t_map *map)
+void	setmap(char **tempmap, t_map *map, char *temp, char *str)
 {
 	int	j;
 	int	i;
 
+	ft_free(&temp);
+	ft_free(&str);
+	map->high = 0;
 	j = 0;
 	while (tempmap[j] != NULL)
 	{
@@ -58,6 +55,7 @@ void	setmap(char **tempmap, t_map *map)
 			if (i == map->wide)
 				map->map[j][i] = '\0';
 		}
+		map->high++;
 		j++;
 	}
 	map->map[j] = NULL;
@@ -67,6 +65,8 @@ int	malloc_map(t_map *map, char *file)
 {
 	int	i;
 
+	map->wide = 0;
+	map->high = 0;
 	if (set_dimensions(map, file))
 		return (MALLOC_ERR);
 	i = 0;
@@ -76,11 +76,12 @@ int	malloc_map(t_map *map, char *file)
 	while (i < map->high)
 	{
 		map->map[i] = malloc(sizeof(char) * (map->wide + 2));
-		ft_bzero(map->map[i], map->wide + 2);
 		if (map->map[i] == NULL)
 			return (MALLOC_ERR);
+		ft_bzero(map->map[i], map->wide + 2);
 		i++;
 	}
+	map->map[i] = NULL;
 	return (0);
 }
 
@@ -99,22 +100,24 @@ int	load_map(t_game *game, t_map *map, char *file)
 		str = ft_strjoin_gnl(str, temp);
 		free(temp);
 		temp = get_next_line(fd);
+		if (cub_check_newlines(map, str, temp))
+		{
+			close (fd);
+			return_error("Error\n newline in map\n", map, game);
+		}
 	}
-	free(temp);
 	close(fd);
 	map_temp = ft_split(str, '\n');
-	free(str);
-	setmap(map_temp, map);
-	free_double_array(map_temp);
-	validate_map(map, game);
-	game->grid_size = 64;
+	setmap(map_temp, map, temp, str);
+	validate_map(map, game, map_temp);
 	load_grid_segments(&game);
 	return (0);
 }
 
-int	validate_map(t_map *map, t_game *game)
+int	validate_map(t_map *map, t_game *game, char **map_temp)
 {
-	if (map->high < 6)
+	free_double_array(map_temp);
+	if (map->high <= 6)
 		return_error("Error\n map's too short\n\n", map, game);
 	else if (find_rgb(map) == PARSE_ERR)
 		return_error("Error\n Invalid RGB\n\n", map, game);

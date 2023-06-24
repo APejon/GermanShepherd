@@ -6,7 +6,7 @@
 #    By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 10:55:58 by amalbrei          #+#    #+#              #
-#    Updated: 2023/06/23 23:53:54 by amalbrei         ###   ########.fr        #
+#    Updated: 2023/06/24 20:23:42 by amalbrei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,9 +46,10 @@ RENDERING_SRC	=	cub_bressenham_mini.c	cub_draw_ui.c	cub_draw_map.c\
 					
 
 PARSING_SRC		=	make_map.c	map_validation.c	parsing.c\
-					textures_and_colors.c	segmentation.c	fill_segments.c
+					textures_and_colors.c	segmentation.c	fill_segments.c\
+					cub_info_check.c
 
-MAIN_SRC 		=	main.c	cub_utils.c	cub_init.c
+MAIN_SRC 		=	main.c	cub_utils.c	cub_utils2.c	cub_init.c
 
 SRC				=	$(INPUTS_SRC) $(PLAYER_SRC) $(RENDERING_SRC) $(PARSING_SRC)\
 					$(MAIN_SRC)

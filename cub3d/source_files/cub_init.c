@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:05:07 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/24 11:34:43 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/24 20:24:02 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	cub_player_init(t_game **game)
 	cub_find_player(game, (*game)->map);
 	(*game)->player->fov = 60;
 	(*game)->player->height = 32;
-	(*game)->player->up = 0;
 	if ((*game)->player->dir == 'N')
 		(*game)->player->p_angle = 90.0;
 	if ((*game)->player->dir == 'W')

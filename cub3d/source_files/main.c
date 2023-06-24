@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:12:32 by gchernys          #+#    #+#             */
-/*   Updated: 2023/06/24 11:30:34 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/24 19:01:27 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,27 @@ static void	cub_mlx_keys(t_game *game)
 
 int	main(int argc, char **argv)
 {
-	int	i;
 	t_game	*game;
 
-	i = -1;
 	basic_error_check(argc, argv);
 	game = ft_calloc(1, sizeof(t_game));
+	game->grid_size = 64;
+	if (!game)
+	{
+		write(2, "Error\n Malloc error\n", 21);
+		return (1);
+	}
 	game->map = ft_calloc(1, sizeof(t_map));
-	if (game->map == NULL || game == NULL || malloc_map(game->map, argv[1]))
+	if (!game->map)
+	{
+		ft_free(&game);
+		write(2, "Error\n Malloc error\n", 21);
+		return (1);
+	}
+	if (malloc_map(game->map, argv[1]))
 		return_error("Error\n Malloc error\n\n", game->map, game);
-	game->player = ft_calloc(1, sizeof(t_player));
+	game->map->check = 0;
 	load_map(game, game->map, argv[1]);
-	while (game->map->full_grid[++i])
-		printf("%s\n", game->map->full_grid[i]);
 	cub_init(game);
 	cub_mlx_keys(game);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:12:34 by gchernys          #+#    #+#             */
-/*   Updated: 2023/06/21 14:20:23 by gchernys         ###   ########.fr       */
+/*   Updated: 2023/06/24 19:30:29 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	basic_error_check(int argc, char **argv)
 	if (str[i - 1] != 'b' || str[i - 2] != 'u' || \
 	str[i - 3] != 'c' || str[i - 4] != '.')
 	{
-		write(2, "Error: File needs to end with \".cub\" extension", 46);
+		write(2, "Error: File needs to end with \".cub\" extension\n", 47);
 		return (PARSE_ERR);
 	}
 	i = open(argv[1], O_RDONLY);
@@ -37,6 +37,57 @@ int	basic_error_check(int argc, char **argv)
 		return (PARSE_ERR);
 	}
 	close (i);
+	return (0);
+}
+
+static int	cub_check_file_extended(t_map *map, char *ext, int j, int i)
+{
+	j = -1;
+	i = ft_find_char(map->east, '.');
+	while (ext[++j] && map->east[++i])
+	{
+		if (map->east[i] != ext[j])
+			return (1);
+	}
+	if (map->east[++i] != ext[j])
+		return (1);
+	j = -1;
+	i = ft_find_char(map->west, '.');
+	while (ext[++j] && map->west[++i])
+	{
+		if (map->west[i] != ext[j])
+			return (1);
+	}
+	if (map->west[++i] != ext[j])
+		return (1);
+	return (0);
+}
+
+static int	cub_check_file_extensions(t_map *map, char *ext)
+{
+	int	j;
+	int	i;
+
+	j = -1;
+	i = ft_find_char(map->north, '.');
+	while (ext[++j] && map->north[++i])
+	{
+		if (map->north[i] != ext[j])
+			return (1);
+	}
+	if (map->north[++i] != ext[j])
+		return (1);
+	j = -1;
+	i = ft_find_char(map->south, '.');
+	while (ext[++j] && map->south[++i])
+	{
+		if (map->south[i] != ext[j])
+			return (1);
+	}
+	if (map->south[++i] != ext[j])
+		return (1);
+	if (cub_check_file_extended(map, ext, j, i))
+		return (1);
 	return (0);
 }
 
@@ -55,6 +106,8 @@ int	check_textures(t_map *map)
 	if (open(map->east, O_RDONLY) < 0)
 		return (PARSE_ERR);
 	close(open(map->east, O_RDONLY));
+	if (cub_check_file_extensions(map, "xpm"))
+		return (PARSE_ERR);
 	if (map->north == NULL || map->south == NULL || map->west == NULL || \
 	map->east == NULL || map->north[0] == '\0' || map->south[0] == '\0' || \
 	map->west[0] == '\0' || map->east[0] == '\0')

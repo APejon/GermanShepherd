@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   cub_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:29:17 by gchernys          #+#    #+#             */
-/*   Updated: 2023/06/21 14:58:20 by gchernys         ###   ########.fr       */
+/*   Updated: 2023/06/24 15:37:52 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+char	*cub_strtrim_free(char *line, char *set)
+{
+	char	*str;
+
+	str = ft_strtrim(line, set);
+	if (!str)
+		return (NULL);
+	ft_free(&line);
+	return (str);
+}
 
 void	cub_place_image(t_window **win)
 {
@@ -48,12 +59,16 @@ void	free_double_array(char **arr)
 	int	i;
 
 	i = 0;
-	while (arr[i] != NULL)
+	if (arr)
 	{
-		free(arr[i]);
-		i++;
+		while (arr[i] != NULL)
+		{
+			if (arr[i])
+				free(arr[i]);
+			i++;
+		}
+		free(arr);
 	}
-	free(arr);
 }
 
 int	return_error(char *str, t_map *map, t_game *game)
