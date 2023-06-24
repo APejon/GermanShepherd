@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:05:07 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/24 11:34:43 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/24 22:49:53 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,17 @@ void	cub_init(t_game *game)
 	game->player->horiz_i = ft_calloc(2, sizeof(double));
 	game->player->dir = 0;
 	cub_player_init(&(game));
+	int noneed;
+	int size;
+	void *img_ptr = mlx_xpm_file_to_image(game->win->mlx, game->map->north, &size, &size);
+	if (img_ptr == NULL)
+		return_error("Error\n Malloc error\n\n", game->map, game);
+	game->tex_north = mlx_get_data_addr(img_ptr, &noneed, &noneed, &noneed);
+	img_ptr = mlx_xpm_file_to_image(game->win->mlx, game->map->east, &size, &size);
+	game->tex_east = mlx_get_data_addr(img_ptr, &noneed, &noneed, &noneed);
+	img_ptr = mlx_xpm_file_to_image(game->win->mlx, game->map->south, &size, &size);
+	game->tex_south = mlx_get_data_addr(img_ptr, &noneed, &noneed, &noneed);
+	img_ptr = mlx_xpm_file_to_image(game->win->mlx, game->map->west, &size, &size);
+	game->tex_west = mlx_get_data_addr(img_ptr, &noneed, &noneed, &noneed);
 	cub_draw(game);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+         #
+#    By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 10:55:58 by amalbrei          #+#    #+#              #
-#    Updated: 2023/06/23 23:53:54 by amalbrei         ###   ########.fr        #
+#    Updated: 2023/06/24 21:32:54 by gchernys         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ LIB				=	ar	-rcs
 LIBFT			=	-Llibft -lft
 MLX				=	-Lmlx -lmlx
 CC				=	gcc
-CFLAGS			=	-Wall -Wextra -Werror -g3 -Ofast
+CFLAGS			=	-g3  -g -Ofast
 CUB3D_FLAGS 	=	-framework OpenGL -framework AppKit
 RM				=	rm	-rf
 

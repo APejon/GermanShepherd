@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   segmentation.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 14:19:41 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/24 12:04:20 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/24 21:23:15 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void	fill_corners_end(t_game *game, int i, int j, int k)
 
 void	fill_corners_middle(t_game *game, int i, int j, int k)
 {
-	if (game->map->map[j][k] == 'x' && (game->map->map[j][k + 1] == '1'
-		|| game->map->map[j][k - 1] == '1')
+	if (game->map->map[j][k] == 'x' && (game->map->map[j][k + 1] == '1')
 		&& (game->map->map[j + 1][k] == '1'
 		|| game->map->map[j - 1][k] == '1'))
 		game->map->full_grid[i][k] = '1';

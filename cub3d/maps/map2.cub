@@ -1,9 +1,10 @@
-NO textures/b_smoke.xpm
-SO textures/stars.xpm
-WE textures/starfall.xpm
+NO textures/colorstone.xpm
+SO textures/greystone.xpm
+WE textures/mossy.xpm
 EA textures/smoke.xpm
 F 220,100,0
 C 225,30,0
+
 11111111111111111111111111111111111111
 10000000000000000000000000000000000001
 10000000000000000000000000000000000001

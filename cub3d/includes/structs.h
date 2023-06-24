@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:47 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/24 11:32:24 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/24 21:11:06 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,10 @@ typedef struct s_game
 	int			border_y;
 	int			win_x;
 	int			x_shift;
+	char*		tex_north;
+	char* 		tex_south;
+	char* 		tex_west;
+	char* 		tex_east;
 	int			y_shift;
 	t_map		*map;
 	t_player	*player;

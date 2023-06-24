@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_bressenham_mini.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:10:23 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/24 11:33:01 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/24 22:16:53 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	my_mlx_pixel_put(t_game *game, int x, int y)
 {
 	char	*dst;
 
+	// if (game->color == (int)0xFF000000)
+		// return ; 
 	if ((x >= 0 && y >= 0) && (x < game->win->window_w
 			&& y < game->win->window_h))
 	{

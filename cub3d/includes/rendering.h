@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:15:59 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/23 16:35:18 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/24 19:14:07 by gchernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	cub_draw_grid(t_game *game, char **grid);
 void	cub_draw_m_background(t_game *game, t_window *win);
 
 /*----- cub_draw_column.c -----*/
-void	cub_put_column(t_game *game, t_map *map, int draw_start, int draw_end);
+void	cub_put_column(t_game *game, t_map *map, int draw_start, int draw_end, int wall_height);
 void	cub_prep_column(t_game *game, t_map *map, t_player *player,
 			t_window *win);
 void	cub_correct_distance(t_game **game, t_player *player);
