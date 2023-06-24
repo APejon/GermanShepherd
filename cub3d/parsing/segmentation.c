@@ -6,31 +6,66 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 14:19:41 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/19 22:23:48 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/24 12:04:20 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	load_full_grid(t_game *game)
+void	fill_corners_end(t_game *game, int i, int j, int k)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 6;
-	game->map->full_grid = ft_calloc((game->map->high - 6 + 1), sizeof(char *));
-	while (game->map->map[j])
+	if (game->map->map[j][k] == 'x' && game->map->map[j][k + 1] == '1'
+		&& game->map->map[j - 1][k] == '1')
+		game->map->full_grid[i][k] = '1';
+	while (game->map->full_grid[i][++k])
 	{
-		game->map->full_grid[i] = ft_strdup(game->map->map[j]);
-		i++;
-		j++;
+		if (game->map->map[j][k] == 'x' && game->map->map[j][k - 1] == '1'
+		&& game->map->map[j - 1][k] == '1')
+			game->map->full_grid[i][k] = '1';
 	}
-	game->map->wide = ft_strlen(game->map->full_grid[0]);
-	game->map->high = i;
 }
 
-int	count_segments(t_game **game, char **full_grid)
+void	fill_corners_middle(t_game *game, int i, int j, int k)
+{
+	if (game->map->map[j][k] == 'x' && (game->map->map[j][k + 1] == '1'
+		|| game->map->map[j][k - 1] == '1')
+		&& (game->map->map[j + 1][k] == '1'
+		|| game->map->map[j - 1][k] == '1'))
+		game->map->full_grid[i][k] = '1';
+	while (game->map->full_grid[i][++k])
+	{
+		if (game->map->map[j][k] == 'x' && (game->map->map[j][k + 1] == '1'
+			|| game->map->map[j][k - 1] == '1')
+			&& (game->map->map[j + 1][k] == '1'
+			|| game->map->map[j - 1][k] == '1'))
+			game->map->full_grid[i][k] = '1';
+	}
+}
+
+void	fill_corners(t_game *game, int i, int j)
+{
+	int	k;
+
+	k = 0;
+	if (i == 0)
+	{
+		if (game->map->map[j][k] == 'x' && game->map->map[j][k + 1] == '1'
+			&& game->map->map[j + 1][k] == '1')
+			game->map->full_grid[i][k] = '1';
+		while (game->map->full_grid[i][++k])
+		{
+			if (game->map->map[j][k] == 'x' && game->map->map[j][k - 1] == '1'
+			&& game->map->map[j + 1][k] == '1')
+				game->map->full_grid[i][k] = '1';
+		}
+	}
+	else if (i < game->map->high - 7)
+		fill_corners_middle(game, i, j, k);
+	else
+		fill_corners_end(game, i, j, k);
+}
+
+static int	count_segments(t_game **game, char **full_grid)
 {
 	int	total;
 
@@ -46,11 +81,25 @@ int	count_segments(t_game **game, char **full_grid)
 
 void	load_grid_segments(t_game **game)
 {
-	(*game)->m_mag = 1;
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 6;
 	(*game)->m_zoom = (*game)->grid_size / 4;
 	(*game)->m_xset = 2;
 	(*game)->m_yset = 2;
-	load_full_grid(*game);
+	(*game)->map->full_grid
+		= ft_calloc(((*game)->map->high - 6 + 1), sizeof(char *));
+	while ((*game)->map->map[j])
+	{
+		(*game)->map->full_grid[i] = ft_strdup((*game)->map->map[j]);
+		fill_corners((*game), i, j);
+		i++;
+		j++;
+	}
+	(*game)->map->wide = ft_strlen((*game)->map->full_grid[0]);
+	(*game)->map->high = i;
 	(*game)->no_of_segments = count_segments(game, (*game)->map->full_grid);
 	(*game)->map->segment
 		= ft_calloc((*game)->no_of_segments + 1, sizeof(t_segment));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:05:07 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/21 14:13:33 by gchernys         ###   ########.fr       */
+/*   Updated: 2023/06/24 11:34:43 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	cub_draw(t_game *game)
 {
-	game->m_zoom = (game->grid_size / 4) * game->m_mag;
+	game->m_zoom = (game->grid_size / 4);
 	game->win_x = 0;
 	game->player->rays = 0.0;
 	game->player->r_angle = game->player->p_angle + (game->player->fov / 2);

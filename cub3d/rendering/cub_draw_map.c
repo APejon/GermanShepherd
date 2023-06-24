@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_draw_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gchernys <gchernys@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:03:57 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/21 14:56:46 by gchernys         ###   ########.fr       */
+/*   Updated: 2023/06/24 11:34:17 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,17 @@ void	cub_print_m_info(t_game *game)
 
 	spotx = 250;
 	spoty = 280;
-	mlx_string_put(game->win->mlx, game->win->window, spotx * game->m_mag,
-		spoty * game->m_mag, 0x00000000,
-		"MAP SECTION: ");
+	mlx_string_put(game->win->mlx, game->win->window, spotx,
+		spoty, 0x00000000, "MAP SECTION: ");
 	segment = ft_itoa(game->start + 1);
-	mlx_string_put(game->win->mlx, game->win->window, (spotx + 90)
-		* game->m_mag, spoty * game->m_mag, 0x00000000, segment);
+	mlx_string_put(game->win->mlx, game->win->window, (spotx + 90),
+		spoty, 0x00000000, segment);
 	ft_free(&segment);
 	segment = ft_itoa(game->no_of_segments);
-	mlx_string_put(game->win->mlx, game->win->window, (spotx + 100)
-		* game->m_mag, spoty * game->m_mag, 0x00000000, "/");
-	mlx_string_put(game->win->mlx, game->win->window, (spotx + 110)
-		* game->m_mag, spoty * game->m_mag, 0x00000000, segment);
+	mlx_string_put(game->win->mlx, game->win->window, (spotx + 100),
+		spoty, 0x00000000, "/");
+	mlx_string_put(game->win->mlx, game->win->window, (spotx + 110),
+		spoty, 0x00000000, segment);
 	ft_free(&segment);
 }
 
@@ -97,12 +96,8 @@ void	cub_draw_grid(t_game *game, char **grid)
 
 void	cub_draw_m_background(t_game *game, t_window *win)
 {
-	if (game->m_mag == 2)
-		win->addr->i_p = mlx_xpm_file_to_image(game->win->mlx,
-				"textures/cloud.xpm", &(game->m_width), &(game->m_height));
-	else if (game->m_mag == 1)
-		win->addr->i_p = mlx_xpm_file_to_image(game->win->mlx,
-				"textures/clouds.xpm", &(game->m_width), &(game->m_height));
+	win->addr->i_p = mlx_xpm_file_to_image(game->win->mlx,
+			"textures/clouds.xpm", &(game->m_width), &(game->m_height));
 	win->addr->ad = mlx_get_data_addr(win->addr->i_p, &(win->addr->pix_bi),
 			&(win->addr->line_by), &win->addr->endian);
 	mlx_put_image_to_window(game->win->mlx, game->win->window,

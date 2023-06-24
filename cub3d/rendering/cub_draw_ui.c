@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:01:03 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/23 16:10:11 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/24 11:33:14 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	cub_draw_cursor(t_game *game, t_player *player)
 	if (game->map->segment[game->start]->player_found)
 	{
 		game->color = 0x00ffd700;
-		bress.x = player->x_m_grid * game->m_mag;
-		bress.y = player->y_m_grid * game->m_mag;
+		bress.x = player->x_m_grid;
+		bress.y = player->y_m_grid;
 		my_mlx_pixel_put(game, bress.x, bress.y);
 		game->color = 0x00b59410;
 		cub_draw_outline(game, bress);

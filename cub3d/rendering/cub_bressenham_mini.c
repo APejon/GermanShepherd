@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:10:23 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/15 19:13:29 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/24 11:33:01 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	cub_fill_grid(t_game *game, t_bress *bress, int i)
 	j = -1;
 	bress->x += 1;
 	start = bress->x;
-	while (++j < 16 * game->m_mag)
+	while (++j < 16)
 	{
 		i = 0;
 		bress->x = start;

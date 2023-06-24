@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 16:46:13 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/23 16:18:12 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/24 11:34:28 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ void	cub_bressenham(double x, double y, double *delta, t_game *game)
 	bress->y_shift = 0.0;
 	bress->x_check = 34.0;
 	bress->y_check = 14.0;
-	bress->deltax[0] = x * (game->m_mag);
-	bress->deltay[0] = y * (game->m_mag);
+	bress->deltax[0] = x;
+	bress->deltay[0] = y;
 	bress->deltax[1] = (delta[0] + (double)game->m_xset)
 		* ((double)game->m_zoom);
 	bress->deltay[1] = (delta[1] + (double)game->m_yset)

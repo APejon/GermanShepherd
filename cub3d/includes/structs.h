@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:47 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/23 16:22:49 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/24 11:32:24 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_keys {
 	bool	shift;
 	bool	m_switch;
 	bool	m_player;
-	bool	m_enlarge;
 }	t_keys;
 
 typedef struct s_bress {
@@ -145,7 +144,6 @@ typedef struct s_game
 {
 	int			grid_size;
 	int			m_zoom;
-	int			m_mag;
 	int			m_xset;
 	int			m_yset;
 	int			m_width;
