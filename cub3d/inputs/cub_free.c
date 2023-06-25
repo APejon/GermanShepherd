@@ -6,11 +6,24 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:53:43 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/05/28 15:40:17 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/25 12:52:11 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	cub_free_textures(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (++i < 4)
+	{
+		mlx_destroy_image(game->win->mlx, game->tex[i]->i_p);
+		ft_free(&game->tex[i]);
+	}
+	ft_free(&game->tex);
+}
 
 void	cub_free_segments(t_game **game)
 {

@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:08:51 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/23 23:34:01 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/25 14:35:09 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	cub_calc_player(t_game **game, t_player *player, t_window *win)
 	while (player->rays <= player->fov)
 	{
 		if (cub_first_intersect(game, (*game)->map, (*game)->player))
-			cub_draw_column(game, (*game)->map, player, win);
+			cub_draw_column(game, player, win);
 		else
 		{
 			while (1)
@@ -111,7 +111,7 @@ void	cub_calc_player(t_game **game, t_player *player, t_window *win)
 						(*game)->player))
 					break ;
 			}
-			cub_draw_column(game, (*game)->map, player, win);
+			cub_draw_column(game, player, win);
 		}
 		(*game)->player->r_angle -= (double)player->fov / (double)win->window_w;
 		if (player->r_angle < 0)

@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:05:07 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/24 20:24:02 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/25 12:47:25 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,21 @@ void	cub_draw(t_game *game)
 	cub_calc_player(&(game), game->player, game->win);
 }
 
-void	cub_window_init(t_window *win)
+void	cub_window_init(t_game *game, t_window *win)
 {
 	win->addr = malloc(sizeof(t_addr));
 	if (!win->addr)
-		exit (MALLOC_ERR);
+		cub_return_error("Error\n Malloc failed\n", game->map, game);
 	win->mlx = mlx_init();
+	if (!win->mlx)
+		cub_return_error("Error\n Malloc failed\n", game->map, game);
 	win->window_w = 1280;
 	win->window_h = 1280;
+	cub_set_textures(game, game->map);
 	win->window = mlx_new_window(win->mlx, win->window_w,
 			win->window_h, "Cub3D Clear To Fly");
+	if (!win->window)
+		cub_return_error("Error\n Malloc failed\n", game->map, game);
 }
 
 void	cub_player_init(t_game **game)
@@ -69,9 +74,15 @@ void	cub_player_init(t_game **game)
 void	cub_init(t_game *game)
 {
 	game->win = ft_calloc(1, sizeof(t_window));
-	cub_window_init(game->win);
+	if (!game->win)
+		cub_return_error("Error\n Malloc failed\n", game->map, game);
 	game->player->verti_i = ft_calloc(2, sizeof(double));
+	if (!game->player->verti_i)
+		cub_return_error("Error\n Malloc failed\n", game->map, game);
 	game->player->horiz_i = ft_calloc(2, sizeof(double));
+	if (!game->player->horiz_i)
+		cub_return_error("Error\n Malloc failed\n", game->map, game);
+	cub_window_init(game, game->win);
 	game->player->dir = 0;
 	cub_player_init(&(game));
 	cub_draw(game);

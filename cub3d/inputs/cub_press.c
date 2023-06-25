@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 13:19:50 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/24 16:05:03 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/25 12:51:23 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 
 void	cub_esc(t_game **game)
 {
-	mlx_clear_window((*game)->win->mlx, (*game)->win->window);
+	mlx_destroy_window((*game)->win->mlx, (*game)->win->window);
+	cub_free_textures(*game);
 	cub_free_map(game);
 	cub_free_segments(game);
+	ft_free(&((*game)->map));
 	ft_free(&((*game)->keys));
 	ft_free(&((*game)->win->addr));
 	ft_free(&((*game)->win));
 	ft_free(&((*game)->player->verti_i));
 	ft_free(&((*game)->player->horiz_i));
 	ft_free(&((*game))->player);
-	ft_free(&((*game)->map));
 	ft_free(&((*game)));
 	exit(0);
 }

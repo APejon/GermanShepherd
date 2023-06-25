@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:16:57 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/24 19:42:22 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/25 12:55:30 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,13 @@ void	cub_return_error(char *str, t_map *map, t_game *game);
 
 /*-------- cub_init.c --------*/
 void	cub_draw(t_game *game);
-void	cub_window_init(t_window *win);
+void	cub_window_init(t_game *game, t_window *win);
 void	cub_player_init(t_game **game);
 void	cub_init(t_game *game);
 void	cub_draw_floor_and_ceiling(t_game *game);
+
+/*------- main.c -------*/
+void	cub_get_textures(t_game *game, t_texture **tex, int i, char *dir);
+void	cub_set_textures(t_game *game, t_map *map);
 
 #endif

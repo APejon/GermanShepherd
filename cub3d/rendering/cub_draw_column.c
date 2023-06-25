@@ -6,52 +6,62 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:00:33 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/25 10:59:33 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/25 17:31:59 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	cub_put_column(t_game *game, t_map *map, int draw_start, int draw_end)
+int	cub_get_tex_colour(t_game *game, t_texture **tex, int i)
+{
+	int	colour;
+
+	if (i == 2 || i == 3)
+		tex[i]->tex_pointer = floor((int)game->player->verti_i[1]
+				% game->grid_size);
+	else if (i == 0 || i == 1)
+		tex[i]->tex_pointer = floor((int)game->player->horiz_i[0]
+				% game->grid_size);
+	tex[i]->tex_pointer += (tex[i]->t_width * tex[i]->tex_i);
+	colour = tex[i]->ad[tex[i]->tex_pointer];
+	return (colour);
+}
+
+void	cub_put_column(t_game *game, t_texture **tex, int draw_st, int draw_end)
 {
 	int	y;
-	(void)map;
+	int	i;
+
 	y = 0;
-	if (game->player->side == NORTH)
-		game->color = 0x191233;
-		// mlx_xpm_file_to_image(game->win->mlx, game->map->north, &size, &size);
-	else if (game->player->side == EAST)
-		game->color = 0x194523;
-		// mlx_xpm_file_to_image(game->win->mlx, game->map->north, &size, &size);
-	else if (game->player->side == SOUTH)
-		game->color = 0xbba24c;
-		// mlx_xpm_file_to_image(game->win->mlx, game->map->north, &size, &size);
-	else if (game->player->side == WEST)
-		game->color = 0x42adef;
-		// mlx_xpm_file_to_image(game->win->mlx, game->map->north, &size, &size);
-	if (game->win_x <= game->m_width)
-	{
-		while (y <= game->m_height)
-			y++;
-	}
-	while (y < draw_start)
+	i = cub_check_side(game, game->player->side, draw_end - draw_st);
+	tex[i]->tex_i = 0;
+	while (y < draw_st)
 		y++;
-	while (y >= draw_start && y <= draw_end && y <= game->win->window_h)
+	while (y >= draw_st && y <= draw_end && y <= game->win->window_h)
 	{
+		cub_check_scaling(game, game->tex, i);
+		if (game->win_x <= game->m_width)
+		{
+			if (y <= game->m_height)
+			{
+				y++;
+				continue ;
+			}
+		}
+		game->color = cub_get_tex_colour(game, tex, i);
 		my_mlx_pixel_put(game, game->win_x, y);
 		y++;
 	}
+	cub_reset_scaling(game, i);
 	game->win_x++;
 }
 
-void	cub_prep_column(t_game *game, t_map *map, t_player *player,
-						t_window *win)
+void	cub_prep_column(t_game *game, t_player *player, t_window *win)
 {
 	int	wall_height;
 	int	draw_start;
 	int	draw_end;
 
-	(void)map;
 	wall_height = (int)ceil(game->grid_size / player->correct_dis
 			* player->project_dis);
 	draw_start = (win->window_h / 2) - (wall_height / 2);
@@ -60,7 +70,7 @@ void	cub_prep_column(t_game *game, t_map *map, t_player *player,
 	draw_end = (win->window_h / 2) + (wall_height / 2);
 	if (draw_end > win->window_h)
 		draw_end = win->window_h;
-	cub_put_column(game, map, draw_start, draw_end);
+	cub_put_column(game, game->tex, draw_start, draw_end);
 }
 
 void	cub_correct_distance(t_game **game, t_player *player)
@@ -81,8 +91,7 @@ void	cub_correct_distance(t_game **game, t_player *player)
 				- player->p_angle) * (M_PI / 180));
 }
 
-void	cub_draw_column(t_game **game, t_map *map, t_player *pl,
-						t_window *win)
+void	cub_draw_column(t_game **game, t_player *pl, t_window *win)
 {
 	if (pl->verti_dis < pl->horiz_dis)
 	{
@@ -107,5 +116,5 @@ void	cub_draw_column(t_game **game, t_map *map, t_player *pl,
 	if (pl->r_angle != pl->p_angle)
 		cub_correct_distance(game, pl);
 	if (pl->correct_dis)
-		cub_prep_column(*game, map, pl, win);
+		cub_prep_column(*game, pl, win);
 }

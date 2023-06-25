@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:47 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/25 10:20:09 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/25 15:25:37 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,6 @@ typedef enum e_side
 	WEST,
 }	t_side;
 
-typedef struct s_keys {
-	bool	esc;
-	bool	w;
-	bool	s;
-	bool	a;
-	bool	d;
-	bool	l_arrow;
-	bool	r_arrow;
-	bool	shift;
-	bool	m_switch;
-	bool	m_player;
-}	t_keys;
-
 typedef struct s_bress {
 	double	deltax[2];
 	double	deltay[2];
@@ -57,6 +44,34 @@ typedef struct s_bress {
 	double	x_check;
 	double	y_check;
 }	t_bress;
+
+typedef struct s_keys {
+	bool	esc;
+	bool	w;
+	bool	s;
+	bool	a;
+	bool	d;
+	bool	l_arrow;
+	bool	r_arrow;
+	bool	shift;
+	bool	m_switch;
+	bool	m_player;
+}	t_keys;
+
+typedef struct s_texture {
+	void	*i_p;
+	int		*ad;
+	int		t_height;
+	int		t_width;
+	int		pix_bi;
+	int		line_by;
+	int		endian;
+	int		skip;
+	int		repeat;
+	int		tex_i;
+	int		tex_pointer;
+	double	scale;
+}	t_texture;
 
 typedef struct s_addr {
 	void	*i_p;
@@ -163,6 +178,7 @@ typedef struct s_game
 	t_map		*map;
 	t_player	*player;
 	t_window	*win;
+	t_texture	**tex;
 	t_keys		*keys;
 }		t_game;
 

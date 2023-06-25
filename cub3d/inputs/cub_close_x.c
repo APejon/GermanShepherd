@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:23:53 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/25 11:04:18 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/25 12:50:45 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	cub_no_clip(t_map *map, t_player *player, char **full_grid)
 
 int	cub_close_x(t_game **game)
 {
-	mlx_clear_window((*game)->win->mlx, (*game)->win->window);
+	mlx_destroy_window((*game)->win->mlx, (*game)->win->window);
+	cub_free_textures(*game);
 	cub_free_map(game);
 	cub_free_segments(game);
 	ft_free(&((*game)->map));

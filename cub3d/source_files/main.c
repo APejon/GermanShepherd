@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:12:32 by gchernys          #+#    #+#             */
-/*   Updated: 2023/06/24 19:01:27 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/25 15:31:11 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,42 @@ static void	cub_mlx_keys(t_game *game)
 	mlx_hook(game->win->window, 3, 0, cub_key_release, &game);
 	mlx_loop_hook(game->win->mlx, cub_inputs, &game);
 	mlx_loop(game->win->mlx);
+}
+
+void	cub_get_textures(t_game *game, t_texture **tex, int i, char *dir)
+{
+	game->tex[i]->i_p = mlx_xpm_file_to_image(game->win->mlx, dir,
+			&(game->tex[i]->t_width), &(game->tex[i]->t_height));
+	if (!game->tex[i]->i_p)
+		cub_return_error("Texture file couldn't open or corrupted\n", game->map,
+			game);
+	game->tex[i]->ad = (int *)mlx_get_data_addr(tex[i]->i_p, &(tex[i]->pix_bi),
+			&(tex[i]->line_by), &(tex[i]->endian));
+	if (!game->tex[i]->i_p)
+		cub_return_error("Texture file couldn't open or corrupted\n", game->map,
+			game);
+	game->tex[i]->repeat = 0;
+	game->tex[i]->skip = 0;
+}
+
+void	cub_set_textures(t_game *game, t_map *map)
+{
+	int	i;
+
+	i = -1;
+	game->tex = ft_calloc(4, sizeof(t_texture));
+	if (!game->tex)
+		cub_return_error("Error\n Malloc failed\n", map, game);
+	while (++i < 4)
+	{
+		game->tex[i] = ft_calloc(1, sizeof(t_texture));
+		if (!game->tex[i])
+			cub_return_error("Error\n Malloc failed\n", map, game);
+	}
+	cub_get_textures(game, game->tex, 0, map->north);
+	cub_get_textures(game, game->tex, 1, map->south);
+	cub_get_textures(game, game->tex, 2, map->east);
+	cub_get_textures(game, game->tex, 3, map->west);
 }
 
 int	main(int argc, char **argv)

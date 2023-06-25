@@ -6,7 +6,7 @@
 #    By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 10:55:58 by amalbrei          #+#    #+#              #
-#    Updated: 2023/06/24 20:23:42 by amalbrei         ###   ########.fr        #
+#    Updated: 2023/06/25 14:34:34 by amalbrei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ PLAYER_SRC		=	cub_calc_player.c	cub_find_intersect.c\
 
 RENDERING_SRC	=	cub_bressenham_mini.c	cub_draw_ui.c	cub_draw_map.c\
 					cub_draw_column.c	cub_bressenham.c	cub_back_collisions.c\
+					cub_render_utils.c
 					
 
 PARSING_SRC		=	make_map.c	map_validation.c	parsing.c\
