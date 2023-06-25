@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 19:09:50 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/23 16:28:40 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/25 11:06:24 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ void	cub_undo_cont2(t_game **game, t_player *pl)
 
 void	cub_undo_cont(t_game **game, t_player *pl)
 {
-	if ((*game)->keys->w == true && (pl->fl_coll < 10 || pl->fr_coll < 10))
+	if ((*game)->keys->w == true && (pl->fl_coll < 5 || pl->fr_coll < 5
+			|| pl->fl2_coll < 5 || pl->fr2_coll < 5))
 	{
 		(*game)->player->y_pos += sin(pl->p_angle * (M_PI / 180))
 			* pl->speed;
@@ -99,7 +100,7 @@ void	cub_undo_cont(t_game **game, t_player *pl)
 		(*game)->player->x_m_grid -= cos(pl->p_angle * (M_PI / 180))
 			* pl->speed / 4.0;
 	}
-	if ((*game)->keys->s == true && (pl->bl_coll < 10 || pl->br_coll < 10))
+	if ((*game)->keys->s == true)
 	{
 		(*game)->player->y_pos -= sin(pl->p_angle * (M_PI / 180))
 			* pl->speed;

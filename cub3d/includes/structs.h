@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:47 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/24 16:05:35 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/25 10:20:09 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,12 @@ typedef struct s_player
 	double	correct_dis;
 	double	fl_coll;
 	double	fr_coll;
+	double	fl2_coll;
+	double	fr2_coll;
 	double	bl_coll;
 	double	br_coll;
+	double	bl2_coll;
+	double	br2_coll;
 	double	l_coll;
 	double	r_coll;
 }		t_player;

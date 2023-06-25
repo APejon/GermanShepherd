@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:00:33 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/24 16:05:53 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/25 10:59:33 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,14 @@ void	cub_correct_distance(t_game **game, t_player *player)
 		player->fl_coll = (*game)->player->correct_dis;
 	if (player->r_angle == player->p_angle + 30)
 		player->fr_coll = (*game)->player->correct_dis;
-	player->bl_coll = cub_back_collisions(game, player, player->p_angle + 150);
-	player->br_coll = cub_back_collisions(game, player, player->p_angle - 150);
-	player->l_coll = cub_back_collisions(game, player, player->p_angle + 90);
-	player->r_coll = cub_back_collisions(game, player, player->p_angle - 90);
+	player->fl2_coll = cub_back_collisions(game, player, player->p_angle - 60);
+	player->fr2_coll = cub_back_collisions(game, player, player->p_angle + 60);
+	player->l_coll = cub_back_collisions(game, player, player->p_angle - 90);
+	player->r_coll = cub_back_collisions(game, player, player->p_angle + 90);
+	player->bl2_coll = cub_back_collisions(game, player, player->p_angle - 120);
+	player->br2_coll = cub_back_collisions(game, player, player->p_angle + 120);
+	player->bl_coll = cub_back_collisions(game, player, player->p_angle - 150);
+	player->br_coll = cub_back_collisions(game, player, player->p_angle + 150);
 	(*game)->player->correct_dis *= cos((player->r_angle
 				- player->p_angle) * (M_PI / 180));
 }

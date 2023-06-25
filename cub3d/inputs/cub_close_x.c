@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:23:53 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/24 20:21:00 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/25 11:04:18 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 int	cub_no_clip(t_map *map, t_player *player, char **full_grid)
 {
 	if (full_grid[(int)player->y_pos / 64][(int)player->x_pos / 64] == 'x'
-		|| player->fl_coll < 10 || player->fr_coll < 10
-		|| player->bl_coll < 10 || player->br_coll < 10
-		|| player->l_coll < 10 || player->r_coll < 10
+		|| player->fl_coll < 5 || player->fr_coll < 5
+		|| player->bl_coll < 5 || player->br_coll < 5
+		|| player->l_coll < 5 || player->r_coll < 5
+		|| player->fl2_coll < 5 || player->fr2_coll < 5
+		|| player->bl2_coll < 5 || player->br2_coll < 5
 		|| player->y_pos / 64 < 1 || player->x_pos / 64 < 1
 		|| player->y_pos / 64 > map->high - 1
 		|| player->x_pos / 64 > map->wide - 2)
