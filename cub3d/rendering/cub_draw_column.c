@@ -6,35 +6,37 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:00:33 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/25 17:31:59 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/25 21:27:12 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	cub_get_tex_colour(t_game *game, t_texture **tex, int i)
+int	cub_get_tex_colour(t_game *game, int i)
 {
 	int	colour;
 
 	if (i == 2 || i == 3)
-		tex[i]->tex_pointer = floor((int)game->player->verti_i[1]
-				% game->grid_size);
+		game->tex[i]->tex_pointer = (int)game->player->verti_i[1]
+			% game->grid_size;
 	else if (i == 0 || i == 1)
-		tex[i]->tex_pointer = floor((int)game->player->horiz_i[0]
-				% game->grid_size);
-	tex[i]->tex_pointer += (tex[i]->t_width * tex[i]->tex_i);
-	colour = tex[i]->ad[tex[i]->tex_pointer];
+		game->tex[i]->tex_pointer = (int)game->player->horiz_i[0]
+			% game->grid_size;
+	if (game->tex[i]->tex_i >= game->tex[i]->t_height)
+		game->tex[i]->tex_i = game->tex[i]->t_height - 1;
+	game->tex[i]->tex_pointer += (game->tex[i]->t_width * game->tex[i]->tex_i);
+	colour = game->tex[i]->ad[game->tex[i]->tex_pointer];
 	return (colour);
 }
 
-void	cub_put_column(t_game *game, t_texture **tex, int draw_st, int draw_end)
+void	cub_put_column(t_game *game, int i, int draw_st, int draw_end)
 {
-	int	y;
-	int	i;
+	double	y;
 
 	y = 0;
-	i = cub_check_side(game, game->player->side, draw_end - draw_st);
-	tex[i]->tex_i = 0;
+	game->tex[i]->scale = (double)(draw_end - draw_st)
+		/ (double)game->tex[i]->t_height;
+	game->tex[i]->tex_i = 0;
 	while (y < draw_st)
 		y++;
 	while (y >= draw_st && y <= draw_end && y <= game->win->window_h)
@@ -48,29 +50,36 @@ void	cub_put_column(t_game *game, t_texture **tex, int draw_st, int draw_end)
 				continue ;
 			}
 		}
-		game->color = cub_get_tex_colour(game, tex, i);
-		my_mlx_pixel_put(game, game->win_x, y);
+		game->color = cub_get_tex_colour(game, i);
+		my_mlx_pixel_put(game, game->win_x, (int)y);
 		y++;
 	}
 	cub_reset_scaling(game, i);
 	game->win_x++;
 }
 
-void	cub_prep_column(t_game *game, t_player *player, t_window *win)
+void	cub_prep_column(t_game *game, t_player *player, t_window *win,
+			t_texture **tex)
 {
+	int	i;
 	int	wall_height;
 	int	draw_start;
 	int	draw_end;
 
+	cub_grid_mult_hori(&game, player);
+	cub_grid_mult_verti(&game, player);
+	i = cub_check_side(game->player->side);
 	wall_height = (int)ceil(game->grid_size / player->correct_dis
 			* player->project_dis);
 	draw_start = (win->window_h / 2) - (wall_height / 2);
+	tex[i]->draw_start = draw_start;
 	if (draw_start < 0)
 		draw_start = 0;
 	draw_end = (win->window_h / 2) + (wall_height / 2);
+	tex[i]->draw_end = draw_end;
 	if (draw_end > win->window_h)
 		draw_end = win->window_h;
-	cub_put_column(game, game->tex, draw_start, draw_end);
+	cub_put_column(game, i, draw_start, draw_end);
 }
 
 void	cub_correct_distance(t_game **game, t_player *player)
@@ -116,5 +125,5 @@ void	cub_draw_column(t_game **game, t_player *pl, t_window *win)
 	if (pl->r_angle != pl->p_angle)
 		cub_correct_distance(game, pl);
 	if (pl->correct_dis)
-		cub_prep_column(*game, pl, win);
+		cub_prep_column(*game, pl, win, (*game)->tex);
 }

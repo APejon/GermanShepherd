@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 14:23:19 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/25 17:18:23 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/25 21:28:35 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ void	cub_check_scaling(t_game *game, t_texture **tex, int i)
 			tex[i]->tex_i++;
 		}
 	}
-	else if (tex[i]->scale < 1)
+	if (tex[i]->scale < 1)
 	{
-		game->tex[i]->skip = tex[i]->scale * 0.5;
+		game->tex[i]->skip = tex[i]->scale * 10.0 / 2.0;
 		tex[i]->tex_i += game->tex[i]->skip;
 	}
 	else
 		return ;
 }
 
-int	cub_check_side(t_game *game, int side, int wall_height)
+int	cub_check_side(int side)
 {
 	int	i;
 
@@ -50,6 +50,5 @@ int	cub_check_side(t_game *game, int side, int wall_height)
 		i = 2;
 	else
 		i = 3;
-	game->tex[i]->scale = (double)wall_height / (double)game->tex[i]->t_height;
 	return (i);
 }

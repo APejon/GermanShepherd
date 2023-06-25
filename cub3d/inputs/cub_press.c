@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 13:19:50 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/25 12:51:23 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/25 21:52:51 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	cub_movement(int key, t_game **game)
 int	cub_key_press(int key, t_game **game)
 {
 	cub_movement(key, game);
-	if (key == 18 || key == 19 || key == 46)
+	if (key == 18 || key == 19)
 	{
 		if (key == 18)
 			(*game)->keys->m_switch = true;

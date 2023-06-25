@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:15:59 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/25 15:34:03 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/25 20:02:55 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,16 @@ void	cub_draw_grid(t_game *game, char **grid);
 void	cub_draw_m_background(t_game *game, t_window *win);
 
 /*----- cub_draw_column.c -----*/
-int		cub_get_tex_colour(t_game *game, t_texture **tex, int i);
-void	cub_put_column(t_game *game, t_texture **tex, int draw_st,
-			int draw_end);
-void	cub_prep_column(t_game *game, t_player *player,
-			t_window *win);
+int		cub_get_tex_colour(t_game *game, int i);
+void	cub_put_column(t_game *game, int i, int draw_st, int draw_end);
+void	cub_prep_column(t_game *game, t_player *player, t_window *win,
+			t_texture **tex);
 void	cub_correct_distance(t_game **game, t_player *player);
 void	cub_draw_column(t_game **game, t_player *player, t_window *win);
 
 /*----- cub_render_utils.c -----*/
 void	cub_reset_scaling(t_game *game, int i);
 void	cub_check_scaling(t_game *game, t_texture **tex, int i);
-int		cub_check_side(t_game *game, int side, int wall_height);
+int		cub_check_side(int side);
 
 #endif

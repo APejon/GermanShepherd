@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:47 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/25 15:25:37 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/25 21:39:45 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_keys {
 	bool	shift;
 	bool	m_switch;
 	bool	m_player;
+	bool	m_reset;
 }	t_keys;
 
 typedef struct s_texture {
@@ -66,11 +67,13 @@ typedef struct s_texture {
 	int		pix_bi;
 	int		line_by;
 	int		endian;
-	int		skip;
-	int		repeat;
+	double	scale;
+	double	skip;
+	double	repeat;
 	int		tex_i;
 	int		tex_pointer;
-	double	scale;
+	int		draw_start;
+	int		draw_end;
 }	t_texture;
 
 typedef struct s_addr {
