@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:12:34 by gchernys          #+#    #+#             */
-/*   Updated: 2023/06/24 19:30:29 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/26 15:01:11 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@ int	basic_error_check(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		write(2, "Error: Invalid number of arguments", 34);
-		return (PARSE_ERR);
+		write(2, "Error\n Invalid number of arguments", 34);
+		exit(PARSE_ERR);
 	}
 	str = argv[1];
 	i = ft_strlen(argv[1]);
 	if (str[i - 1] != 'b' || str[i - 2] != 'u' || \
 	str[i - 3] != 'c' || str[i - 4] != '.')
 	{
-		write(2, "Error: File needs to end with \".cub\" extension\n", 47);
-		return (PARSE_ERR);
+		write(2, "Error\n File needs to end with \".cub\" extension\n", 47);
+		exit(PARSE_ERR);
 	}
 	i = open(argv[1], O_RDONLY);
 	if (i < 0)
 	{
-		write(2, "Couldn't open file", 18);
-		return (PARSE_ERR);
+		write(2, "Error\n Couldn't open file", 25);
+		exit(PARSE_ERR);
 	}
 	close (i);
 	return (0);
@@ -123,8 +123,8 @@ void	cub_draw_floor_and_ceiling(t_game *game)
 	i = game->win->window_w * game->win->window_h / 2;
 	dst = (unsigned int *) game->win->addr->ad;
 	while (--i > 0)
-		*dst++ = game->map->floor_color;
+		*dst++ = game->map->ceiling_color;
 	i = game->win->window_w * game->win->window_h / 2;
 	while (--i > 0)
-		*dst++ = game->map->ceiling_color;
+		*dst++ = game->map->floor_color;
 }

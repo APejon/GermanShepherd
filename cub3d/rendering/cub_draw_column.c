@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:00:33 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/25 21:27:12 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/26 14:48:55 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,25 @@ int	cub_get_tex_colour(t_game *game, int i)
 
 void	cub_put_column(t_game *game, int i, int draw_st, int draw_end)
 {
-	double	y;
+	int	y;
 
 	y = 0;
-	game->tex[i]->scale = (double)(draw_end - draw_st)
-		/ (double)game->tex[i]->t_height;
-	game->tex[i]->tex_i = 0;
 	while (y < draw_st)
 		y++;
 	while (y >= draw_st && y <= draw_end && y <= game->win->window_h)
 	{
-		cub_check_scaling(game, game->tex, i);
 		if (game->win_x <= game->m_width)
 		{
 			if (y <= game->m_height)
 			{
+				cub_check_scaling(game->tex, i);
 				y++;
 				continue ;
 			}
 		}
 		game->color = cub_get_tex_colour(game, i);
-		my_mlx_pixel_put(game, game->win_x, (int)y);
+		cub_check_scaling(game->tex, i);
+		my_mlx_pixel_put(game, game->win_x, y);
 		y++;
 	}
 	cub_reset_scaling(game, i);
@@ -79,6 +77,7 @@ void	cub_prep_column(t_game *game, t_player *player, t_window *win,
 	tex[i]->draw_end = draw_end;
 	if (draw_end > win->window_h)
 		draw_end = win->window_h;
+	cub_start_index(tex, i, draw_start);
 	cub_put_column(game, i, draw_start, draw_end);
 }
 

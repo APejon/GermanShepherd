@@ -6,58 +6,68 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 19:09:50 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/25 21:54:39 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/26 12:50:26 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	cub_map_bound2(t_game **game, t_player *player, t_segment *segment,
-			double y)
+void	cub_map_bound2(t_game **game, t_player *player, t_segment *segment)
 {
+	double	y;
+
+	y = player->y_m_grid / (*game)->m_zoom - (*game)->m_yset;
 	if (y < 0)
 	{
 		(*game)->player->y_m_grid = (14 + (*game)->m_yset) * (*game)->m_zoom;
-		segment->player_found = 0;
-		segment->north->player_found = 1;
-		(*game)->start = segment->north->id;
+		if (segment->north)
+		{
+			segment->player_found = 0;
+			segment->north->player_found = 1;
+			(*game)->start = segment->north->id;
+		}
 	}
 	else if (y > 14)
 	{
 		(*game)->player->y_m_grid = (player->y_pos / (*game)->grid_size)
 			- (13.9 * ((*game)->y_shift + 1)) + (*game)->m_yset
 			* (*game)->m_zoom;
-		segment->player_found = 0;
-		segment->south->player_found = 1;
-		(*game)->start = segment->south->id;
+		if (segment->south)
+		{
+			segment->player_found = 0;
+			segment->south->player_found = 1;
+			(*game)->start = segment->south->id;
+		}
 	}
 }
 
-void	cub_map_bound(t_game **game, t_player *player, t_segment *segment)
+void	cub_map_bound(t_game **game, t_player *player, t_segment *segment,
+			double x)
 {
-	double	y;
-	double	x;
-
-	y = player->y_m_grid / (*game)->m_zoom - (*game)->m_yset;
-	x = player->x_m_grid / (*game)->m_zoom - (*game)->m_xset;
 	if (x < 0)
 	{
 		(*game)->player->x_m_grid = (34 + (*game)->m_xset) * (*game)->m_zoom;
-		segment->player_found = 0;
-		segment->west->player_found = 1;
-		(*game)->start = segment->west->id;
+		if (segment->west)
+		{
+			segment->player_found = 0;
+			segment->west->player_found = 1;
+			(*game)->start = segment->west->id;
+		}
 	}
 	else if (x > 34)
 	{
 		(*game)->player->x_m_grid = (player->x_pos / (*game)->grid_size)
 			- (33.9 * ((*game)->x_shift + 1)) + (*game)->m_xset
 			* (*game)->m_zoom;
-		segment->player_found = 0;
-		segment->east->player_found = 1;
-		(*game)->start = segment->east->id;
+		if (segment->east)
+		{
+			segment->player_found = 0;
+			segment->east->player_found = 1;
+			(*game)->start = segment->east->id;
+		}
 	}
 	else
-		cub_map_bound2(game, player, segment, y);
+		cub_map_bound2(game, player, segment);
 }
 
 void	cub_undo_cont2(t_game **game, t_player *pl)

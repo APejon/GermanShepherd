@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:12:32 by gchernys          #+#    #+#             */
-/*   Updated: 2023/06/25 15:31:11 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/26 12:53:45 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	cub_get_textures(t_game *game, t_texture **tex, int i, char *dir)
 	game->tex[i]->i_p = mlx_xpm_file_to_image(game->win->mlx, dir,
 			&(game->tex[i]->t_width), &(game->tex[i]->t_height));
 	if (!game->tex[i]->i_p)
-		cub_return_error("Texture file couldn't open or corrupted\n", game->map,
-			game);
+		cub_return_error("Error\n Texture file couldn't open or corrupted\n",
+			game->map, game);
 	game->tex[i]->ad = (int *)mlx_get_data_addr(tex[i]->i_p, &(tex[i]->pix_bi),
 			&(tex[i]->line_by), &(tex[i]->endian));
 	if (!game->tex[i]->i_p)
-		cub_return_error("Texture file couldn't open or corrupted\n", game->map,
-			game);
+		cub_return_error("Error\n Texture file couldn't open or corrupted\n",
+			game->map, game);
 	game->tex[i]->repeat = 0;
 	game->tex[i]->skip = 0;
 }

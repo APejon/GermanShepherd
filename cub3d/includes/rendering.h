@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:15:59 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/25 20:02:55 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/26 14:49:11 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void	cub_draw_column(t_game **game, t_player *player, t_window *win);
 
 /*----- cub_render_utils.c -----*/
 void	cub_reset_scaling(t_game *game, int i);
-void	cub_check_scaling(t_game *game, t_texture **tex, int i);
+void	cub_check_scaling(t_texture **tex, int i);
+void	cub_start_index(t_texture **tex, int i, int draw_start);
 int		cub_check_side(int side);
 
 #endif
