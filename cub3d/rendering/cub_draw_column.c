@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:00:33 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/26 14:48:55 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/26 20:07:23 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ void	cub_put_column(t_game *game, int i, int draw_st, int draw_end)
 		{
 			if (y <= game->m_height)
 			{
-				cub_check_scaling(game->tex, i);
+				cub_check_scaling(game->tex, i, y);
 				y++;
 				continue ;
 			}
 		}
 		game->color = cub_get_tex_colour(game, i);
-		cub_check_scaling(game->tex, i);
+		cub_check_scaling(game->tex, i, y);
 		my_mlx_pixel_put(game, game->win_x, y);
 		y++;
 	}
@@ -77,7 +77,7 @@ void	cub_prep_column(t_game *game, t_player *player, t_window *win,
 	tex[i]->draw_end = draw_end;
 	if (draw_end > win->window_h)
 		draw_end = win->window_h;
-	cub_start_index(tex, i, draw_start);
+	tex[i]->tex_i = 0;
 	cub_put_column(game, i, draw_start, draw_end);
 }
 

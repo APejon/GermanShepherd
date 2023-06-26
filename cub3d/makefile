@@ -6,7 +6,7 @@
 #    By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 10:55:58 by amalbrei          #+#    #+#              #
-#    Updated: 2023/06/26 12:46:21 by amalbrei         ###   ########.fr        #
+#    Updated: 2023/06/26 20:06:12 by amalbrei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,11 @@ SRC				=	$(INPUTS_SRC) $(PLAYER_SRC) $(RENDERING_SRC) $(PARSING_SRC)\
 
 OBJ				= 	$(addprefix $(OBJ_DIR)/,$(SRC:%.c=%.o))
 
-all: mlx $(SUB_LIB) $(NAME)  
+OBJ_BONUS		=	$(addprefix $(OBJ_DIR)/,$(SRC:%.c=%.o))
+
+all: mlx $(SUB_LIB) $(NAME)
+
+bonus: mlx $(SUB_LIB) bonus_c
 
 mlx:
 	@$(MAKE) all -C mlx
@@ -103,13 +107,15 @@ $(OBJ_DIR)/%.o: $(MAIN_DIR)/%.c
 
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(INC_DIR) $(OBJ) $(LIBFT) $(MLX) $(CUB3D_FLAGS) -o $(NAME)
-# @echo "$(PEJON)"
 	@printf "$(C)\n==========================\n"
 	@printf "$(C) CUB3D COMPILED\n"
 	@printf "$(C)==========================\n$(D)"
 
-chirp:
-	
+bonus_c: $(OBJ_BONUS)
+	@$(CC) $(CFLAGS) $(INC_DIR) $(OBJ_BONUS) $(LIBFT) $(MLX) $(CUB3D_FLAGS) -o $(NAME)
+	@printf "$(C)\n==========================\n"
+	@printf "$(C) CUB3D COMPILED\n"
+	@printf "$(C)==========================\n$(D)"
 
 norm:
 	@norminette | grep Error
