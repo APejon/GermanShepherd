@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:23:08 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/26 12:50:30 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/27 12:14:05 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define INPUTS_H
 
 /*----- cub_close_x.c -----*/
+void	cub_reset_map(t_game *game);
 int		cub_no_clip(t_map *map, t_player *player, char **full_grid);
 int		cub_close_x(t_game **game);
 

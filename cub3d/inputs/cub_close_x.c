@@ -6,11 +6,40 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:23:53 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/26 15:30:38 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/27 12:42:40 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	cub_reset_map(t_game *game)
+{
+	int			i;
+	int			j;
+	t_segment	*position;
+
+	i = -1;
+	j = -1;
+	position = game->map->segment[0];
+	while (++i < game->x_shift)
+		position = position->east;
+	while (++j < game->y_shift)
+		position = position->south;
+	game->start = position->id;
+	game->player->x_m_grid = (game->player->x_pos / (double)game->grid_size
+			- (34 * game->x_shift) + game->m_xset) * (double)game->m_zoom;
+	game->player->y_m_grid = (game->player->y_pos / (double)game->grid_size
+			- (14 * game->y_shift) + game->m_yset) * (double)game->m_zoom;
+	i = -1;
+	while (++i < game->no_of_segments)
+	{
+		if (game->map->segment[i]->player_found)
+		{
+			game->map->segment[i]->player_found = 0;
+			game->map->segment[game->start]->player_found = 1;
+		}
+	}
+}
 
 int	cub_no_clip(t_map *map, t_player *player, char **full_grid)
 {

@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:47 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/25 21:39:45 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/27 12:01:56 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,6 @@ typedef struct s_player
 	double	y_pos;
 	double	x_m_grid;
 	double	y_m_grid;
-	int		x_shift;
-	int		y_shift;
 	double	*verti_i;
 	double	*horiz_i;
 	double	project_dis;
