@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:05:07 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/27 13:10:36 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/26 20:04:57 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	cub_draw(t_game *game)
 	game->player->verti_dis = INT_MAX;
 	game->player->horiz_dis = INT_MAX;
 	game->player->correct_dis = 0.0;
+	cub_draw_m_background(game, game->win);
+	cub_draw_ui(game);
 	cub_calc_player(&(game), game->player, game->win);
 }
 

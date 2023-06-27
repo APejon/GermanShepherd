@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:08:51 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/27 13:12:39 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:07:26 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	cub_first_intersect(t_game **game, t_map *m, t_player *play)
 
 void	cub_calc_player(t_game **game, t_player *player, t_window *win)
 {
-	cub_prep_image(*game, &((*game)->win), 'n');
+	cub_prep_image(*game, &((*game)->win), 'g');
 	while (player->rays <= player->fov)
 	{
 		if (cub_first_intersect(game, (*game)->map, (*game)->player))

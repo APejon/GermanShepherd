@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:53:43 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/25 12:52:11 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:18:26 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,18 @@ void	cub_free_segments(t_game **game)
 	int	j;
 
 	i = -1;
-	while ((*game)->map->segment[++i])
+	if ((*game)->map->segment)
 	{
-		j = -1;
-		while ((*game)->map->segment[i]->grid[++j])
-			ft_free(&(*game)->map->segment[i]->grid[j]);
-		ft_free(&(*game)->map->segment[i]->grid);
-		ft_free(&(*game)->map->segment[i]);
+		while ((*game)->map->segment[++i])
+		{
+			j = -1;
+			while ((*game)->map->segment[i]->grid[++j])
+				ft_free(&(*game)->map->segment[i]->grid[j]);
+			ft_free(&(*game)->map->segment[i]->grid);
+			ft_free(&(*game)->map->segment[i]);
+		}
+		ft_free(&(*game)->map->segment);
 	}
-	ft_free(&(*game)->map->segment);
 }
 
 void	cub_free_map(t_game **game)

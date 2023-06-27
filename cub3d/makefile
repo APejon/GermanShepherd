@@ -6,7 +6,7 @@
 #    By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 10:55:58 by amalbrei          #+#    #+#              #
-#    Updated: 2023/06/26 20:06:12 by amalbrei         ###   ########.fr        #
+#    Updated: 2023/06/27 15:51:39 by amalbrei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,26 +38,45 @@ RM				=	rm	-rf
 INPUTS_SRC 		=	cub_close_x.c	cub_inputs.c	cub_free.c	cub_press.c\
 					cub_inputs_utils.c
 
+INPUTS_SRC_B 		=	cub_close_x.c	cub_inputs.c	cub_free.c\
+					cub_press_bonus.c	cub_inputs_utils.c\
+
 PLAYER_SRC		=	cub_calc_player.c	cub_find_intersect.c\
+					cub_find_player.c	cub_find_utils.c
+
+PLAYER_SRC_B	=	cub_calc_player_bonus.c	cub_find_intersect.c\
 					cub_find_player.c	cub_find_utils.c
 
 RENDERING_SRC	=	cub_bressenham_mini.c	cub_draw_ui.c	cub_draw_map.c\
 					cub_draw_column.c	cub_bressenham.c	cub_back_collisions.c\
 					cub_render_utils.c
+
+RENDERING_SRC_B	=	cub_bressenham_mini.c	cub_draw_ui.c	cub_draw_map.c\
+					cub_draw_column_bonus.c	cub_bressenham.c\
+					cub_back_collisions.c	cub_render_utils.c
 					
 
 PARSING_SRC		=	make_map.c	map_validation.c	parsing.c\
 					textures_and_colors.c	segmentation.c	fill_segments.c\
 					cub_info_check.c
 
+PARSING_SRC_B	=	make_map.c	map_validation.c	parsing.c\
+					textures_and_colors.c	segmentation_bonus.c\
+					fill_segments.c			cub_info_check.c
+
 MAIN_SRC 		=	main.c	cub_utils.c	cub_utils2.c	cub_init.c
+
+MAIN_SRC_B 		=	main.c	cub_utils.c	cub_utils2.c	cub_init_bonus.c
 
 SRC				=	$(INPUTS_SRC) $(PLAYER_SRC) $(RENDERING_SRC) $(PARSING_SRC)\
 					$(MAIN_SRC)
 
+SRC_B			=	$(INPUTS_SRC_B) $(PLAYER_SRC_B) $(RENDERING_SRC_B)\
+					$(PARSING_SRC_B)	$(MAIN_SRC_B)
+
 OBJ				= 	$(addprefix $(OBJ_DIR)/,$(SRC:%.c=%.o))
 
-OBJ_BONUS		=	$(addprefix $(OBJ_DIR)/,$(SRC:%.c=%.o))
+OBJ_BONUS		=	$(addprefix $(OBJ_DIR)/,$(SRC_B:%.c=%.o))
 
 all: mlx $(SUB_LIB) $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 14:19:41 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/27 13:17:32 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/26 20:03:12 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,25 @@ void	fill_corners(t_game *game, int i, int j)
 		fill_corners_end(game, i, j, k);
 }
 
+static int	count_segments(t_game **game, char **full_grid, int i)
+{
+	int	total;
+
+	(*game)->m_zoom = (*game)->grid_size / 4;
+	(*game)->m_xset = 2;
+	(*game)->m_yset = 2;
+	(*game)->map->wide = ft_strlen((*game)->map->full_grid[0]);
+	(*game)->map->high = i;
+	(*game)->m_horizontal = ft_strlen(full_grid[0]);
+	(*game)->m_horizontal = ((*game)->m_horizontal / 34) + 1;
+	(*game)->m_vertical = 0;
+	while (full_grid[(*game)->m_vertical])
+		(*game)->m_vertical++;
+	(*game)->m_vertical = ((*game)->m_vertical / 14) + 1;
+	total = (*game)->m_horizontal * (*game)->m_vertical;
+	return (total);
+}
+
 void	load_grid_segments(t_game **game)
 {
 	int	i;
@@ -87,5 +106,6 @@ void	load_grid_segments(t_game **game)
 		i++;
 		j++;
 	}
-	(*game)->map->high = i;
+	(*game)->no_of_segments = count_segments(game, (*game)->map->full_grid, i);
+	fill_segments(game);
 }
