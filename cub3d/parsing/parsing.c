@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:12:34 by gchernys          #+#    #+#             */
-/*   Updated: 2023/06/26 15:01:11 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/27 18:44:50 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,18 +94,6 @@ static int	cub_check_file_extensions(t_map *map, char *ext)
 int	check_textures(t_map *map)
 {
 	set_textures(map);
-	if (open(map->north, O_RDONLY) < 0)
-		return (PARSE_ERR);
-	close(open(map->north, O_RDONLY));
-	if (open(map->south, O_RDONLY) < 0)
-		return (PARSE_ERR);
-	close(open(map->south, O_RDONLY));
-	if (open(map->west, O_RDONLY) < 0)
-		return (PARSE_ERR);
-	close(open(map->west, O_RDONLY));
-	if (open(map->east, O_RDONLY) < 0)
-		return (PARSE_ERR);
-	close(open(map->east, O_RDONLY));
 	if (cub_check_file_extensions(map, "xpm"))
 		return (PARSE_ERR);
 	if (map->north == NULL || map->south == NULL || map->west == NULL || \

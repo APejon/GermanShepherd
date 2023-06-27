@@ -6,7 +6,7 @@
 #    By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 10:55:58 by amalbrei          #+#    #+#              #
-#    Updated: 2023/06/27 17:58:35 by amalbrei         ###   ########.fr        #
+#    Updated: 2023/06/27 19:49:57 by amalbrei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ RM				=	rm	-rf
 INPUTS_SRC 		=	cub_close_x.c	cub_inputs.c	cub_free.c	cub_press.c\
 					cub_inputs_utils.c
 
-INPUTS_SRC_B 		=	cub_close_x.c	cub_inputs.c	cub_free.c\
+INPUTS_SRC_B 		=	cub_close_x_bonus.c	cub_inputs.c	cub_free.c\
 					cub_press_bonus.c	cub_inputs_utils.c\
 
 PLAYER_SRC		=	cub_calc_player.c	cub_find_intersect.c\

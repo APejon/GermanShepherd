@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:39:32 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/27 13:19:20 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/27 19:25:00 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ double	cub_back_vertical(t_map *map, t_player *player, char **full_grid,
 	return (INT_MAX);
 }
 
-double	cub_back_collisions(t_game **game, t_player *player, double angle)
+double	cub_back_collisions(t_game *game, t_player *player, double angle)
 {
 	double	verti_dis;
 	double	horiz_dis;
@@ -95,10 +95,10 @@ double	cub_back_collisions(t_game **game, t_player *player, double angle)
 		angle += 360;
 	else if (angle > 360)
 		angle -= 360;
-	verti_dis = cub_back_vertical((*game)->map, player,
-			(*game)->map->full_grid, angle);
-	horiz_dis = cub_back_horizontal((*game)->map, player,
-			(*game)->map->full_grid, angle);
+	verti_dis = cub_back_vertical(game->map, player,
+			game->map->full_grid, angle);
+	horiz_dis = cub_back_horizontal(game->map, player,
+			game->map->full_grid, angle);
 	if (verti_dis < horiz_dis)
 		return (verti_dis);
 	else

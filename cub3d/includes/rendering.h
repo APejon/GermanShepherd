@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:15:59 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/27 16:44:12 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/27 19:22:58 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ double	cub_back_horizontal(t_map *map, t_player *player, char **full_grid,
 			double angle);
 double	cub_back_vertical(t_map *map, t_player *player, char **full_grid,
 			double angle);
-double	cub_back_collisions(t_game **game, t_player *player, double angle);
+double	cub_back_collisions(t_game *game, t_player *player, double angle);
 
 /*----- cub_bressenham_mini.c -----*/
 void	my_mlx_pixel_put(t_game *game, int x, int y);
@@ -52,8 +52,8 @@ int		cub_get_tex_colour(t_game *game, int i);
 void	cub_put_column(t_game *game, int i, int draw_st, int draw_end);
 void	cub_prep_column(t_game *game, t_player *player, t_window *win,
 			t_texture **tex);
-void	cub_correct_distance(t_game **game, t_player *player);
-void	cub_draw_column(t_game **game, t_player *player, t_window *win);
+void	cub_correct_distance(t_game *game, t_player *player);
+void	cub_draw_column(t_game *game, t_player *player, t_window *win);
 
 /*----- cub_render_utils.c -----*/
 void	cub_check_scaling(t_texture **tex, int i, int y);

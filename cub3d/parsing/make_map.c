@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:16:27 by gchernys          #+#    #+#             */
-/*   Updated: 2023/06/27 18:09:28 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/27 20:07:23 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	setmap(char **tempmap, t_map *map, char *temp, char *str)
 		map->high++;
 		j++;
 	}
+	map->full_high = map->high;
 	map->map[j] = NULL;
 }
 
@@ -112,7 +113,7 @@ int	load_map(t_game *game, t_map *map, char *file)
 	map_temp = ft_split(str, '\n');
 	setmap(map_temp, map, temp, str);
 	validate_map(map, game, map_temp);
-	load_grid_segments(&game);
+	load_grid_segments(game);
 	return (0);
 }
 

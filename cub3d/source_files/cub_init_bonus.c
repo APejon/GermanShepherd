@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub_init.c                                         :+:      :+:    :+:   */
+/*   cub_init_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:05:07 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/26 20:04:57 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/27 19:51:40 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	cub_draw(t_game *game)
 	game->player->correct_dis = 0.0;
 	cub_draw_m_background(game, game->win);
 	cub_draw_ui(game);
-	cub_calc_player(&(game), game->player, game->win);
+	cub_calc_player(game, game->player, game->win);
 }
 
 void	cub_window_init(t_game *game, t_window *win)
@@ -47,28 +47,28 @@ void	cub_window_init(t_game *game, t_window *win)
 		cub_return_error("Error\n Malloc failed\n", game->map, game);
 }
 
-void	cub_player_init(t_game **game)
+void	cub_player_init(t_game *game)
 {
-	cub_find_player(game, (*game)->map);
-	(*game)->player->fov = 60;
-	(*game)->player->height = 32;
-	if ((*game)->player->dir == 'N')
-		(*game)->player->p_angle = 90.0;
-	if ((*game)->player->dir == 'W')
-		(*game)->player->p_angle = 180.0;
-	if ((*game)->player->dir == 'S')
-		(*game)->player->p_angle = 270.0;
-	if ((*game)->player->dir == 'E')
-		(*game)->player->p_angle = 0.0;
-	(*game)->player->r_angle = (*game)->player->p_angle
-		+ ((*game)->player->fov / 2);
-	(*game)->player->x_pos = ((*game)->player->x * (*game)->grid_size)
-		+ ((*game)->grid_size / 2);
-	(*game)->player->y_pos = ((*game)->player->y * (*game)->grid_size)
-		+ ((*game)->grid_size / 2);
-	(*game)->player->project_dis = ((*game)->win->window_w / 2)
-		/ tan(((*game)->player->fov / 2) * (M_PI / 180));
-	(*game)->player->speed = 2;
+	cub_find_player(game, game->map);
+	game->player->fov = 60;
+	game->player->height = 32;
+	if (game->player->dir == 'N')
+		game->player->p_angle = 90.0;
+	if (game->player->dir == 'W')
+		game->player->p_angle = 180.0;
+	if (game->player->dir == 'S')
+		game->player->p_angle = 270.0;
+	if (game->player->dir == 'E')
+		game->player->p_angle = 0.0;
+	game->player->r_angle = game->player->p_angle
+		+ (game->player->fov / 2);
+	game->player->x_pos = (game->player->x * game->grid_size)
+		+ (game->grid_size / 2);
+	game->player->y_pos = (game->player->y * game->grid_size)
+		+ (game->grid_size / 2);
+	game->player->project_dis = (game->win->window_w / 2)
+		/ tan((game->player->fov / 2) * (M_PI / 180));
+	game->player->speed = 2;
 }
 
 void	cub_init(t_game *game)
@@ -84,6 +84,6 @@ void	cub_init(t_game *game)
 		cub_return_error("Error\n Malloc failed\n", game->map, game);
 	cub_window_init(game, game->win);
 	game->player->dir = 0;
-	cub_player_init(&(game));
+	cub_player_init(game);
 	cub_draw(game);
 }

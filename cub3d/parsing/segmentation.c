@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 14:19:41 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/27 16:28:50 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/27 19:25:40 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,28 +64,28 @@ void	fill_corners(t_game *game, int i, int j)
 		fill_corners_end(game, i, j, k);
 }
 
-void	load_grid_segments(t_game **game)
+void	load_grid_segments(t_game *game)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 6;
-	(*game)->player = ft_calloc(1, sizeof(t_player));
-	if (!(*game)->player)
-		return_error("Error\n Malloc error\n\n", (*game)->map, (*game));
-	(*game)->map->full_grid
-		= ft_calloc(((*game)->map->high - 6 + 1), sizeof(char *));
-	if (!(*game)->map->full_grid)
-		cub_return_error("Error\n Malloc error\n\n", (*game)->map, (*game));
-	while ((*game)->map->map[j])
+	game->player = ft_calloc(1, sizeof(t_player));
+	if (!game->player)
+		return_error("Error\n Malloc error\n\n", game->map, game);
+	game->map->full_grid
+		= ft_calloc((game->map->high - 6 + 1), sizeof(char *));
+	if (!game->map->full_grid)
+		cub_return_error("Error\n Malloc error\n\n", game->map, game);
+	while (game->map->map[j])
 	{
-		(*game)->map->full_grid[i] = ft_strdup((*game)->map->map[j]);
-		if (!(*game)->map->full_grid[i])
-			cub_return_error("Error\n Malloc error\n\n", (*game)->map, (*game));
-		fill_corners((*game), i, j);
+		game->map->full_grid[i] = ft_strdup(game->map->map[j]);
+		if (!game->map->full_grid[i])
+			cub_return_error("Error\n Malloc error\n\n", game->map, game);
+		fill_corners(game, i, j);
 		i++;
 		j++;
 	}
-	(*game)->map->high = i;
+	game->map->high = i;
 }
