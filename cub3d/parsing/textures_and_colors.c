@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 07:35:06 by gchernys          #+#    #+#             */
-/*   Updated: 2023/06/27 15:30:23 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:57:05 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ int	check_rgb(char **str)
 				return (PARSE_ERR);
 			i++;
 		}
-		if (ft_strlen(str[j]) > 3 || ft_atoi(str[j]) > 255
-			|| ft_atoi(str[j]) < 0)
+		if (ft_atoi(str[j]) > 255 || ft_atoi(str[j]) < 0)
 			return (PARSE_ERR);
 		j++;
 	}
@@ -108,9 +107,6 @@ int	init_rgb(t_map *map)
 		free_double_array(temp);
 		return (PARSE_ERR);
 	}
-	if (ft_strlen(temp[0]) > 3 || ft_strlen(temp[1]) > 3 || \
-		ft_strlen(temp[2]) > 3)
-		return (PARSE_ERR);
 	map->floor_color = setrgb(ft_atoi(temp[0]), ft_atoi(temp[1]), \
 	ft_atoi(temp[2]));
 	free_double_array(temp);

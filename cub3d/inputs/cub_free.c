@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:53:43 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/27 13:18:26 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:37:38 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,16 @@ void	cub_free_textures(t_game *game)
 	int	i;
 
 	i = 0;
-	while (++i < 4)
+	if (game->tex)
 	{
-		mlx_destroy_image(game->win->mlx, game->tex[i]->i_p);
-		ft_free(&game->tex[i]);
+		while (++i < 4)
+		{
+			if (game->tex[i])
+				mlx_destroy_image(game->win->mlx, game->tex[i]->i_p);
+			ft_free(&game->tex[i]);
+		}
+		ft_free(&game->tex);
 	}
-	ft_free(&game->tex);
 }
 
 void	cub_free_segments(t_game **game)
@@ -31,17 +35,20 @@ void	cub_free_segments(t_game **game)
 	int	j;
 
 	i = -1;
-	if ((*game)->map->segment)
+	if ((*game)->map)
 	{
-		while ((*game)->map->segment[++i])
+		if ((*game)->map->segment)
 		{
-			j = -1;
-			while ((*game)->map->segment[i]->grid[++j])
-				ft_free(&(*game)->map->segment[i]->grid[j]);
-			ft_free(&(*game)->map->segment[i]->grid);
-			ft_free(&(*game)->map->segment[i]);
+			while ((*game)->map->segment[++i])
+			{
+				j = -1;
+				while ((*game)->map->segment[i]->grid[++j])
+					ft_free(&(*game)->map->segment[i]->grid[j]);
+				ft_free(&(*game)->map->segment[i]->grid);
+				ft_free(&(*game)->map->segment[i]);
+			}
+			ft_free(&(*game)->map->segment);
 		}
-		ft_free(&(*game)->map->segment);
 	}
 }
 
@@ -50,12 +57,21 @@ void	cub_free_map(t_game **game)
 	int	i;
 
 	i = -1;
-	while (++i < (*game)->map->high)
+	if ((*game)->map)
 	{
-		ft_free(&(*game)->map->map[i]);
-		if (i < (*game)->map->high - 6)
-			ft_free(&(*game)->map->full_grid[i]);
+		if ((*game)->map->map)
+		{
+			while (++i < (*game)->map->high)
+			{
+				ft_free(&(*game)->map->map[i]);
+				if ((*game)->map->full_grid)
+				{
+					if (i < (*game)->map->high - 6)
+						ft_free(&(*game)->map->full_grid[i]);
+				}
+			}
+			ft_free(&((*game)->map->map));
+			ft_free(&(*game)->map->full_grid);
+		}
 	}
-	ft_free(&((*game)->map->map));
-	ft_free(&(*game)->map->full_grid);
 }

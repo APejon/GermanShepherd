@@ -6,17 +6,11 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 14:23:19 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/26 20:04:39 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:43:44 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-void	cub_reset_scaling(t_game *game, int i)
-{
-	game->tex[i]->repeat = 0;
-	game->tex[i]->skip = 0;
-}
 
 void	cub_check_scaling(t_texture **tex, int i, int y)
 {

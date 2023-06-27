@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub_draw_column.c                                  :+:      :+:    :+:   */
+/*   cub_draw_column_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:00:33 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/27 13:06:31 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/27 18:10:22 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	cub_put_column(t_game *game, int i, int draw_st, int draw_end)
 		my_mlx_pixel_put(game, game->win_x, y);
 		y++;
 	}
-	cub_reset_scaling(game, i);
 	game->win_x++;
 }
 

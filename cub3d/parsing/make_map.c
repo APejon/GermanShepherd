@@ -6,13 +6,13 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:16:27 by gchernys          #+#    #+#             */
-/*   Updated: 2023/06/26 20:03:05 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/27 18:09:28 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	set_dimensions(t_map *map, char *file)
+int	set_dimensions(t_map *map, t_game *game, char *file)
 {
 	char	*temp;
 	int		fd;
@@ -31,6 +31,8 @@ int	set_dimensions(t_map *map, char *file)
 	}
 	free(temp);
 	close(fd);
+	if (map->wide > 1000)
+		return_error("Error\n Map too big", map, game);
 	return (0);
 }
 
@@ -61,13 +63,13 @@ void	setmap(char **tempmap, t_map *map, char *temp, char *str)
 	map->map[j] = NULL;
 }
 
-int	malloc_map(t_map *map, char *file)
+int	malloc_map(t_map *map, char *file, t_game *game)
 {
 	int	i;
 
 	map->wide = 0;
 	map->high = 0;
-	if (set_dimensions(map, file))
+	if (set_dimensions(map, game, file))
 		return (MALLOC_ERR);
 	i = 0;
 	map->map = malloc(sizeof(char *) * (map->high + 1));
