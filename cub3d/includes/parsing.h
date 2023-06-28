@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:16:48 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/27 19:22:58 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/27 23:45:19 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 /***************************PARSING***************************/
 int				malloc_map(t_map *map, char *file, t_game *game);
 int				basic_error_check(int argc, char **argv);
-int				load_map(t_game *game, t_map *map, char *file);
+int				load_map(t_game *game, t_map *map, char *file, int count);
 int				validate_map(t_map *map, t_game *game, char **map_temp);
 int				validate_vertices(char **tempmap, t_map *map);
 int				validate_space(char **tempmap);
 int				validate_sides(char **tempmap);
 int				validate_player_count(char **tempmap);
 int				set_textures(t_map *map);
-void			setmap(char **tempmap, t_map *map, char *temp, char *str);
+void			setmap(char **tempmap, t_map *map, char *str, t_game *game);
 int				check_textures(t_map *map);
 int				find_rgb(t_map *map);
 int				init_rgb(t_map *map);
@@ -40,8 +40,6 @@ void			segment_init(t_game *game);
 void			connect_segments(t_game *game);
 void			connect_segments_p2(t_game *game, int i, int h, int v);
 int				cub_comma_count(char *line);
-int				cub_check_newlines(t_map *map, char *str,
-					char *line);
-int				cub_consec_newlines(t_map *map, char *str, char *line);	
+int				cub_check_newlines(char *str);
 
 #endif

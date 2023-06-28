@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:16:27 by gchernys          #+#    #+#             */
-/*   Updated: 2023/06/27 20:07:23 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/28 11:11:10 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,11 @@ int	set_dimensions(t_map *map, t_game *game, char *file)
 	return (0);
 }
 
-void	setmap(char **tempmap, t_map *map, char *temp, char *str)
+void	setmap(char **tempmap, t_map *map, char *str, t_game *game)
 {
-	int	j;
-	int	i;
+	int		j;
+	int		i;
 
-	ft_free(&temp);
 	ft_free(&str);
 	map->high = 0;
 	j = 0;
@@ -56,6 +55,8 @@ void	setmap(char **tempmap, t_map *map, char *temp, char *str)
 			i++;
 			if (i == map->wide)
 				map->map[j][i] = '\0';
+			if (ft_strchr("SWEN0", map->map[j][0]))
+				return_error("Error\n 0 or player touching a space", map, game);
 		}
 		map->high++;
 		j++;
@@ -88,30 +89,30 @@ int	malloc_map(t_map *map, char *file, t_game *game)
 	return (0);
 }
 
-int	load_map(t_game *game, t_map *map, char *file)
+int	load_map(t_game *game, t_map *map, char *file, int count)
 {
 	int		fd;
 	char	*temp;
 	char	*str;
 	char	**map_temp;
 
-	str = NULL;
 	fd = open(file, O_RDONLY);
 	temp = get_next_line(fd);
 	while (temp != NULL)
 	{
+		if (count > 6 && (ft_strcmp(temp, "\n") == 0))
+			return_error("Error\n Newline in map (spaces between?)", map, game);
+		while (ft_strncmp(temp, "\n", 1) == 0)
+			temp = get_next_line(fd);
+		count++;
 		str = ft_strjoin_gnl(str, temp);
 		free(temp);
 		temp = get_next_line(fd);
-		if (cub_check_newlines(map, str, temp))
-		{
-			close (fd);
-			return_error("Error\n newline in map\n", map, game);
-		}
 	}
 	close(fd);
+	ft_free(&temp);
 	map_temp = ft_split(str, '\n');
-	setmap(map_temp, map, temp, str);
+	setmap(map_temp, map, str, game);
 	validate_map(map, game, map_temp);
 	load_grid_segments(game);
 	return (0);

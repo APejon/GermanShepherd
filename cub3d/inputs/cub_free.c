@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:53:43 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/27 20:10:30 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/27 21:31:11 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	cub_free_textures(t_game *game)
 		while (++i < 4)
 		{
 			if (game->tex[i])
-				mlx_destroy_image(game->win->mlx, game->tex[i]->i_p);
+			{
+				if (game->tex[i]->i_p)
+					mlx_destroy_image(game->win->mlx, game->tex[i]->i_p);
+			}
 			ft_free(&game->tex[i]);
 		}
 		ft_free(&game->tex);

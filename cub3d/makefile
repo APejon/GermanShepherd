@@ -6,7 +6,7 @@
 #    By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 10:55:58 by amalbrei          #+#    #+#              #
-#    Updated: 2023/06/27 19:49:57 by amalbrei         ###   ########.fr        #
+#    Updated: 2023/06/28 11:07:16 by amalbrei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,7 @@ PARSING_SRC_B	=	make_map.c	map_validation.c	parsing.c\
 
 MAIN_SRC 		=	main.c	cub_utils.c	cub_utils2.c	cub_init.c
 
-MAIN_SRC_B 		=	main.c	cub_utils.c	cub_utils2.c	cub_init_bonus.c
+MAIN_SRC_B 		=	main.c	cub_utils.c	cub_utils2_bonus.c	cub_init_bonus.c
 
 SRC				=	$(INPUTS_SRC) $(PLAYER_SRC) $(RENDERING_SRC) $(PARSING_SRC)\
 					$(MAIN_SRC)

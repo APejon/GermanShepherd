@@ -1,10 +1,32 @@
+
 NO textures/b_smoke.xpm
+
+
+
+
 SO textures/stars.xpm
-EA textures/smoke.xpm
+
+
+
+
+
+
+
+
 WE textures/starfall.xpm
-C 255 , 255 , 255
-F 33 , 62 , 4
+
+
+
+EA textures/smoke.xpm
+
+
+
+C  1, 2, 3
+
+
+
+F 1,1,1
 
  1
-1N1
+1W1
  1

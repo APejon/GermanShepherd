@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:12:34 by gchernys          #+#    #+#             */
-/*   Updated: 2023/06/27 18:44:50 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/27 21:34:44 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,53 +40,27 @@ int	basic_error_check(int argc, char **argv)
 	return (0);
 }
 
-static int	cub_check_file_extended(t_map *map, char *ext, int j, int i)
+static int	cub_check_file_extensions(t_map *map)
 {
-	j = -1;
-	i = ft_find_char(map->east, '.');
-	while (ext[++j] && map->east[++i])
-	{
-		if (map->east[i] != ext[j])
-			return (1);
-	}
-	if (map->east[++i] != ext[j])
-		return (1);
-	j = -1;
-	i = ft_find_char(map->west, '.');
-	while (ext[++j] && map->west[++i])
-	{
-		if (map->west[i] != ext[j])
-			return (1);
-	}
-	if (map->west[++i] != ext[j])
-		return (1);
-	return (0);
-}
-
-static int	cub_check_file_extensions(t_map *map, char *ext)
-{
-	int	j;
 	int	i;
 
-	j = -1;
-	i = ft_find_char(map->north, '.');
-	while (ext[++j] && map->north[++i])
-	{
-		if (map->north[i] != ext[j])
-			return (1);
-	}
-	if (map->north[++i] != ext[j])
+	i = ft_lastoccur(map->north, '.');
+	if (i == 0)
 		return (1);
-	j = -1;
-	i = ft_find_char(map->south, '.');
-	while (ext[++j] && map->south[++i])
-	{
-		if (map->south[i] != ext[j])
-			return (1);
-	}
-	if (map->south[++i] != ext[j])
+	if (map->north[i + 1] != 'x' || map->north[i + 2] != 'p' || \
+	map->north[i + 3] != 'm' || map->north[i + 4] != '\0')
 		return (1);
-	if (cub_check_file_extended(map, ext, j, i))
+	i = ft_lastoccur(map->south, '.');
+	if (map->south[i + 1] != 'x' || map->south[i + 2] != 'p' || \
+	map->south[i + 3] != 'm' || map->south[i + 4] != '\0')
+		return (1);
+	i = ft_lastoccur(map->east, '.');
+	if (map->east[i + 1] != 'x' || map->east[i + 2] != 'p' || \
+	map->east[i + 3] != 'm' || map->east[i + 4] != '\0')
+		return (1);
+	i = ft_lastoccur(map->west, '.');
+	if (map->west[i + 1] != 'x' || map->west[i + 2] != 'p' || \
+	map->west[i + 3] != 'm' || map->west[i + 4] != '\0')
 		return (1);
 	return (0);
 }
@@ -94,11 +68,13 @@ static int	cub_check_file_extensions(t_map *map, char *ext)
 int	check_textures(t_map *map)
 {
 	set_textures(map);
-	if (cub_check_file_extensions(map, "xpm"))
-		return (PARSE_ERR);
 	if (map->north == NULL || map->south == NULL || map->west == NULL || \
-	map->east == NULL || map->north[0] == '\0' || map->south[0] == '\0' || \
-	map->west[0] == '\0' || map->east[0] == '\0')
+	map->east == NULL)
+		return (PARSE_ERR);
+	if (cub_check_file_extensions(map))
+		return (PARSE_ERR);
+	if (map->north[0] == '\0' || map->south[0] == '\0' || \
+		map->west[0] == '\0' || map->east[0] == '\0')
 		return (PARSE_ERR);
 	return (0);
 }

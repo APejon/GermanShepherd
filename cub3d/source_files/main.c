@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:12:32 by gchernys          #+#    #+#             */
-/*   Updated: 2023/06/27 19:32:11 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/28 10:33:11 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,18 @@ void	cub_set_textures(t_game *game, t_map *map)
 	}
 }
 
+static void	cub_map_init(t_map *map)
+{
+	map->map = NULL;
+	map->full_grid = NULL;
+	map->floor = NULL;
+	map->cil = NULL;
+	map->north = NULL;
+	map->south = NULL;
+	map->east = NULL;
+	map->west = NULL;
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	*game;
@@ -81,10 +93,11 @@ int	main(int argc, char **argv)
 		write(2, "Error\n Malloc error\n", 21);
 		return (1);
 	}
+	cub_map_init(game->map);
 	if (malloc_map(game->map, argv[1], game))
 		return_error("Error\n Malloc error\n\n", game->map, game);
 	game->map->check = 0;
-	load_map(game, game->map, argv[1]);
+	load_map(game, game->map, argv[1], 0);
 	cub_init(game);
 	cub_mlx_keys(game);
 	return (0);

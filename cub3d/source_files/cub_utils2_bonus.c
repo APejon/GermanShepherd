@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 19:39:32 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/27 21:15:16 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/27 19:01:03 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	cub_return_error(char *str, t_map *map, t_game *game)
 		ft_free(&game->win->addr);
 		ft_free(&game->win);
 	}
+	cub_free_segments(game);
 	cub_free_map(game);
 	ft_free(&game->player->verti_i);
 	ft_free(&game->player->horiz_i);
