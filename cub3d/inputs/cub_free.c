@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:53:43 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/27 21:31:11 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/28 14:56:32 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	cub_free_textures(t_game *game)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	if (game->tex)
 	{
 		while (++i < 4)

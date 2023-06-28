@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:39:32 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/27 19:25:00 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/28 14:35:35 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ double	cub_back_horizontal(t_map *map, t_player *player, char **full_grid,
 {
 	double	horiz_i[2];
 
+	ft_bzero(horiz_i, sizeof(double) * 2);
 	if (angle == 0.0 || angle == 180.0)
 		return (INT_MAX);
 	else if (angle > 0.0 && angle < 180.0)
@@ -62,6 +63,7 @@ double	cub_back_vertical(t_map *map, t_player *player, char **full_grid,
 {
 	double	verti_i[2];
 
+	ft_bzero(verti_i, sizeof(double) * 2);
 	if (angle == 90.0 || angle == 270.0)
 		return (INT_MAX);
 	else if (angle > 270.0 || angle < 90.0)

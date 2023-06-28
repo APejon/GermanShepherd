@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 14:19:41 by amalbrei          #+#    #+#             */
-/*   Updated: 2023/06/27 19:25:40 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/28 14:33:18 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,15 @@ static int	count_segments(t_game *game, char **full_grid, int i)
 	return (total);
 }
 
-void	load_grid_segments(t_game *game)
+void	load_grid_segments(t_game *game, char *temp, char *str)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 6;
+	ft_free(&temp);
+	ft_free(&str);
 	game->player = ft_calloc(1, sizeof(t_player));
 	if (!game->player)
 		return_error("Error\n Malloc error\n\n", game->map, game);

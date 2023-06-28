@@ -6,7 +6,7 @@
 /*   By: amalbrei <amalbrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 01:16:27 by gchernys          #+#    #+#             */
-/*   Updated: 2023/06/28 11:11:10 by amalbrei         ###   ########.fr       */
+/*   Updated: 2023/06/28 15:19:08 by amalbrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	set_dimensions(t_map *map, t_game *game, char *file)
 	{
 		if (ft_strlen(temp) > (size_t)map->wide)
 			map->wide = ft_strlen(temp);
-		map->high++;
+		if (ft_strcmp(temp, "\n") != 0)
+			map->high++;
 		free(temp);
 		temp = get_next_line(fd);
 	}
@@ -36,12 +37,11 @@ int	set_dimensions(t_map *map, t_game *game, char *file)
 	return (0);
 }
 
-void	setmap(char **tempmap, t_map *map, char *str, t_game *game)
+void	setmap(char **tempmap, t_map *map, t_game *game)
 {
 	int		j;
 	int		i;
 
-	ft_free(&str);
 	map->high = 0;
 	j = 0;
 	while (tempmap[j] != NULL)
@@ -61,8 +61,8 @@ void	setmap(char **tempmap, t_map *map, char *str, t_game *game)
 		map->high++;
 		j++;
 	}
-	map->full_high = map->high;
 	map->map[j] = NULL;
+	map->full_high = map->high;
 }
 
 int	malloc_map(t_map *map, char *file, t_game *game)
@@ -94,32 +94,36 @@ int	load_map(t_game *game, t_map *map, char *file, int count)
 	int		fd;
 	char	*temp;
 	char	*str;
-	char	**map_temp;
 
 	fd = open(file, O_RDONLY);
+	str = NULL;
 	temp = get_next_line(fd);
 	while (temp != NULL)
 	{
 		if (count > 6 && (ft_strcmp(temp, "\n") == 0))
 			return_error("Error\n Newline in map (spaces between?)", map, game);
 		while (ft_strncmp(temp, "\n", 1) == 0)
+		{
+			ft_free(&temp);
 			temp = get_next_line(fd);
+		}
 		count++;
 		str = ft_strjoin_gnl(str, temp);
 		free(temp);
 		temp = get_next_line(fd);
 	}
-	close(fd);
-	ft_free(&temp);
-	map_temp = ft_split(str, '\n');
-	setmap(map_temp, map, str, game);
-	validate_map(map, game, map_temp);
-	load_grid_segments(game);
+	validate_map(map, game, str, fd);
+	load_grid_segments(game, temp, str);
 	return (0);
 }
 
-int	validate_map(t_map *map, t_game *game, char **map_temp)
+int	validate_map(t_map *map, t_game *game, char *str, int fd)
 {
+	char	**map_temp;
+
+	close(fd);
+	map_temp = ft_split(str, '\n');
+	setmap(map_temp, map, game);
 	free_double_array(map_temp);
 	if (map->high <= 6)
 		return_error("Error\n map's too short\n\n", map, game);
